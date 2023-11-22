@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simios.simioapp.dao.CatalogoDAO">
+
+    <cache />
+
+    <resultMap id="catalogoResultMap" type="com.simios.simioapp.dominio.entidades.CatalogoEntity">
+        <id column="catalogo_id" property="catalogoID" jdbcType="INTEGER" />
+        <result column="catalogo" property="catalogo" jdbcType="VARCHAR" />
+        <result column="datacatalogo" property="datacatalogo" jdbcType="VARCHAR" />
+        <result column="tipo" property="tipo" jdbcType="VARCHAR" />
+        <result column="descripcion" property="descripcion" jdbcType="VARCHAR" />
+        <result column="descripcion_corta" property="descripcionCorta" jdbcType="VARCHAR" />
+        <result column="ind_del" property="indDel" jdbcType="VARCHAR" />
+        <result column="fec_reg" property="fechaReg" jdbcType="TIMESTAMP" />
+        <result column="fec_act" property="fechaAct" jdbcType="TIMESTAMP" />
+        <result column="usu_reg" property="usuReg" jdbcType="VARCHAR" />
+        <result column="usu_act" property="usuAct" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectByID" resultMap="catalogoResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.CatalogoEntity">
+
+        SELECT
+            catalogo_id, catalogo, datacatalogo, tipo, 
+            descripcion, descripcion_corta, ind_del, fec_reg, 
+            fec_act, usu_reg, usu_act
+        FROM 
+            inventario.catalogo
+        WHERE
+            catalogo_id = #{catalogoID,jdbcType=INTEGER}
+    </select>
+
+    <select id="select" resultMap="catalogoResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.CatalogoEntity">
+
+        SELECT
+            catalogo_id, catalogo, datacatalogo, tipo, 
+            descripcion, descripcion_corta, ind_del, fec_reg, 
+            fec_act, usu_reg, usu_act
+        FROM 
+            inventario.catalogo
+        <where>
+            <if test="catalogoID != null">
+                 AND catalogo_id = #{catalogoID,jdbcType=INTEGER}
+            </if>
+            <if test="catalogo != null">
+                 AND catalogo = #{catalogo,jdbcType=VARCHAR}
+            </if>
+            <if test="datacatalogo != null">
+                 AND datacatalogo = #{datacatalogo,jdbcType=VARCHAR}
+            </if>
+            <if test="tipo != null">
+                 AND tipo = #{tipo,jdbcType=VARCHAR}
+            </if>
+            <if test="descripcion != null">
+                 AND descripcion = #{descripcion,jdbcType=VARCHAR}
+            </if>
+            <if test="descripcionCorta != null">
+                 AND descripcion_corta = #{descripcionCorta,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMap" resultMap="catalogoResultMap" useCache="false" parameterType="java.util.Map">
+
+        SELECT
+            c.catalogo_id, c.catalogo, c.datacatalogo, c.tipo, 
+            c.descripcion, c.descripcion_corta, c.ind_del, c.fec_reg, 
+            c.fec_act, c.usu_reg, c.usu_act
+        FROM 
+            inventario.catalogo c
+        <where>
+            <if test="catalogoID != null">
+                <choose>
+                    <when test="catalogoID_type == 'rango_incluye'">
+                         AND c.catalogo_id &gt;= #{catalogoID_ini,jdbcType=INTEGER} AND c.catalogo_id &lt;= #{catalogoID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="catalogoID_type == 'rango_excluye'">
+                         AND c.catalogo_id &gt; #{catalogoID_ini,jdbcType=INTEGER} AND c.catalogo_id &lt; #{catalogoID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND c.catalogo_id = #{catalogoID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="catalogo != null">
+                <choose>
+                    <when test="catalogo_type == 'igual'">
+                         AND c.catalogo = #{catalogo,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.catalogo like #{catalogo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="datacatalogo != null">
+                <choose>
+                    <when test="datacatalogo_type == 'igual'">
+                         AND c.datacatalogo = #{datacatalogo,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.datacatalogo like #{datacatalogo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="tipo != null">
+                <choose>
+                    <when test="tipo_type == 'igual'">
+                         AND c.tipo = #{tipo,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.tipo like #{tipo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="descripcion != null">
+                <choose>
+                    <when test="descripcion_type == 'igual'">
+                         AND c.descripcion = #{descripcion,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.descripcion like #{descripcion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="descripcionCorta != null">
+                <choose>
+                    <when test="descripcionCorta_type == 'igual'">
+                         AND c.descripcion_corta = #{descripcionCorta,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.descripcion_corta like #{descripcionCorta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND c.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND c.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND c.fec_reg &gt; #{fechaReg_ini,jdbcType=TIMESTAMP} AND c.fec_reg &lt; #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND c.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND c.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND c.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND c.fec_act &gt; #{fechaAct_ini,jdbcType=TIMESTAMP} AND c.fec_act &lt; #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND c.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND c.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND c.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND c.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMapGrilla" useCache="false" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT
+            c.catalogo_id as "catalogoID", 
+            c.catalogo as "catalogo", 
+            c.datacatalogo as "datacatalogo", 
+            c.tipo as "tipo",
+            (select c2.descripcion from inventario.catalogo c2 where c2.catalogo = 'TIPO_CATALOGO' and c2.datacatalogo = c.tipo and c2.ind_del = '0' ) as "tipoDescripcion", 
+            c.descripcion as "descripcion", 
+            c.descripcion_corta as "descripcionCorta", 
+            c.ind_del as "indDel", 
+            c.fec_reg as "fechaReg", 
+            c.fec_act as "fechaAct", 
+            c.usu_reg as "usuReg", 
+            c.usu_act as "usuAct"
+        FROM 
+            inventario.catalogo c
+        <where>
+            <if test="catalogoID != null">
+                <choose>
+                    <when test="catalogoID_type == 'rango_incluye'">
+                         AND c.catalogo_id &gt;= #{catalogoID,jdbcType=INTEGER} AND c.catalogo_id &lt;= #{catalogoID,jdbcType=INTEGER}
+                    </when>
+                    <when test="catalogoID_type == 'rango_excluye'">
+                         AND c.catalogo_id &gt; #{catalogoID,jdbcType=INTEGER} AND c.catalogo_id &lt; #{catalogoID,jdbcType=INTEGER}
+                    </when>
+                    <when test="catalogoID_type == 'is_null'">
+                         AND c.catalogo_id IS NULL 
+                    </when>
+                    <when test="catalogoID_type == 'is_not_null'">
+                         AND c.catalogo_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.catalogo_id = #{catalogoID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="catalogo != null">
+                <choose>
+                    <when test="catalogo_type == 'igual'">
+                         AND c.catalogo = #{catalogo,jdbcType=VARCHAR}
+                    </when>
+                    <when test="catalogo_type == 'is_null'">
+                         AND c.catalogo IS NULL 
+                    </when>
+                    <when test="catalogo_type == 'is_not_null'">
+                         AND c.catalogo IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.catalogo like #{catalogo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="datacatalogo != null">
+                <choose>
+                    <when test="datacatalogo_type == 'igual'">
+                         AND c.datacatalogo = #{datacatalogo,jdbcType=VARCHAR}
+                    </when>
+                    <when test="datacatalogo_type == 'is_null'">
+                         AND c.datacatalogo IS NULL 
+                    </when>
+                    <when test="datacatalogo_type == 'is_not_null'">
+                         AND c.datacatalogo IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.datacatalogo like #{datacatalogo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="tipo != null">
+                <choose>
+                    <when test="tipo_type == 'igual'">
+                         AND c.tipo = #{tipo,jdbcType=VARCHAR}
+                    </when>
+                    <when test="tipo_type == 'is_null'">
+                         AND c.tipo IS NULL 
+                    </when>
+                    <when test="tipo_type == 'is_not_null'">
+                         AND c.tipo IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.tipo like #{tipo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="descripcion != null">
+                <choose>
+                    <when test="descripcion_type == 'igual'">
+                         AND c.descripcion = #{descripcion,jdbcType=VARCHAR}
+                    </when>
+                    <when test="descripcion_type == 'is_null'">
+                         AND c.descripcion IS NULL 
+                    </when>
+                    <when test="descripcion_type == 'is_not_null'">
+                         AND c.descripcion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.descripcion like #{descripcion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="descripcionCorta != null">
+                <choose>
+                    <when test="descripcionCorta_type == 'igual'">
+                         AND c.descripcion_corta = #{descripcionCorta,jdbcType=VARCHAR}
+                    </when>
+                    <when test="descripcionCorta_type == 'is_null'">
+                         AND c.descripcion_corta IS NULL 
+                    </when>
+                    <when test="descripcionCorta_type == 'is_not_null'">
+                         AND c.descripcion_corta IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.descripcion_corta like #{descripcionCorta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND c.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indDel_type == 'is_null'">
+                         AND c.ind_del IS NULL 
+                    </when>
+                    <when test="indDel_type == 'is_not_null'">
+                         AND c.ind_del IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND c.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND c.fec_reg &gt; #{fechaReg,jdbcType=TIMESTAMP} AND c.fec_reg &lt; #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND c.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'is_null'">
+                         AND c.fec_reg IS NULL 
+                    </when>
+                    <when test="fechaReg_type == 'is_not_null'">
+                         AND c.fec_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND c.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND c.fec_act &gt; #{fechaAct,jdbcType=TIMESTAMP} AND c.fec_act &lt; #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND c.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'is_null'">
+                         AND c.fec_act IS NULL 
+                    </when>
+                    <when test="fechaAct_type == 'is_not_null'">
+                         AND c.fec_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND c.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuReg_type == 'is_null'">
+                         AND c.usu_reg IS NULL 
+                    </when>
+                    <when test="usuReg_type == 'is_not_null'">
+                         AND c.usu_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND c.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuAct_type == 'is_null'">
+                         AND c.usu_act IS NULL 
+                    </when>
+                    <when test="usuAct_type == 'is_not_null'">
+                         AND c.usu_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectNextID" useCache="false" resultType="java.lang.Integer">
+        select nextval('catalogo_catalogo_id_seq')
+    </select>
+
+    <select id="selectCurrentID" useCache="false" resultType="java.lang.Integer">
+        select currval('catalogo_catalogo_id_seq')
+    </select>
+
+    <insert id="insert" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.CatalogoEntity"
+        useGeneratedKeys="true" keyProperty="catalogoID">
+
+        INSERT INTO inventario.catalogo 
+        (
+            catalogo,
+            datacatalogo,
+            tipo,
+            descripcion,
+            descripcion_corta,
+            ind_del,
+            fec_reg,
+            fec_act,
+            usu_reg,
+            usu_act
+        )
+        VALUES
+        (
+            #{catalogo,jdbcType=VARCHAR},
+            #{datacatalogo,jdbcType=VARCHAR},
+            #{tipo,jdbcType=VARCHAR},
+            #{descripcion,jdbcType=VARCHAR},
+            #{descripcionCorta,jdbcType=VARCHAR},
+            #{indDel,jdbcType=VARCHAR},
+            #{fechaReg,jdbcType=TIMESTAMP},
+            #{fechaAct,jdbcType=TIMESTAMP},
+            #{usuReg,jdbcType=VARCHAR},
+            #{usuAct,jdbcType=VARCHAR}
+        )
+
+    </insert>
+
+    <update id="update" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.CatalogoEntity">
+
+        UPDATE inventario.catalogo
+        <set>
+            <if test="catalogo != null">
+                catalogo = #{catalogo,jdbcType=VARCHAR},
+            </if>
+            <if test="datacatalogo != null">
+                datacatalogo = #{datacatalogo,jdbcType=VARCHAR},
+            </if>
+            <if test="tipo != null">
+                tipo = #{tipo,jdbcType=VARCHAR},
+            </if>
+            <if test="descripcion != null">
+                descripcion = #{descripcion,jdbcType=VARCHAR},
+            </if>
+            <if test="descripcionCorta != null">
+                descripcion_corta = #{descripcionCorta,jdbcType=VARCHAR},
+            </if>
+            <if test="indDel != null">
+                ind_del = #{indDel,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaReg != null">
+                fec_reg = #{fechaReg,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fechaAct != null">
+                fec_act = #{fechaAct,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usuReg != null">
+                usu_reg = #{usuReg,jdbcType=VARCHAR},
+            </if>
+            <if test="usuAct != null">
+                usu_act = #{usuAct,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE 
+            catalogo_id = #{catalogoID,jdbcType=INTEGER}
+    </update>
+
+ <select id="selectCatalogoCombo" useCache="false" resultType="com.jcfr.utiles.ListaItem" 
+			parameterType="com.simios.simioapp.dominio.entidades.CatalogoEntity">
+		
+        SELECT
+            datacatalogo as "id", 
+            upper(descripcion_corta) as "label"
+        FROM 
+            inventario.catalogo 
+ 		<where>
+            <if test="catalogoID != null">
+                 AND catalogo_id = #{catalogoID,jdbcType=INTEGER}
+            </if>
+            <if test="catalogo != null">
+                 AND catalogo = #{catalogo,jdbcType=VARCHAR}
+            </if>
+            <if test="datacatalogo != null">
+                 AND datacatalogo = #{datacatalogo,jdbcType=VARCHAR}
+            </if>
+            <if test="tipo != null">
+                 AND tipo = #{tipo,jdbcType=VARCHAR}
+            </if>            
+            <if test="descripcion != null">
+                 AND descripcion = #{descripcion,jdbcType=VARCHAR}
+            </if>
+            <if test="descripcionCorta != null">
+                 AND descripcion_corta = #{descripcionCorta,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+	</select>  	
+</mapper>

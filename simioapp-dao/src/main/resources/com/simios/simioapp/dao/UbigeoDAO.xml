@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simios.simioapp.dao.UbigeoDAO">
+
+    <cache />
+
+    <resultMap id="ubigeoResultMap" type="com.simios.simioapp.dominio.entidades.UbigeoEntity">
+        <id column="ubigeo_id" property="ubigeoID" jdbcType="INTEGER" />
+        <result column="cod_ubigeo" property="codigoUbigeo" jdbcType="VARCHAR" />
+        <result column="descripcion" property="descripcion" jdbcType="VARCHAR" />
+        <result column="ind_del" property="indDel" jdbcType="VARCHAR" />
+        <result column="fec_reg" property="fechaReg" jdbcType="TIMESTAMP" />
+        <result column="fec_act" property="fechaAct" jdbcType="TIMESTAMP" />
+        <result column="usu_reg" property="usuReg" jdbcType="VARCHAR" />
+        <result column="usu_act" property="usuAct" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectByID" resultMap="ubigeoResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.UbigeoEntity">
+
+        SELECT
+            ubigeo_id, cod_ubigeo, descripcion, ind_del, 
+            fec_reg, fec_act, usu_reg, usu_act
+        FROM 
+            inventario.ubigeo
+        WHERE
+            ubigeo_id = #{ubigeoID,jdbcType=INTEGER}
+    </select>
+
+    <select id="select" resultMap="ubigeoResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.UbigeoEntity">
+
+        SELECT
+            ubigeo_id, cod_ubigeo, descripcion, ind_del, 
+            fec_reg, fec_act, usu_reg, usu_act
+        FROM 
+            inventario.ubigeo
+        <where>
+            <if test="ubigeoID != null">
+                 AND ubigeo_id = #{ubigeoID,jdbcType=INTEGER}
+            </if>
+            <if test="codigoUbigeo != null">
+                 AND cod_ubigeo = #{codigoUbigeo,jdbcType=VARCHAR}
+            </if>
+            <if test="descripcion != null">
+                 AND descripcion = #{descripcion,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMap" resultMap="ubigeoResultMap" useCache="false" parameterType="java.util.Map">
+
+        SELECT
+            u.ubigeo_id, u.cod_ubigeo, u.descripcion, u.ind_del, 
+            u.fec_reg, u.fec_act, u.usu_reg, u.usu_act
+        FROM 
+            inventario.ubigeo u
+        <where>
+            <if test="ubigeoID != null">
+                <choose>
+                    <when test="ubigeoID_type == 'rango_incluye'">
+                         AND u.ubigeo_id &gt;= #{ubigeoID_ini,jdbcType=INTEGER} AND u.ubigeo_id &lt;= #{ubigeoID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="ubigeoID_type == 'rango_excluye'">
+                         AND u.ubigeo_id &gt; #{ubigeoID_ini,jdbcType=INTEGER} AND u.ubigeo_id &lt; #{ubigeoID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND u.ubigeo_id = #{ubigeoID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="codigoUbigeo != null">
+                <choose>
+                    <when test="codigoUbigeo_type == 'igual'">
+                         AND u.cod_ubigeo = #{codigoUbigeo,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.cod_ubigeo like #{codigoUbigeo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="descripcion != null">
+                <choose>
+                    <when test="descripcion_type == 'igual'">
+                         AND u.descripcion = #{descripcion,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.descripcion like #{descripcion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND u.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND u.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND u.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND u.fec_reg &gt; #{fechaReg_ini,jdbcType=TIMESTAMP} AND u.fec_reg &lt; #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND u.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND u.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND u.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND u.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND u.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND u.fec_act &gt; #{fechaAct_ini,jdbcType=TIMESTAMP} AND u.fec_act &lt; #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND u.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND u.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND u.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND u.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND u.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMapGrilla" useCache="false" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT
+            u.ubigeo_id as "ubigeoID", 
+            u.cod_ubigeo as "codigoUbigeo", 
+            u.descripcion as "descripcion", 
+            u.ind_del as "indDel", 
+            u.fec_reg as "fechaReg", 
+            u.fec_act as "fechaAct", 
+            u.usu_reg as "usuReg", 
+            u.usu_act as "usuAct"
+        FROM 
+            inventario.ubigeo u
+        <where>
+            <if test="ubigeoID != null">
+                <choose>
+                    <when test="ubigeoID_type == 'rango_incluye'">
+                         AND u.ubigeo_id &gt;= #{ubigeoID,jdbcType=INTEGER} AND u.ubigeo_id &lt;= #{ubigeoID,jdbcType=INTEGER}
+                    </when>
+                    <when test="ubigeoID_type == 'rango_excluye'">
+                         AND u.ubigeo_id &gt; #{ubigeoID,jdbcType=INTEGER} AND u.ubigeo_id &lt; #{ubigeoID,jdbcType=INTEGER}
+                    </when>
+                    <when test="ubigeoID_type == 'is_null'">
+                         AND u.ubigeo_id IS NULL 
+                    </when>
+                    <when test="ubigeoID_type == 'is_not_null'">
+                         AND u.ubigeo_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.ubigeo_id = #{ubigeoID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="codigoUbigeo != null">
+                <choose>
+                    <when test="codigoUbigeo_type == 'igual'">
+                         AND u.cod_ubigeo = #{codigoUbigeo,jdbcType=VARCHAR}
+                    </when>
+                    <when test="codigoUbigeo_type == 'is_null'">
+                         AND u.cod_ubigeo IS NULL 
+                    </when>
+                    <when test="codigoUbigeo_type == 'is_not_null'">
+                         AND u.cod_ubigeo IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.cod_ubigeo like #{codigoUbigeo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="descripcion != null">
+                <choose>
+                    <when test="descripcion_type == 'igual'">
+                         AND u.descripcion = #{descripcion,jdbcType=VARCHAR}
+                    </when>
+                    <when test="descripcion_type == 'is_null'">
+                         AND u.descripcion IS NULL 
+                    </when>
+                    <when test="descripcion_type == 'is_not_null'">
+                         AND u.descripcion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.descripcion like #{descripcion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND u.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indDel_type == 'is_null'">
+                         AND u.ind_del IS NULL 
+                    </when>
+                    <when test="indDel_type == 'is_not_null'">
+                         AND u.ind_del IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND u.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND u.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND u.fec_reg &gt; #{fechaReg,jdbcType=TIMESTAMP} AND u.fec_reg &lt; #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND u.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'is_null'">
+                         AND u.fec_reg IS NULL 
+                    </when>
+                    <when test="fechaReg_type == 'is_not_null'">
+                         AND u.fec_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND u.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND u.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND u.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND u.fec_act &gt; #{fechaAct,jdbcType=TIMESTAMP} AND u.fec_act &lt; #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND u.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'is_null'">
+                         AND u.fec_act IS NULL 
+                    </when>
+                    <when test="fechaAct_type == 'is_not_null'">
+                         AND u.fec_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND u.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND u.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuReg_type == 'is_null'">
+                         AND u.usu_reg IS NULL 
+                    </when>
+                    <when test="usuReg_type == 'is_not_null'">
+                         AND u.usu_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND u.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuAct_type == 'is_null'">
+                         AND u.usu_act IS NULL 
+                    </when>
+                    <when test="usuAct_type == 'is_not_null'">
+                         AND u.usu_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectNextID" useCache="false" resultType="java.lang.Integer">
+        select nextval('ubigeo_ubigeo_id_seq')
+    </select>
+
+    <select id="selectCurrentID" useCache="false" resultType="java.lang.Integer">
+        select currval('ubigeo_ubigeo_id_seq')
+    </select>
+
+    <insert id="insert" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.UbigeoEntity"
+        useGeneratedKeys="true" keyProperty="ubigeoID">
+
+        INSERT INTO inventario.ubigeo 
+        (
+            cod_ubigeo,
+            descripcion,
+            ind_del,
+            fec_reg,
+            fec_act,
+            usu_reg,
+            usu_act
+        )
+        VALUES
+        (
+            #{codigoUbigeo,jdbcType=VARCHAR},
+            #{descripcion,jdbcType=VARCHAR},
+            #{indDel,jdbcType=VARCHAR},
+            #{fechaReg,jdbcType=TIMESTAMP},
+            #{fechaAct,jdbcType=TIMESTAMP},
+            #{usuReg,jdbcType=VARCHAR},
+            #{usuAct,jdbcType=VARCHAR}
+        )
+
+    </insert>
+
+    <update id="update" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.UbigeoEntity">
+
+        UPDATE inventario.ubigeo
+        <set>
+            <if test="codigoUbigeo != null">
+                cod_ubigeo = #{codigoUbigeo,jdbcType=VARCHAR},
+            </if>
+            <if test="descripcion != null">
+                descripcion = #{descripcion,jdbcType=VARCHAR},
+            </if>
+            <if test="indDel != null">
+                ind_del = #{indDel,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaReg != null">
+                fec_reg = #{fechaReg,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fechaAct != null">
+                fec_act = #{fechaAct,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usuReg != null">
+                usu_reg = #{usuReg,jdbcType=VARCHAR},
+            </if>
+            <if test="usuAct != null">
+                usu_act = #{usuAct,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE 
+            ubigeo_id = #{ubigeoID,jdbcType=INTEGER}
+    </update>
+    
+    <select id="selectDepartamentoCombo" resultType="com.jcfr.utiles.ListaItem" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.UbigeoEntity">
+
+        SELECT
+            cod_ubigeo AS "id",  
+            descripcion AS "label"
+        FROM 
+            inventario.ubigeo
+			
+			WHERE LENGTH(cod_ubigeo) = 2 AND ind_del = 0
+
+    </select>
+    
+    <select id="selectProvinciaCombo" resultType="com.jcfr.utiles.ListaItem" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.UbigeoEntity">
+
+        SELECT
+            cod_ubigeo AS "id",  
+            descripcion AS "label"
+        FROM 
+            inventario.ubigeo
+			
+		<where>
+            <if test="ubigeoID != null">
+                 AND ubigeo_id = #{ubigeoID,jdbcType=INTEGER}
+            </if>
+            <if test="codigoUbigeo != null">
+                 AND (cod_ubigeo like #{codigoUbigeo,jdbcType=VARCHAR} AND LENGTH(cod_ubigeo) = 4)
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+    
+    <select id="selectDistritoCombo" resultType="com.jcfr.utiles.ListaItem" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.UbigeoEntity">
+
+        SELECT
+            cod_ubigeo AS "id",  
+            descripcion AS "label"
+        FROM 
+            inventario.ubigeo
+			
+		<where>
+            <if test="ubigeoID != null">
+                 AND ubigeo_id = #{ubigeoID,jdbcType=INTEGER}
+            </if>
+            <if test="codigoUbigeo != null">
+                 AND (cod_ubigeo like #{codigoUbigeo,jdbcType=VARCHAR} AND LENGTH(cod_ubigeo) = 6)
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+
+</mapper>

@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simios.simioapp.dao.GrupoClaseDAO">
+
+    <cache />
+
+    <resultMap id="grupoClaseResultMap" type="com.simios.simioapp.dominio.entidades.GrupoClaseEntity">
+        <id column="grupo_id" property="grupoID" jdbcType="INTEGER" />
+        <id column="clase_id" property="claseID" jdbcType="INTEGER" />
+        <result column="cuenta" property="cuenta" jdbcType="VARCHAR" />
+        <result column="ind_del" property="indDel" jdbcType="VARCHAR" />
+        <result column="fec_reg" property="fechaReg" jdbcType="TIMESTAMP" />
+        <result column="fec_act" property="fechaAct" jdbcType="TIMESTAMP" />
+        <result column="usu_reg" property="usuReg" jdbcType="VARCHAR" />
+        <result column="usu_act" property="usuAct" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectByID" resultMap="grupoClaseResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.GrupoClaseEntity">
+
+        SELECT
+            grupo_id, clase_id, cuenta, ind_del, 
+            fec_reg, fec_act, usu_reg, usu_act
+        FROM 
+            inventario.grupo_clase
+        WHERE
+            grupo_id = #{grupoID,jdbcType=INTEGER}
+            AND clase_id = #{claseID,jdbcType=INTEGER}
+    </select>
+
+    <select id="select" resultMap="grupoClaseResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.GrupoClaseEntity">
+
+        SELECT
+            grupo_id, clase_id, cuenta, ind_del, 
+            fec_reg, fec_act, usu_reg, usu_act
+        FROM 
+            inventario.grupo_clase
+        <where>
+            <if test="grupoID != null">
+                 AND grupo_id = #{grupoID,jdbcType=INTEGER}
+            </if>
+            <if test="claseID != null">
+                 AND clase_id = #{claseID,jdbcType=INTEGER}
+            </if>
+            <if test="cuenta != null">
+                 AND cuenta = #{cuenta,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMap" resultMap="grupoClaseResultMap" useCache="false" parameterType="java.util.Map">
+
+        SELECT
+            g.grupo_id, g.clase_id, g.cuenta, g.ind_del, 
+            g.fec_reg, g.fec_act, g.usu_reg, g.usu_act
+        FROM 
+            inventario.grupo_clase g
+        <where>
+            <if test="grupoID != null">
+                <choose>
+                    <when test="grupoID_type == 'rango_incluye'">
+                         AND g.grupo_id &gt;= #{grupoID_ini,jdbcType=INTEGER} AND g.grupo_id &lt;= #{grupoID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="grupoID_type == 'rango_excluye'">
+                         AND g.grupo_id &gt; #{grupoID_ini,jdbcType=INTEGER} AND g.grupo_id &lt; #{grupoID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND g.grupo_id = #{grupoID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="claseID != null">
+                <choose>
+                    <when test="claseID_type == 'rango_incluye'">
+                         AND g.clase_id &gt;= #{claseID_ini,jdbcType=INTEGER} AND g.clase_id &lt;= #{claseID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="claseID_type == 'rango_excluye'">
+                         AND g.clase_id &gt; #{claseID_ini,jdbcType=INTEGER} AND g.clase_id &lt; #{claseID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND g.clase_id = #{claseID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="cuenta != null">
+                <choose>
+                    <when test="cuenta_type == 'igual'">
+                         AND g.cuenta = #{cuenta,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND g.cuenta like #{cuenta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND g.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND g.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND g.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND g.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND g.fec_reg &gt; #{fechaReg_ini,jdbcType=TIMESTAMP} AND g.fec_reg &lt; #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND g.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND g.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND g.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND g.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND g.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND g.fec_act &gt; #{fechaAct_ini,jdbcType=TIMESTAMP} AND g.fec_act &lt; #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND g.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND g.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND g.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND g.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND g.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND g.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND g.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMapGrilla" useCache="false" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT
+		    g.grupo_id as "grupoID",
+		    (select gru.grupo from grupo gru where gru.grupo_id = g.grupo_id) as "grupoCodigo",
+		    (select gru.descripcion from grupo gru where gru.grupo_id = g.grupo_id) as "grupoDescrip",
+		    g.clase_id as "claseID",
+		    (select cla.clase from clase cla where cla.clase_id = g.clase_id) as "claseCodigo",
+		    (select cla.descripcion from clase cla where cla.clase_id = g.clase_id) as "claseDescrip",
+		    g.cuenta as "cuenta", 
+		    g.ind_del as "indDel", 
+		    g.fec_reg as "fechaReg", 
+		    g.fec_act as "fechaAct", 
+		    g.usu_reg as "usuReg", 
+		    g.usu_act as "usuAct"
+        FROM 
+            inventario.grupo_clase g
+        <where>
+            <if test="grupoID != null">
+                <choose>
+                    <when test="grupoID_type == 'rango_incluye'">
+                         AND g.grupo_id &gt;= #{grupoID,jdbcType=INTEGER} AND g.grupo_id &lt;= #{grupoID,jdbcType=INTEGER}
+                    </when>
+                    <when test="grupoID_type == 'rango_excluye'">
+                         AND g.grupo_id &gt; #{grupoID,jdbcType=INTEGER} AND g.grupo_id &lt; #{grupoID,jdbcType=INTEGER}
+                    </when>
+                    <when test="grupoID_type == 'is_null'">
+                         AND g.grupo_id IS NULL 
+                    </when>
+                    <when test="grupoID_type == 'is_not_null'">
+                         AND g.grupo_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND g.grupo_id = #{grupoID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="claseID != null">
+                <choose>
+                    <when test="claseID_type == 'rango_incluye'">
+                         AND g.clase_id &gt;= #{claseID,jdbcType=INTEGER} AND g.clase_id &lt;= #{claseID,jdbcType=INTEGER}
+                    </when>
+                    <when test="claseID_type == 'rango_excluye'">
+                         AND g.clase_id &gt; #{claseID,jdbcType=INTEGER} AND g.clase_id &lt; #{claseID,jdbcType=INTEGER}
+                    </when>
+                    <when test="claseID_type == 'is_null'">
+                         AND g.clase_id IS NULL 
+                    </when>
+                    <when test="claseID_type == 'is_not_null'">
+                         AND g.clase_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND g.clase_id = #{claseID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="cuenta != null">
+                <choose>
+                    <when test="cuenta_type == 'igual'">
+                         AND g.cuenta = #{cuenta,jdbcType=VARCHAR}
+                    </when>
+                    <when test="cuenta_type == 'is_null'">
+                         AND g.cuenta IS NULL 
+                    </when>
+                    <when test="cuenta_type == 'is_not_null'">
+                         AND g.cuenta IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND g.cuenta like #{cuenta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND g.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indDel_type == 'is_null'">
+                         AND g.ind_del IS NULL 
+                    </when>
+                    <when test="indDel_type == 'is_not_null'">
+                         AND g.ind_del IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND g.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND g.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND g.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND g.fec_reg &gt; #{fechaReg,jdbcType=TIMESTAMP} AND g.fec_reg &lt; #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND g.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'is_null'">
+                         AND g.fec_reg IS NULL 
+                    </when>
+                    <when test="fechaReg_type == 'is_not_null'">
+                         AND g.fec_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND g.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND g.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND g.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND g.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND g.fec_act &gt; #{fechaAct,jdbcType=TIMESTAMP} AND g.fec_act &lt; #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND g.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'is_null'">
+                         AND g.fec_act IS NULL 
+                    </when>
+                    <when test="fechaAct_type == 'is_not_null'">
+                         AND g.fec_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND g.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND g.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND g.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuReg_type == 'is_null'">
+                         AND g.usu_reg IS NULL 
+                    </when>
+                    <when test="usuReg_type == 'is_not_null'">
+                         AND g.usu_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND g.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND g.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuAct_type == 'is_null'">
+                         AND g.usu_act IS NULL 
+                    </when>
+                    <when test="usuAct_type == 'is_not_null'">
+                         AND g.usu_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND g.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <insert id="insert" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.GrupoClaseEntity">
+
+        INSERT INTO inventario.grupo_clase 
+        (
+        	grupo_id,
+        	clase_id,
+            cuenta,
+            ind_del,
+            fec_reg,
+            fec_act,
+            usu_reg,
+            usu_act
+        )
+        VALUES
+        (
+        	#{grupoID,jdbcType=INTEGER},
+        	#{claseID,jdbcType=INTEGER},
+            #{cuenta,jdbcType=VARCHAR},
+            #{indDel,jdbcType=VARCHAR},
+            #{fechaReg,jdbcType=TIMESTAMP},
+            #{fechaAct,jdbcType=TIMESTAMP},
+            #{usuReg,jdbcType=VARCHAR},
+            #{usuAct,jdbcType=VARCHAR}
+        )
+
+    </insert>
+
+    <update id="update" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.GrupoClaseEntity">
+
+        UPDATE inventario.grupo_clase
+        <set>
+            <if test="cuenta != null">
+                cuenta = #{cuenta,jdbcType=VARCHAR},
+            </if>
+            <if test="indDel != null">
+                ind_del = #{indDel,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaReg != null">
+                fec_reg = #{fechaReg,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fechaAct != null">
+                fec_act = #{fechaAct,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usuReg != null">
+                usu_reg = #{usuReg,jdbcType=VARCHAR},
+            </if>
+            <if test="usuAct != null">
+                usu_act = #{usuAct,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE 
+            grupo_id = #{grupoID,jdbcType=INTEGER} AND 
+            clase_id = #{claseID,jdbcType=INTEGER}
+    </update>
+
+</mapper>

@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>simioapp-web</artifactId>
+	<packaging>war</packaging>
+	<name>simioapp-web</name>
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.simios.simioapp</groupId>
+			<artifactId>simioapp-controller</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<finalName>simioapp-web</finalName>
+
+		<plugins>
+
+			<!-- maven plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+
+			<!-- tomcat plugin -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<port>8081</port>
+					<path>/</path>
+				</configuration>
+			</plugin>
+			
+			<!-- jetty plugin -->
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.2.15.v20160210</version>
+				<configuration>
+					<scanIntervalSeconds>30</scanIntervalSeconds>
+					<webApp>
+						<contextPath>/simioapp</contextPath>
+					</webApp>
+					<httpConnector>
+          	     		<port>8081</port>
+        			</httpConnector>
+				</configuration>
+			</plugin>
+
+			<!-- jrebel plugin (valido por 15 dias - cuenta de pago) -->
+<!--             <plugin> -->
+<!--                 <groupId>org.zeroturnaround</groupId> -->
+<!--                 <artifactId>jrebel-maven-plugin</artifactId> -->
+<!--                 <version>1.1.5</version> -->
+<!-- 				<configuration> -->
+<!--                     <rebelXmlDirectory>src/main/resources</rebelXmlDirectory> -->
+<!--                     <addResourcesDirToRebelXml>true</addResourcesDirToRebelXml> -->
+<!--                     <showGenerated>true</showGenerated> -->
+<!--                     <alwaysGenerate>true</alwaysGenerate> -->
+<!-- 				</configuration> -->
+<!--                 <executions> -->
+<!--                     <execution> -->
+<!--                         <id>generate-rebel-xml</id> -->
+<!--                         <phase>process-resources</phase> -->
+<!--                         <goals> -->
+<!--                             <goal>generate</goal> -->
+<!--                         </goals> -->
+<!--                     </execution> -->
+<!--                 </executions> -->
+<!--             </plugin> -->
+
+		</plugins>
+	</build>
+
+	<parent>
+		<groupId>com.simios.simioapp</groupId>
+		<artifactId>simioapp-artefactos</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../simioapp-artefactos</relativePath>
+	</parent>
+
+</project>

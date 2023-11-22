@@ -1,0 +1,3558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simios.simioapp.dao.BienDAO">
+
+    <cache />
+
+    <resultMap id="bienResultMap" type="com.simios.simioapp.dominio.entidades.BienEntity">
+        <id column="bien_id" property="bienID" jdbcType="INTEGER" />
+        <result column="codigo_patrimonial" property="codigoPatrimonial" jdbcType="VARCHAR" />
+        <result column="entidad_id" property="entidadID" jdbcType="INTEGER" />
+        <result column="locales_id" property="localesID" jdbcType="INTEGER" />
+        <result column="area_id" property="areaID" jdbcType="INTEGER" />
+        <result column="empleado_id" property="empleadoID" jdbcType="INTEGER" />
+        <result column="oficina_id" property="oficinaID" jdbcType="INTEGER" />
+        <result column="tipo_causal_alta" property="tipoCausalAlta" jdbcType="VARCHAR" />
+        <result column="anho" property="anho" jdbcType="INTEGER" />
+        <result column="matricula" property="matricula" jdbcType="VARCHAR" />
+        <result column="ancho" property="ancho" jdbcType="DECIMAL" />
+        <result column="valor_libro" property="valorLibro" jdbcType="DECIMAL" />
+        <result column="cuenta_con_seguro" property="cuentaConSeguro" jdbcType="VARCHAR" />
+        <result column="estado_bien" property="estadoBien" jdbcType="VARCHAR" />
+        <result column="dimension" property="dimension" jdbcType="VARCHAR" />
+        <result column="condicion" property="condicion" jdbcType="VARCHAR" />
+        <result column="nro_doc_adquisicion" property="numeroDocAdquisicion" jdbcType="VARCHAR" />
+        <result column="color" property="color" jdbcType="VARCHAR" />
+        <result column="fecha_adquisicion" property="fechaAdquisicion" jdbcType="DATE" />
+        <result column="ent_disp" property="entDisp" jdbcType="VARCHAR" />
+        <result column="ent_arre" property="entArre" jdbcType="VARCHAR" />
+        <result column="fec_vafec" property="fechaVafec" jdbcType="DATE" />
+        <result column="edad" property="edad" jdbcType="VARCHAR" />
+        <result column="motivo_eliminacion_bien" property="motivoEliminacionBien" jdbcType="VARCHAR" />
+        <result column="valor_adquisicion" property="valorAdquisicion" jdbcType="DECIMAL" />
+        <result column="anio_fabricacion" property="anioFabricacion" jdbcType="VARCHAR" />
+        <result column="resol_afec" property="resolAfec" jdbcType="VARCHAR" />
+        <result column="especie" property="especie" jdbcType="VARCHAR" />
+        <result column="raza" property="raza" jdbcType="VARCHAR" />
+        <result column="fec_afec" property="fechaAfec" jdbcType="DATE" />
+        <result column="flg_acto" property="flgActo" jdbcType="VARCHAR" />
+        <result column="modelo" property="modelo" jdbcType="VARCHAR" />
+        <result column="flg_causal" property="flgCausal" jdbcType="VARCHAR" />
+        <result column="marca" property="marca" jdbcType="VARCHAR" />
+        <result column="nro_resolucion_baja" property="numeroResolucionBaja" jdbcType="VARCHAR" />
+        <result column="resol_arre" property="resolArre" jdbcType="VARCHAR" />
+        <result column="dsc_otros" property="dscOtros" jdbcType="VARCHAR" />
+        <result column="fec_arre" property="fechaArre" jdbcType="DATE" />
+        <result column="fecha_disposicion" property="fechaDisposicion" jdbcType="DATE" />
+        <result column="resol_disp" property="resolDisp" jdbcType="VARCHAR" />
+        <result column="altura" property="altura" jdbcType="VARCHAR" />
+        <result column="nro_chasis" property="numeroChasis" jdbcType="VARCHAR" />
+        <result column="valortasa" property="valortasa" jdbcType="VARCHAR" />
+        <result column="placa" property="placa" jdbcType="VARCHAR" />
+        <result column="sit_binv" property="sitBinv" jdbcType="VARCHAR" />
+        <result column="nro_cuenta_contable" property="numeroCuentaContable" jdbcType="VARCHAR" />
+        <result column="serie" property="serie" jdbcType="VARCHAR" />
+        <result column="est_bien" property="estBien" jdbcType="VARCHAR" />
+        <result column="ent_afec" property="entAfec" jdbcType="VARCHAR" />
+        <result column="codanterio" property="codanterio" jdbcType="VARCHAR" />
+        <result column="tipo_cuenta" property="tipoCuenta" jdbcType="VARCHAR" />
+        <result column="est_gestio" property="estGestio" jdbcType="VARCHAR" />
+        <result column="doc_baja" property="docBaja" jdbcType="VARCHAR" />
+        <result column="nro_motor" property="numeroMotor" jdbcType="VARCHAR" />
+        <result column="longitud" property="longitud" jdbcType="VARCHAR" />
+        <result column="pais" property="pais" jdbcType="VARCHAR" />
+        <result column="fecha_baja" property="fechaBaja" jdbcType="DATE" />
+        <result column="fec_varre" property="fechaVarre" jdbcType="DATE" />
+        <result column="denominacion_bien" property="denominacionBien" jdbcType="VARCHAR" />
+        <result column="fecha_depreciacion" property="fechaDepreciacion" jdbcType="DATE" />
+        <result column="valor_deprec_ejercicio" property="valorDeprecEjercicio" jdbcType="DECIMAL" />
+        <result column="valor_deprec_acumulado" property="valorDeprecAcumulado" jdbcType="DECIMAL" />
+        <result column="valor_neto" property="valorNeto" jdbcType="DECIMAL" />
+        <result column="tip_uso_cuenta" property="tipUsoCuenta" jdbcType="VARCHAR" />
+        <result column="catalogo_bien_id" property="catalogoBienID" jdbcType="INTEGER" />
+        <result column="otras_caract" property="otrasCaract" jdbcType="VARCHAR" />
+        <result column="descripcion_ubicacion_bien" property="descripcionUbicacionBien" jdbcType="VARCHAR" />
+        <result column="causal_baja" property="causalBaja" jdbcType="VARCHAR" />
+        <result column="acto_disposicion_bien" property="actoDisposicionBien" jdbcType="VARCHAR" />
+        <result column="entidad_beneficiada_acto_disposicion" property="entidadBeneficiadaActoDisposicion" jdbcType="VARCHAR" />
+        <result column="acto_administracion_bien" property="actoAdministracionBien" jdbcType="VARCHAR" />
+        <result column="num_resolucion_administracion" property="numeroResolucionAdministracion" jdbcType="VARCHAR" />
+        <result column="fecha_administracion" property="fechaAdministracion" jdbcType="DATE" />
+        <result column="fecha_venc_acto_admin" property="fechaVencActoAdmin" jdbcType="DATE" />
+        <result column="entidad_beneficiada_acto_admin" property="entidadBeneficiadaActoAdmin" jdbcType="VARCHAR" />
+        <result column="doc_alta_sbn" property="docAltaSbn" jdbcType="VARCHAR" />
+        <result column="doc_baja_sbn" property="docBajaSbn" jdbcType="VARCHAR" />
+        <result column="ind_del" property="indDel" jdbcType="VARCHAR" />
+        <result column="fec_reg" property="fechaReg" jdbcType="TIMESTAMP" />
+        <result column="fec_act" property="fechaAct" jdbcType="TIMESTAMP" />
+        <result column="usu_reg" property="usuReg" jdbcType="VARCHAR" />
+        <result column="usu_act" property="usuAct" jdbcType="VARCHAR" />
+        <result column="tipo" property="tipo" jdbcType="VARCHAR" />
+        <result column="nro_resolucion_disp" property="numeroResolucionDisp" jdbcType="VARCHAR" />
+        <result column="codigo_barras" property="codigoBarras" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectByID" resultMap="bienResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.BienEntity">
+
+        SELECT
+            bien_id, codigo_patrimonial, entidad_id, locales_id, 
+            area_id, empleado_id, oficina_id, tipo_causal_alta, 
+            anho, matricula, ancho, valor_libro, 
+            cuenta_con_seguro, estado_bien, dimension, condicion, 
+            nro_doc_adquisicion, color, fecha_adquisicion, ent_disp, 
+            ent_arre, fec_vafec, edad, motivo_eliminacion_bien, 
+            valor_adquisicion, anio_fabricacion, resol_afec, especie, 
+            raza, fec_afec, flg_acto, modelo, 
+            flg_causal, marca, nro_resolucion_baja, resol_arre, 
+            dsc_otros, fec_arre, fecha_disposicion, resol_disp, 
+            altura, nro_chasis, valortasa, placa, 
+            sit_binv, nro_cuenta_contable, serie, est_bien, 
+            ent_afec, codanterio, tipo_cuenta, est_gestio, 
+            doc_baja, nro_motor, longitud, pais, 
+            fecha_baja, fec_varre, denominacion_bien, fecha_depreciacion, 
+            valor_deprec_ejercicio, valor_deprec_acumulado, valor_neto, tip_uso_cuenta, 
+            catalogo_bien_id, otras_caract, descripcion_ubicacion_bien, causal_baja, 
+            acto_disposicion_bien, entidad_beneficiada_acto_disposicion, acto_administracion_bien, num_resolucion_administracion, 
+            fecha_administracion, fecha_venc_acto_admin, entidad_beneficiada_acto_admin, doc_alta_sbn, 
+            doc_baja_sbn, ind_del, fec_reg, fec_act, 
+            usu_reg, usu_act, tipo, nro_resolucion_disp, 
+            codigo_barras
+        FROM 
+            inventario.bien
+        WHERE
+            bien_id = #{bienID,jdbcType=INTEGER}
+    </select>
+
+    <select id="select" resultMap="bienResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.BienEntity">
+
+        SELECT
+            bien_id, codigo_patrimonial, entidad_id, locales_id, 
+            area_id, empleado_id, oficina_id, tipo_causal_alta, 
+            anho, matricula, ancho, valor_libro, 
+            cuenta_con_seguro, estado_bien, dimension, condicion, 
+            nro_doc_adquisicion, color, fecha_adquisicion, ent_disp, 
+            ent_arre, fec_vafec, edad, motivo_eliminacion_bien, 
+            valor_adquisicion, anio_fabricacion, resol_afec, especie, 
+            raza, fec_afec, flg_acto, modelo, 
+            flg_causal, marca, nro_resolucion_baja, resol_arre, 
+            dsc_otros, fec_arre, fecha_disposicion, resol_disp, 
+            altura, nro_chasis, valortasa, placa, 
+            sit_binv, nro_cuenta_contable, serie, est_bien, 
+            ent_afec, codanterio, tipo_cuenta, est_gestio, 
+            doc_baja, nro_motor, longitud, pais, 
+            fecha_baja, fec_varre, denominacion_bien, fecha_depreciacion, 
+            valor_deprec_ejercicio, valor_deprec_acumulado, valor_neto, tip_uso_cuenta, 
+            catalogo_bien_id, otras_caract, descripcion_ubicacion_bien, causal_baja, 
+            acto_disposicion_bien, entidad_beneficiada_acto_disposicion, acto_administracion_bien, num_resolucion_administracion, 
+            fecha_administracion, fecha_venc_acto_admin, entidad_beneficiada_acto_admin, doc_alta_sbn, 
+            doc_baja_sbn, ind_del, fec_reg, fec_act, 
+            usu_reg, usu_act, tipo, nro_resolucion_disp, 
+            codigo_barras
+        FROM 
+            inventario.bien
+        <where>
+            <if test="bienID != null">
+                 AND bien_id = #{bienID,jdbcType=INTEGER}
+            </if>
+            <if test="codigoPatrimonial != null">
+                 AND codigo_patrimonial = #{codigoPatrimonial,jdbcType=VARCHAR}
+            </if>
+            <if test="entidadID != null">
+                 AND entidad_id = #{entidadID,jdbcType=INTEGER}
+            </if>
+            <if test="localesID != null">
+                 AND locales_id = #{localesID,jdbcType=INTEGER}
+            </if>
+            <if test="areaID != null">
+                 AND area_id = #{areaID,jdbcType=INTEGER}
+            </if>
+            <if test="empleadoID != null">
+                 AND empleado_id = #{empleadoID,jdbcType=INTEGER}
+            </if>
+            <if test="oficinaID != null">
+                 AND oficina_id = #{oficinaID,jdbcType=INTEGER}
+            </if>
+            <if test="tipoCausalAlta != null">
+                 AND tipo_causal_alta = #{tipoCausalAlta,jdbcType=VARCHAR}
+            </if>
+            <if test="anho != null">
+                 AND anho = #{anho,jdbcType=INTEGER}
+            </if>
+            <if test="matricula != null">
+                 AND matricula = #{matricula,jdbcType=VARCHAR}
+            </if>
+            <if test="ancho != null">
+                 AND ancho = #{ancho,jdbcType=DECIMAL}
+            </if>
+            <if test="valorLibro != null">
+                 AND valor_libro = #{valorLibro,jdbcType=DECIMAL}
+            </if>
+            <if test="cuentaConSeguro != null">
+                 AND cuenta_con_seguro = #{cuentaConSeguro,jdbcType=VARCHAR}
+            </if>
+            <if test="estadoBien != null">
+                 AND estado_bien = #{estadoBien,jdbcType=VARCHAR}
+            </if>
+            <if test="dimension != null">
+                 AND dimension = #{dimension,jdbcType=VARCHAR}
+            </if>
+            <if test="condicion != null">
+                 AND condicion = #{condicion,jdbcType=VARCHAR}
+            </if>
+            <if test="numeroDocAdquisicion != null">
+                 AND nro_doc_adquisicion = #{numeroDocAdquisicion,jdbcType=VARCHAR}
+            </if>
+            <if test="color != null">
+                 AND color = #{color,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaAdquisicion != null">
+                 AND fecha_adquisicion = #{fechaAdquisicion,jdbcType=DATE}
+            </if>
+            <if test="entDisp != null">
+                 AND ent_disp = #{entDisp,jdbcType=VARCHAR}
+            </if>
+            <if test="entArre != null">
+                 AND ent_arre = #{entArre,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaVafec != null">
+                 AND fec_vafec = #{fechaVafec,jdbcType=DATE}
+            </if>
+            <if test="edad != null">
+                 AND edad = #{edad,jdbcType=VARCHAR}
+            </if>
+            <if test="motivoEliminacionBien != null">
+                 AND motivo_eliminacion_bien = #{motivoEliminacionBien,jdbcType=VARCHAR}
+            </if>
+            <if test="valorAdquisicion != null">
+                 AND valor_adquisicion = #{valorAdquisicion,jdbcType=DECIMAL}
+            </if>
+            <if test="anioFabricacion != null">
+                 AND anio_fabricacion = #{anioFabricacion,jdbcType=VARCHAR}
+            </if>
+            <if test="resolAfec != null">
+                 AND resol_afec = #{resolAfec,jdbcType=VARCHAR}
+            </if>
+            <if test="especie != null">
+                 AND especie = #{especie,jdbcType=VARCHAR}
+            </if>
+            <if test="raza != null">
+                 AND raza = #{raza,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaAfec != null">
+                 AND fec_afec = #{fechaAfec,jdbcType=DATE}
+            </if>
+            <if test="flgActo != null">
+                 AND flg_acto = #{flgActo,jdbcType=VARCHAR}
+            </if>
+            <if test="modelo != null">
+                 AND modelo = #{modelo,jdbcType=VARCHAR}
+            </if>
+            <if test="flgCausal != null">
+                 AND flg_causal = #{flgCausal,jdbcType=VARCHAR}
+            </if>
+            <if test="marca != null">
+                 AND marca = #{marca,jdbcType=VARCHAR}
+            </if>
+            <if test="numeroResolucionBaja != null">
+                 AND nro_resolucion_baja = #{numeroResolucionBaja,jdbcType=VARCHAR}
+            </if>
+            <if test="resolArre != null">
+                 AND resol_arre = #{resolArre,jdbcType=VARCHAR}
+            </if>
+            <if test="dscOtros != null">
+                 AND dsc_otros = #{dscOtros,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaArre != null">
+                 AND fec_arre = #{fechaArre,jdbcType=DATE}
+            </if>
+            <if test="fechaDisposicion != null">
+                 AND fecha_disposicion = #{fechaDisposicion,jdbcType=DATE}
+            </if>
+            <if test="resolDisp != null">
+                 AND resol_disp = #{resolDisp,jdbcType=VARCHAR}
+            </if>
+            <if test="altura != null">
+                 AND altura = #{altura,jdbcType=VARCHAR}
+            </if>
+            <if test="numeroChasis != null">
+                 AND nro_chasis = #{numeroChasis,jdbcType=VARCHAR}
+            </if>
+            <if test="valortasa != null">
+                 AND valortasa = #{valortasa,jdbcType=VARCHAR}
+            </if>
+            <if test="placa != null">
+                 AND placa = #{placa,jdbcType=VARCHAR}
+            </if>
+            <if test="sitBinv != null">
+                 AND sit_binv = #{sitBinv,jdbcType=VARCHAR}
+            </if>
+            <if test="numeroCuentaContable != null">
+                 AND nro_cuenta_contable = #{numeroCuentaContable,jdbcType=VARCHAR}
+            </if>
+            <if test="serie != null">
+                 AND serie = #{serie,jdbcType=VARCHAR}
+            </if>
+            <if test="estBien != null">
+                 AND est_bien = #{estBien,jdbcType=VARCHAR}
+            </if>
+            <if test="entAfec != null">
+                 AND ent_afec = #{entAfec,jdbcType=VARCHAR}
+            </if>
+            <if test="codanterio != null">
+                 AND codanterio = #{codanterio,jdbcType=VARCHAR}
+            </if>
+            <if test="tipoCuenta != null">
+                 AND tipo_cuenta = #{tipoCuenta,jdbcType=VARCHAR}
+            </if>
+            <if test="estGestio != null">
+                 AND est_gestio = #{estGestio,jdbcType=VARCHAR}
+            </if>
+            <if test="docBaja != null">
+                 AND doc_baja = #{docBaja,jdbcType=VARCHAR}
+            </if>
+            <if test="numeroMotor != null">
+                 AND nro_motor = #{numeroMotor,jdbcType=VARCHAR}
+            </if>
+            <if test="longitud != null">
+                 AND longitud = #{longitud,jdbcType=VARCHAR}
+            </if>
+            <if test="pais != null">
+                 AND pais = #{pais,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaBaja != null">
+                 AND fecha_baja = #{fechaBaja,jdbcType=DATE}
+            </if>
+            <if test="fechaVarre != null">
+                 AND fec_varre = #{fechaVarre,jdbcType=DATE}
+            </if>
+            <if test="denominacionBien != null">
+                 AND denominacion_bien = #{denominacionBien,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaDepreciacion != null">
+                 AND fecha_depreciacion = #{fechaDepreciacion,jdbcType=DATE}
+            </if>
+            <if test="valorDeprecEjercicio != null">
+                 AND valor_deprec_ejercicio = #{valorDeprecEjercicio,jdbcType=DECIMAL}
+            </if>
+            <if test="valorDeprecAcumulado != null">
+                 AND valor_deprec_acumulado = #{valorDeprecAcumulado,jdbcType=DECIMAL}
+            </if>
+            <if test="valorNeto != null">
+                 AND valor_neto = #{valorNeto,jdbcType=DECIMAL}
+            </if>
+            <if test="tipUsoCuenta != null">
+                 AND tip_uso_cuenta = #{tipUsoCuenta,jdbcType=VARCHAR}
+            </if>
+            <if test="catalogoBienID != null">
+                 AND catalogo_bien_id = #{catalogoBienID,jdbcType=INTEGER}
+            </if>
+            <if test="otrasCaract != null">
+                 AND otras_caract = #{otrasCaract,jdbcType=VARCHAR}
+            </if>
+            <if test="descripcionUbicacionBien != null">
+                 AND descripcion_ubicacion_bien = #{descripcionUbicacionBien,jdbcType=VARCHAR}
+            </if>
+            <if test="causalBaja != null">
+                 AND causal_baja = #{causalBaja,jdbcType=VARCHAR}
+            </if>
+            <if test="actoDisposicionBien != null">
+                 AND acto_disposicion_bien = #{actoDisposicionBien,jdbcType=VARCHAR}
+            </if>
+            <if test="entidadBeneficiadaActoDisposicion != null">
+                 AND entidad_beneficiada_acto_disposicion = #{entidadBeneficiadaActoDisposicion,jdbcType=VARCHAR}
+            </if>
+            <if test="actoAdministracionBien != null">
+                 AND acto_administracion_bien = #{actoAdministracionBien,jdbcType=VARCHAR}
+            </if>
+            <if test="numeroResolucionAdministracion != null">
+                 AND num_resolucion_administracion = #{numeroResolucionAdministracion,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaAdministracion != null">
+                 AND fecha_administracion = #{fechaAdministracion,jdbcType=DATE}
+            </if>
+            <if test="fechaVencActoAdmin != null">
+                 AND fecha_venc_acto_admin = #{fechaVencActoAdmin,jdbcType=DATE}
+            </if>
+            <if test="entidadBeneficiadaActoAdmin != null">
+                 AND entidad_beneficiada_acto_admin = #{entidadBeneficiadaActoAdmin,jdbcType=VARCHAR}
+            </if>
+            <if test="docAltaSbn != null">
+                 AND doc_alta_sbn = #{docAltaSbn,jdbcType=VARCHAR}
+            </if>
+            <if test="docBajaSbn != null">
+                 AND doc_baja_sbn = #{docBajaSbn,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+            <if test="tipo != null">
+                 AND tipo = #{tipo,jdbcType=VARCHAR}
+            </if>
+            <if test="numeroResolucionDisp != null">
+                 AND nro_resolucion_disp = #{numeroResolucionDisp,jdbcType=VARCHAR}
+            </if>
+            <if test="codigoBarras != null">
+                 AND codigo_barras = #{codigoBarras,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMap" resultMap="bienResultMap" useCache="false" parameterType="java.util.Map">
+
+        SELECT
+            b.bien_id, b.codigo_patrimonial, b.entidad_id, b.locales_id, 
+            b.area_id, b.empleado_id, b.oficina_id, b.tipo_causal_alta, 
+            b.anho, b.matricula, b.ancho, b.valor_libro, 
+            b.cuenta_con_seguro, b.estado_bien, b.dimension, b.condicion, 
+            b.nro_doc_adquisicion, b.color, b.fecha_adquisicion, b.ent_disp, 
+            b.ent_arre, b.fec_vafec, b.edad, b.motivo_eliminacion_bien, 
+            b.valor_adquisicion, b.anio_fabricacion, b.resol_afec, b.especie, 
+            b.raza, b.fec_afec, b.flg_acto, b.modelo, 
+            b.flg_causal, b.marca, b.nro_resolucion_baja, b.resol_arre, 
+            b.dsc_otros, b.fec_arre, b.fecha_disposicion, b.resol_disp, 
+            b.altura, b.nro_chasis, b.valortasa, b.placa, 
+            b.sit_binv, b.nro_cuenta_contable, b.serie, b.est_bien, 
+            b.ent_afec, b.codanterio, b.tipo_cuenta, b.est_gestio, 
+            b.doc_baja, b.nro_motor, b.longitud, b.pais, 
+            b.fecha_baja, b.fec_varre, b.denominacion_bien, b.fecha_depreciacion, 
+            b.valor_deprec_ejercicio, b.valor_deprec_acumulado, b.valor_neto, b.tip_uso_cuenta, 
+            b.catalogo_bien_id, b.otras_caract, b.descripcion_ubicacion_bien, b.causal_baja, 
+            b.acto_disposicion_bien, b.entidad_beneficiada_acto_disposicion, b.acto_administracion_bien, b.num_resolucion_administracion, 
+            b.fecha_administracion, b.fecha_venc_acto_admin, b.entidad_beneficiada_acto_admin, b.doc_alta_sbn, 
+            b.doc_baja_sbn, b.ind_del, b.fec_reg, b.fec_act, 
+            b.usu_reg, b.usu_act, b.tipo, b.nro_resolucion_disp, 
+            b.codigo_barras
+        FROM 
+            inventario.bien b
+        <where>
+            <if test="bienID != null">
+                <choose>
+                    <when test="bienID_type == 'rango_incluye'">
+                         AND b.bien_id &gt;= #{bienID_ini,jdbcType=INTEGER} AND b.bien_id &lt;= #{bienID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="bienID_type == 'rango_excluye'">
+                         AND b.bien_id &gt; #{bienID_ini,jdbcType=INTEGER} AND b.bien_id &lt; #{bienID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND b.bien_id = #{bienID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="codigoPatrimonial != null">
+                <choose>
+                    <when test="codigoPatrimonial_type == 'igual'">
+                         AND b.codigo_patrimonial = #{codigoPatrimonial,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.codigo_patrimonial like #{codigoPatrimonial,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entidadID != null">
+                <choose>
+                    <when test="entidadID_type == 'rango_incluye'">
+                         AND b.entidad_id &gt;= #{entidadID_ini,jdbcType=INTEGER} AND b.entidad_id &lt;= #{entidadID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="entidadID_type == 'rango_excluye'">
+                         AND b.entidad_id &gt; #{entidadID_ini,jdbcType=INTEGER} AND b.entidad_id &lt; #{entidadID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND b.entidad_id = #{entidadID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="localesID != null">
+                <choose>
+                    <when test="localesID_type == 'rango_incluye'">
+                         AND b.locales_id &gt;= #{localesID_ini,jdbcType=INTEGER} AND b.locales_id &lt;= #{localesID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="localesID_type == 'rango_excluye'">
+                         AND b.locales_id &gt; #{localesID_ini,jdbcType=INTEGER} AND b.locales_id &lt; #{localesID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND b.locales_id = #{localesID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="areaID != null">
+                <choose>
+                    <when test="areaID_type == 'rango_incluye'">
+                         AND b.area_id &gt;= #{areaID_ini,jdbcType=INTEGER} AND b.area_id &lt;= #{areaID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="areaID_type == 'rango_excluye'">
+                         AND b.area_id &gt; #{areaID_ini,jdbcType=INTEGER} AND b.area_id &lt; #{areaID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND b.area_id = #{areaID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="empleadoID != null">
+                <choose>
+                    <when test="empleadoID_type == 'rango_incluye'">
+                         AND b.empleado_id &gt;= #{empleadoID_ini,jdbcType=INTEGER} AND b.empleado_id &lt;= #{empleadoID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="empleadoID_type == 'rango_excluye'">
+                         AND b.empleado_id &gt; #{empleadoID_ini,jdbcType=INTEGER} AND b.empleado_id &lt; #{empleadoID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND b.empleado_id = #{empleadoID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="oficinaID != null">
+                <choose>
+                    <when test="oficinaID_type == 'rango_incluye'">
+                         AND b.oficina_id &gt;= #{oficinaID_ini,jdbcType=INTEGER} AND b.oficina_id &lt;= #{oficinaID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="oficinaID_type == 'rango_excluye'">
+                         AND b.oficina_id &gt; #{oficinaID_ini,jdbcType=INTEGER} AND b.oficina_id &lt; #{oficinaID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND b.oficina_id = #{oficinaID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="tipoCausalAlta != null">
+                <choose>
+                    <when test="tipoCausalAlta_type == 'igual'">
+                         AND b.tipo_causal_alta = #{tipoCausalAlta,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.tipo_causal_alta like #{tipoCausalAlta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="anho != null">
+                <choose>
+                    <when test="anho_type == 'rango_incluye'">
+                         AND b.anho &gt;= #{anho_ini,jdbcType=INTEGER} AND b.anho &lt;= #{anho_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="anho_type == 'rango_excluye'">
+                         AND b.anho &gt; #{anho_ini,jdbcType=INTEGER} AND b.anho &lt; #{anho_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND b.anho = #{anho,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="matricula != null">
+                <choose>
+                    <when test="matricula_type == 'igual'">
+                         AND b.matricula = #{matricula,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.matricula like #{matricula,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="ancho != null">
+                <choose>
+                    <when test="ancho_type == 'rango_incluye'">
+                         AND b.ancho &gt;= #{ancho_ini,jdbcType=DECIMAL} AND b.ancho &lt;= #{ancho_fin,jdbcType=DECIMAL}
+                    </when>
+                    <when test="ancho_type == 'rango_excluye'">
+                         AND b.ancho &gt; #{ancho_ini,jdbcType=DECIMAL} AND b.ancho &lt; #{ancho_fin,jdbcType=DECIMAL}
+                    </when>
+                    <when test="ancho_type == 'igual'">
+                         AND b.ancho = #{ancho,jdbcType=DECIMAL}
+                    </when>
+                    <otherwise>
+                         AND b.ancho &gt;= #{ancho_ini,jdbcType=DECIMAL} AND b.ancho &lt;= #{ancho_fin,jdbcType=DECIMAL}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="valorLibro != null">
+                <choose>
+                    <when test="valorLibro_type == 'rango_incluye'">
+                         AND b.valor_libro &gt;= #{valorLibro_ini,jdbcType=DECIMAL} AND b.valor_libro &lt;= #{valorLibro_fin,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorLibro_type == 'rango_excluye'">
+                         AND b.valor_libro &gt; #{valorLibro_ini,jdbcType=DECIMAL} AND b.valor_libro &lt; #{valorLibro_fin,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorLibro_type == 'igual'">
+                         AND b.valor_libro = #{valorLibro,jdbcType=DECIMAL}
+                    </when>
+                    <otherwise>
+                         AND b.valor_libro &gt;= #{valorLibro_ini,jdbcType=DECIMAL} AND b.valor_libro &lt;= #{valorLibro_fin,jdbcType=DECIMAL}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="cuentaConSeguro != null">
+                <choose>
+                    <when test="cuentaConSeguro_type == 'igual'">
+                         AND b.cuenta_con_seguro = #{cuentaConSeguro,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.cuenta_con_seguro like #{cuentaConSeguro,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="estadoBien != null">
+                <choose>
+                    <when test="estadoBien_type == 'igual'">
+                         AND b.estado_bien = #{estadoBien,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.estado_bien like #{estadoBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dimension != null">
+                <choose>
+                    <when test="dimension_type == 'igual'">
+                         AND b.dimension = #{dimension,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.dimension like #{dimension,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="condicion != null">
+                <choose>
+                    <when test="condicion_type == 'igual'">
+                         AND b.condicion = #{condicion,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.condicion like #{condicion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroDocAdquisicion != null">
+                <choose>
+                    <when test="numeroDocAdquisicion_type == 'igual'">
+                         AND b.nro_doc_adquisicion = #{numeroDocAdquisicion,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.nro_doc_adquisicion like #{numeroDocAdquisicion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="color != null">
+                <choose>
+                    <when test="color_type == 'igual'">
+                         AND b.color = #{color,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.color like #{color,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAdquisicion != null">
+                <choose>
+                    <when test="fechaAdquisicion_type == 'rango_incluye'">
+                         AND b.fecha_adquisicion &gt;= #{fechaAdquisicion_ini,jdbcType=DATE} AND b.fecha_adquisicion &lt;= #{fechaAdquisicion_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAdquisicion_type == 'rango_excluye'">
+                         AND b.fecha_adquisicion &gt; #{fechaAdquisicion_ini,jdbcType=DATE} AND b.fecha_adquisicion &lt; #{fechaAdquisicion_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAdquisicion_type == 'igual'">
+                         AND b.fecha_adquisicion = #{fechaAdquisicion,jdbcType=DATE}
+                    </when>
+                    <otherwise>
+                         AND b.fecha_adquisicion &gt;= #{fechaAdquisicion_ini,jdbcType=DATE} AND b.fecha_adquisicion &lt;= #{fechaAdquisicion_fin,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entDisp != null">
+                <choose>
+                    <when test="entDisp_type == 'igual'">
+                         AND b.ent_disp = #{entDisp,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.ent_disp like #{entDisp,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entArre != null">
+                <choose>
+                    <when test="entArre_type == 'igual'">
+                         AND b.ent_arre = #{entArre,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.ent_arre like #{entArre,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaVafec != null">
+                <choose>
+                    <when test="fechaVafec_type == 'rango_incluye'">
+                         AND b.fec_vafec &gt;= #{fechaVafec_ini,jdbcType=DATE} AND b.fec_vafec &lt;= #{fechaVafec_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVafec_type == 'rango_excluye'">
+                         AND b.fec_vafec &gt; #{fechaVafec_ini,jdbcType=DATE} AND b.fec_vafec &lt; #{fechaVafec_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVafec_type == 'igual'">
+                         AND b.fec_vafec = #{fechaVafec,jdbcType=DATE}
+                    </when>
+                    <otherwise>
+                         AND b.fec_vafec &gt;= #{fechaVafec_ini,jdbcType=DATE} AND b.fec_vafec &lt;= #{fechaVafec_fin,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="edad != null">
+                <choose>
+                    <when test="edad_type == 'igual'">
+                         AND b.edad = #{edad,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.edad like #{edad,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="motivoEliminacionBien != null">
+                <choose>
+                    <when test="motivoEliminacionBien_type == 'igual'">
+                         AND b.motivo_eliminacion_bien = #{motivoEliminacionBien,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.motivo_eliminacion_bien like #{motivoEliminacionBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="valorAdquisicion != null">
+                <choose>
+                    <when test="valorAdquisicion_type == 'rango_incluye'">
+                         AND b.valor_adquisicion &gt;= #{valorAdquisicion_ini,jdbcType=DECIMAL} AND b.valor_adquisicion &lt;= #{valorAdquisicion_fin,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorAdquisicion_type == 'rango_excluye'">
+                         AND b.valor_adquisicion &gt; #{valorAdquisicion_ini,jdbcType=DECIMAL} AND b.valor_adquisicion &lt; #{valorAdquisicion_fin,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorAdquisicion_type == 'igual'">
+                         AND b.valor_adquisicion = #{valorAdquisicion,jdbcType=DECIMAL}
+                    </when>
+                    <otherwise>
+                         AND b.valor_adquisicion &gt;= #{valorAdquisicion_ini,jdbcType=DECIMAL} AND b.valor_adquisicion &lt;= #{valorAdquisicion_fin,jdbcType=DECIMAL}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="anioFabricacion != null">
+                <choose>
+                    <when test="anioFabricacion_type == 'igual'">
+                         AND b.anio_fabricacion = #{anioFabricacion,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.anio_fabricacion like #{anioFabricacion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="resolAfec != null">
+                <choose>
+                    <when test="resolAfec_type == 'igual'">
+                         AND b.resol_afec = #{resolAfec,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.resol_afec like #{resolAfec,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="especie != null">
+                <choose>
+                    <when test="especie_type == 'igual'">
+                         AND b.especie = #{especie,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.especie like #{especie,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="raza != null">
+                <choose>
+                    <when test="raza_type == 'igual'">
+                         AND b.raza = #{raza,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.raza like #{raza,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAfec != null">
+                <choose>
+                    <when test="fechaAfec_type == 'rango_incluye'">
+                         AND b.fec_afec &gt;= #{fechaAfec_ini,jdbcType=DATE} AND b.fec_afec &lt;= #{fechaAfec_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAfec_type == 'rango_excluye'">
+                         AND b.fec_afec &gt; #{fechaAfec_ini,jdbcType=DATE} AND b.fec_afec &lt; #{fechaAfec_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAfec_type == 'igual'">
+                         AND b.fec_afec = #{fechaAfec,jdbcType=DATE}
+                    </when>
+                    <otherwise>
+                         AND b.fec_afec &gt;= #{fechaAfec_ini,jdbcType=DATE} AND b.fec_afec &lt;= #{fechaAfec_fin,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="flgActo != null">
+                <choose>
+                    <when test="flgActo_type == 'igual'">
+                         AND b.flg_acto = #{flgActo,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.flg_acto like #{flgActo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="modelo != null">
+                <choose>
+                    <when test="modelo_type == 'igual'">
+                         AND b.modelo = #{modelo,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.modelo like #{modelo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="flgCausal != null">
+                <choose>
+                    <when test="flgCausal_type == 'igual'">
+                         AND b.flg_causal = #{flgCausal,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.flg_causal like #{flgCausal,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="marca != null">
+                <choose>
+                    <when test="marca_type == 'igual'">
+                         AND b.marca = #{marca,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.marca like #{marca,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroResolucionBaja != null">
+                <choose>
+                    <when test="numeroResolucionBaja_type == 'igual'">
+                         AND b.nro_resolucion_baja = #{numeroResolucionBaja,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.nro_resolucion_baja like #{numeroResolucionBaja,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="resolArre != null">
+                <choose>
+                    <when test="resolArre_type == 'igual'">
+                         AND b.resol_arre = #{resolArre,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.resol_arre like #{resolArre,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dscOtros != null">
+                <choose>
+                    <when test="dscOtros_type == 'igual'">
+                         AND b.dsc_otros = #{dscOtros,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.dsc_otros like #{dscOtros,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaArre != null">
+                <choose>
+                    <when test="fechaArre_type == 'rango_incluye'">
+                         AND b.fec_arre &gt;= #{fechaArre_ini,jdbcType=DATE} AND b.fec_arre &lt;= #{fechaArre_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaArre_type == 'rango_excluye'">
+                         AND b.fec_arre &gt; #{fechaArre_ini,jdbcType=DATE} AND b.fec_arre &lt; #{fechaArre_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaArre_type == 'igual'">
+                         AND b.fec_arre = #{fechaArre,jdbcType=DATE}
+                    </when>
+                    <otherwise>
+                         AND b.fec_arre &gt;= #{fechaArre_ini,jdbcType=DATE} AND b.fec_arre &lt;= #{fechaArre_fin,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaDisposicion != null">
+                <choose>
+                    <when test="fechaDisposicion_type == 'rango_incluye'">
+                         AND b.fecha_disposicion &gt;= #{fechaDisposicion_ini,jdbcType=DATE} AND b.fecha_disposicion &lt;= #{fechaDisposicion_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaDisposicion_type == 'rango_excluye'">
+                         AND b.fecha_disposicion &gt; #{fechaDisposicion_ini,jdbcType=DATE} AND b.fecha_disposicion &lt; #{fechaDisposicion_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaDisposicion_type == 'igual'">
+                         AND b.fecha_disposicion = #{fechaDisposicion,jdbcType=DATE}
+                    </when>
+                    <otherwise>
+                         AND b.fecha_disposicion &gt;= #{fechaDisposicion_ini,jdbcType=DATE} AND b.fecha_disposicion &lt;= #{fechaDisposicion_fin,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="resolDisp != null">
+                <choose>
+                    <when test="resolDisp_type == 'igual'">
+                         AND b.resol_disp = #{resolDisp,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.resol_disp like #{resolDisp,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="altura != null">
+                <choose>
+                    <when test="altura_type == 'igual'">
+                         AND b.altura = #{altura,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.altura like #{altura,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroChasis != null">
+                <choose>
+                    <when test="numeroChasis_type == 'igual'">
+                         AND b.nro_chasis = #{numeroChasis,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.nro_chasis like #{numeroChasis,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="valortasa != null">
+                <choose>
+                    <when test="valortasa_type == 'igual'">
+                         AND b.valortasa = #{valortasa,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.valortasa like #{valortasa,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="placa != null">
+                <choose>
+                    <when test="placa_type == 'igual'">
+                         AND b.placa = #{placa,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.placa like #{placa,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="sitBinv != null">
+                <choose>
+                    <when test="sitBinv_type == 'igual'">
+                         AND b.sit_binv = #{sitBinv,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.sit_binv like #{sitBinv,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroCuentaContable != null">
+                <choose>
+                    <when test="numeroCuentaContable_type == 'igual'">
+                         AND b.nro_cuenta_contable = #{numeroCuentaContable,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.nro_cuenta_contable like #{numeroCuentaContable,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="serie != null">
+                <choose>
+                    <when test="serie_type == 'igual'">
+                         AND b.serie = #{serie,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.serie like #{serie,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="estBien != null">
+                <choose>
+                    <when test="estBien_type == 'igual'">
+                         AND b.est_bien = #{estBien,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.est_bien like #{estBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entAfec != null">
+                <choose>
+                    <when test="entAfec_type == 'igual'">
+                         AND b.ent_afec = #{entAfec,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.ent_afec like #{entAfec,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="codanterio != null">
+                <choose>
+                    <when test="codanterio_type == 'igual'">
+                         AND b.codanterio = #{codanterio,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.codanterio like #{codanterio,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="tipoCuenta != null">
+                <choose>
+                    <when test="tipoCuenta_type == 'igual'">
+                         AND b.tipo_cuenta = #{tipoCuenta,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.tipo_cuenta like #{tipoCuenta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="estGestio != null">
+                <choose>
+                    <when test="estGestio_type == 'igual'">
+                         AND b.est_gestio = #{estGestio,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.est_gestio like #{estGestio,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="docBaja != null">
+                <choose>
+                    <when test="docBaja_type == 'igual'">
+                         AND b.doc_baja = #{docBaja,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.doc_baja like #{docBaja,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroMotor != null">
+                <choose>
+                    <when test="numeroMotor_type == 'igual'">
+                         AND b.nro_motor = #{numeroMotor,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.nro_motor like #{numeroMotor,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="longitud != null">
+                <choose>
+                    <when test="longitud_type == 'igual'">
+                         AND b.longitud = #{longitud,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.longitud like #{longitud,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="pais != null">
+                <choose>
+                    <when test="pais_type == 'igual'">
+                         AND b.pais = #{pais,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.pais like #{pais,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaBaja != null">
+                <choose>
+                    <when test="fechaBaja_type == 'rango_incluye'">
+                         AND b.fecha_baja &gt;= #{fechaBaja_ini,jdbcType=DATE} AND b.fecha_baja &lt;= #{fechaBaja_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaBaja_type == 'rango_excluye'">
+                         AND b.fecha_baja &gt; #{fechaBaja_ini,jdbcType=DATE} AND b.fecha_baja &lt; #{fechaBaja_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaBaja_type == 'igual'">
+                         AND b.fecha_baja = #{fechaBaja,jdbcType=DATE}
+                    </when>
+                    <otherwise>
+                         AND b.fecha_baja &gt;= #{fechaBaja_ini,jdbcType=DATE} AND b.fecha_baja &lt;= #{fechaBaja_fin,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaVarre != null">
+                <choose>
+                    <when test="fechaVarre_type == 'rango_incluye'">
+                         AND b.fec_varre &gt;= #{fechaVarre_ini,jdbcType=DATE} AND b.fec_varre &lt;= #{fechaVarre_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVarre_type == 'rango_excluye'">
+                         AND b.fec_varre &gt; #{fechaVarre_ini,jdbcType=DATE} AND b.fec_varre &lt; #{fechaVarre_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVarre_type == 'igual'">
+                         AND b.fec_varre = #{fechaVarre,jdbcType=DATE}
+                    </when>
+                    <otherwise>
+                         AND b.fec_varre &gt;= #{fechaVarre_ini,jdbcType=DATE} AND b.fec_varre &lt;= #{fechaVarre_fin,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="denominacionBien != null">
+                <choose>
+                    <when test="denominacionBien_type == 'igual'">
+                         AND b.denominacion_bien = #{denominacionBien,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.denominacion_bien like #{denominacionBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaDepreciacion != null">
+                <choose>
+                    <when test="fechaDepreciacion_type == 'rango_incluye'">
+                         AND b.fecha_depreciacion &gt;= #{fechaDepreciacion_ini,jdbcType=DATE} AND b.fecha_depreciacion &lt;= #{fechaDepreciacion_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaDepreciacion_type == 'rango_excluye'">
+                         AND b.fecha_depreciacion &gt; #{fechaDepreciacion_ini,jdbcType=DATE} AND b.fecha_depreciacion &lt; #{fechaDepreciacion_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaDepreciacion_type == 'igual'">
+                         AND b.fecha_depreciacion = #{fechaDepreciacion,jdbcType=DATE}
+                    </when>
+                    <otherwise>
+                         AND b.fecha_depreciacion &gt;= #{fechaDepreciacion_ini,jdbcType=DATE} AND b.fecha_depreciacion &lt;= #{fechaDepreciacion_fin,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="valorDeprecEjercicio != null">
+                <choose>
+                    <when test="valorDeprecEjercicio_type == 'rango_incluye'">
+                         AND b.valor_deprec_ejercicio &gt;= #{valorDeprecEjercicio_ini,jdbcType=DECIMAL} AND b.valor_deprec_ejercicio &lt;= #{valorDeprecEjercicio_fin,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorDeprecEjercicio_type == 'rango_excluye'">
+                         AND b.valor_deprec_ejercicio &gt; #{valorDeprecEjercicio_ini,jdbcType=DECIMAL} AND b.valor_deprec_ejercicio &lt; #{valorDeprecEjercicio_fin,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorDeprecEjercicio_type == 'igual'">
+                         AND b.valor_deprec_ejercicio = #{valorDeprecEjercicio,jdbcType=DECIMAL}
+                    </when>
+                    <otherwise>
+                         AND b.valor_deprec_ejercicio &gt;= #{valorDeprecEjercicio_ini,jdbcType=DECIMAL} AND b.valor_deprec_ejercicio &lt;= #{valorDeprecEjercicio_fin,jdbcType=DECIMAL}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="valorDeprecAcumulado != null">
+                <choose>
+                    <when test="valorDeprecAcumulado_type == 'rango_incluye'">
+                         AND b.valor_deprec_acumulado &gt;= #{valorDeprecAcumulado_ini,jdbcType=DECIMAL} AND b.valor_deprec_acumulado &lt;= #{valorDeprecAcumulado_fin,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorDeprecAcumulado_type == 'rango_excluye'">
+                         AND b.valor_deprec_acumulado &gt; #{valorDeprecAcumulado_ini,jdbcType=DECIMAL} AND b.valor_deprec_acumulado &lt; #{valorDeprecAcumulado_fin,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorDeprecAcumulado_type == 'igual'">
+                         AND b.valor_deprec_acumulado = #{valorDeprecAcumulado,jdbcType=DECIMAL}
+                    </when>
+                    <otherwise>
+                         AND b.valor_deprec_acumulado &gt;= #{valorDeprecAcumulado_ini,jdbcType=DECIMAL} AND b.valor_deprec_acumulado &lt;= #{valorDeprecAcumulado_fin,jdbcType=DECIMAL}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="valorNeto != null">
+                <choose>
+                    <when test="valorNeto_type == 'rango_incluye'">
+                         AND b.valor_neto &gt;= #{valorNeto_ini,jdbcType=DECIMAL} AND b.valor_neto &lt;= #{valorNeto_fin,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorNeto_type == 'rango_excluye'">
+                         AND b.valor_neto &gt; #{valorNeto_ini,jdbcType=DECIMAL} AND b.valor_neto &lt; #{valorNeto_fin,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorNeto_type == 'igual'">
+                         AND b.valor_neto = #{valorNeto,jdbcType=DECIMAL}
+                    </when>
+                    <otherwise>
+                         AND b.valor_neto &gt;= #{valorNeto_ini,jdbcType=DECIMAL} AND b.valor_neto &lt;= #{valorNeto_fin,jdbcType=DECIMAL}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="tipUsoCuenta != null">
+                <choose>
+                    <when test="tipUsoCuenta_type == 'igual'">
+                         AND b.tip_uso_cuenta = #{tipUsoCuenta,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.tip_uso_cuenta like #{tipUsoCuenta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="catalogoBienID != null">
+                <choose>
+                    <when test="catalogoBienID_type == 'rango_incluye'">
+                         AND b.catalogo_bien_id &gt;= #{catalogoBienID_ini,jdbcType=INTEGER} AND b.catalogo_bien_id &lt;= #{catalogoBienID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="catalogoBienID_type == 'rango_excluye'">
+                         AND b.catalogo_bien_id &gt; #{catalogoBienID_ini,jdbcType=INTEGER} AND b.catalogo_bien_id &lt; #{catalogoBienID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND b.catalogo_bien_id = #{catalogoBienID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="otrasCaract != null">
+                <choose>
+                    <when test="otrasCaract_type == 'igual'">
+                         AND b.otras_caract = #{otrasCaract,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.otras_caract like #{otrasCaract,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="descripcionUbicacionBien != null">
+                <choose>
+                    <when test="descripcionUbicacionBien_type == 'igual'">
+                         AND b.descripcion_ubicacion_bien = #{descripcionUbicacionBien,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.descripcion_ubicacion_bien like #{descripcionUbicacionBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="causalBaja != null">
+                <choose>
+                    <when test="causalBaja_type == 'igual'">
+                         AND b.causal_baja = #{causalBaja,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.causal_baja like #{causalBaja,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="actoDisposicionBien != null">
+                <choose>
+                    <when test="actoDisposicionBien_type == 'igual'">
+                         AND b.acto_disposicion_bien = #{actoDisposicionBien,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.acto_disposicion_bien like #{actoDisposicionBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entidadBeneficiadaActoDisposicion != null">
+                <choose>
+                    <when test="entidadBeneficiadaActoDisposicion_type == 'igual'">
+                         AND b.entidad_beneficiada_acto_disposicion = #{entidadBeneficiadaActoDisposicion,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.entidad_beneficiada_acto_disposicion like #{entidadBeneficiadaActoDisposicion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="actoAdministracionBien != null">
+                <choose>
+                    <when test="actoAdministracionBien_type == 'igual'">
+                         AND b.acto_administracion_bien = #{actoAdministracionBien,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.acto_administracion_bien like #{actoAdministracionBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroResolucionAdministracion != null">
+                <choose>
+                    <when test="numeroResolucionAdministracion_type == 'igual'">
+                         AND b.num_resolucion_administracion = #{numeroResolucionAdministracion,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.num_resolucion_administracion like #{numeroResolucionAdministracion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAdministracion != null">
+                <choose>
+                    <when test="fechaAdministracion_type == 'rango_incluye'">
+                         AND b.fecha_administracion &gt;= #{fechaAdministracion_ini,jdbcType=DATE} AND b.fecha_administracion &lt;= #{fechaAdministracion_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAdministracion_type == 'rango_excluye'">
+                         AND b.fecha_administracion &gt; #{fechaAdministracion_ini,jdbcType=DATE} AND b.fecha_administracion &lt; #{fechaAdministracion_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAdministracion_type == 'igual'">
+                         AND b.fecha_administracion = #{fechaAdministracion,jdbcType=DATE}
+                    </when>
+                    <otherwise>
+                         AND b.fecha_administracion &gt;= #{fechaAdministracion_ini,jdbcType=DATE} AND b.fecha_administracion &lt;= #{fechaAdministracion_fin,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaVencActoAdmin != null">
+                <choose>
+                    <when test="fechaVencActoAdmin_type == 'rango_incluye'">
+                         AND b.fecha_venc_acto_admin &gt;= #{fechaVencActoAdmin_ini,jdbcType=DATE} AND b.fecha_venc_acto_admin &lt;= #{fechaVencActoAdmin_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVencActoAdmin_type == 'rango_excluye'">
+                         AND b.fecha_venc_acto_admin &gt; #{fechaVencActoAdmin_ini,jdbcType=DATE} AND b.fecha_venc_acto_admin &lt; #{fechaVencActoAdmin_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVencActoAdmin_type == 'igual'">
+                         AND b.fecha_venc_acto_admin = #{fechaVencActoAdmin,jdbcType=DATE}
+                    </when>
+                    <otherwise>
+                         AND b.fecha_venc_acto_admin &gt;= #{fechaVencActoAdmin_ini,jdbcType=DATE} AND b.fecha_venc_acto_admin &lt;= #{fechaVencActoAdmin_fin,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entidadBeneficiadaActoAdmin != null">
+                <choose>
+                    <when test="entidadBeneficiadaActoAdmin_type == 'igual'">
+                         AND b.entidad_beneficiada_acto_admin = #{entidadBeneficiadaActoAdmin,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.entidad_beneficiada_acto_admin like #{entidadBeneficiadaActoAdmin,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="docAltaSbn != null">
+                <choose>
+                    <when test="docAltaSbn_type == 'igual'">
+                         AND b.doc_alta_sbn = #{docAltaSbn,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.doc_alta_sbn like #{docAltaSbn,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="docBajaSbn != null">
+                <choose>
+                    <when test="docBajaSbn_type == 'igual'">
+                         AND b.doc_baja_sbn = #{docBajaSbn,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.doc_baja_sbn like #{docBajaSbn,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND b.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND b.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND b.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND b.fec_reg &gt; #{fechaReg_ini,jdbcType=TIMESTAMP} AND b.fec_reg &lt; #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND b.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND b.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND b.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND b.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND b.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND b.fec_act &gt; #{fechaAct_ini,jdbcType=TIMESTAMP} AND b.fec_act &lt; #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND b.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND b.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND b.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND b.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND b.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="tipo != null">
+                <choose>
+                    <when test="tipo_type == 'igual'">
+                         AND b.tipo = #{tipo,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.tipo like #{tipo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroResolucionDisp != null">
+                <choose>
+                    <when test="numeroResolucionDisp_type == 'igual'">
+                         AND b.nro_resolucion_disp = #{numeroResolucionDisp,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.nro_resolucion_disp like #{numeroResolucionDisp,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="codigoBarras != null">
+                <choose>
+                    <when test="codigoBarras_type == 'igual'">
+                         AND b.codigo_barras = #{codigoBarras,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.codigo_barras like #{codigoBarras,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMapGrilla" useCache="false" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT
+            b.bien_id as "bienID", 
+            b.codigo_patrimonial as "codigoPatrimonial", 
+            b.entidad_id as "entidadID", 
+            b.locales_id as "localesID", 
+            b.area_id as "areaID", 
+            b.empleado_id as "empleadoID", 
+            b.oficina_id as "oficinaID", 
+            b.tipo_causal_alta as "tipoCausalAlta", 
+            b.anho as "anho", 
+            b.matricula as "matricula", 
+            b.ancho as "ancho", 
+            b.valor_libro as "valorLibro", 
+            b.cuenta_con_seguro as "cuentaConSeguro", 
+            b.estado_bien as "estadoBien", 
+            b.dimension as "dimension", 
+            b.condicion as "condicion", 
+            b.nro_doc_adquisicion as "numeroDocAdquisicion", 
+            b.color as "color", 
+            b.fecha_adquisicion as "fechaAdquisicion", 
+            b.ent_disp as "entDisp", 
+            b.ent_arre as "entArre", 
+            b.fec_vafec as "fechaVafec", 
+            b.edad as "edad", 
+            b.motivo_eliminacion_bien as "motivoEliminacionBien", 
+            b.valor_adquisicion as "valorAdquisicion", 
+            b.anio_fabricacion as "anioFabricacion", 
+            b.resol_afec as "resolAfec", 
+            b.especie as "especie", 
+            b.raza as "raza", 
+            b.fec_afec as "fechaAfec", 
+            b.flg_acto as "flgActo", 
+            b.modelo as "modelo", 
+            b.flg_causal as "flgCausal", 
+            b.marca as "marca", 
+            b.nro_resolucion_baja as "numeroResolucionBaja", 
+            b.resol_arre as "resolArre", 
+            b.dsc_otros as "dscOtros", 
+            b.fec_arre as "fechaArre", 
+            b.fecha_disposicion as "fechaDisposicion", 
+            b.resol_disp as "resolDisp", 
+            b.altura as "altura", 
+            b.nro_chasis as "numeroChasis", 
+            b.valortasa as "valortasa", 
+            b.placa as "placa", 
+            b.sit_binv as "sitBinv", 
+            b.nro_cuenta_contable as "numeroCuentaContable", 
+            b.serie as "serie", 
+            b.est_bien as "estBien", 
+            b.ent_afec as "entAfec", 
+            b.codanterio as "codanterio", 
+            b.tipo_cuenta as "tipoCuenta", 
+            b.est_gestio as "estGestio", 
+            b.doc_baja as "docBaja", 
+            b.nro_motor as "numeroMotor", 
+            b.longitud as "longitud", 
+            b.pais as "pais", 
+            b.fecha_baja as "fechaBaja", 
+            b.fec_varre as "fechaVarre", 
+            b.denominacion_bien as "denominacionBien", 
+            b.fecha_depreciacion as "fechaDepreciacion", 
+            b.valor_deprec_ejercicio as "valorDeprecEjercicio", 
+            b.valor_deprec_acumulado as "valorDeprecAcumulado", 
+            b.valor_neto as "valorNeto", 
+            b.tip_uso_cuenta as "tipUsoCuenta", 
+            b.catalogo_bien_id as "catalogoBienID", 
+            b.otras_caract as "otrasCaract", 
+            b.descripcion_ubicacion_bien as "descripcionUbicacionBien", 
+            b.causal_baja as "causalBaja", 
+            b.acto_disposicion_bien as "actoDisposicionBien", 
+            b.entidad_beneficiada_acto_disposicion as "entidadBeneficiadaActoDisposicion", 
+            b.acto_administracion_bien as "actoAdministracionBien", 
+            b.num_resolucion_administracion as "numeroResolucionAdministracion", 
+            b.fecha_administracion as "fechaAdministracion", 
+            b.fecha_venc_acto_admin as "fechaVencActoAdmin", 
+            b.entidad_beneficiada_acto_admin as "entidadBeneficiadaActoAdmin", 
+            b.doc_alta_sbn as "docAltaSbn", 
+            b.doc_baja_sbn as "docBajaSbn", 
+            b.ind_del as "indDel", 
+            b.fec_reg as "fechaReg", 
+            b.fec_act as "fechaAct", 
+            b.usu_reg as "usuReg", 
+            b.usu_act as "usuAct", 
+            b.tipo as "tipo", 
+            b.nro_resolucion_disp as "numeroResolucionDisp", 
+            b.codigo_barras as "codigoBarras"
+        FROM 
+            inventario.bien b
+        <where>
+            <if test="bienID != null">
+                <choose>
+                    <when test="bienID_type == 'rango_incluye'">
+                         AND b.bien_id &gt;= #{bienID,jdbcType=INTEGER} AND b.bien_id &lt;= #{bienID,jdbcType=INTEGER}
+                    </when>
+                    <when test="bienID_type == 'rango_excluye'">
+                         AND b.bien_id &gt; #{bienID,jdbcType=INTEGER} AND b.bien_id &lt; #{bienID,jdbcType=INTEGER}
+                    </when>
+                    <when test="bienID_type == 'is_null'">
+                         AND b.bien_id IS NULL 
+                    </when>
+                    <when test="bienID_type == 'is_not_null'">
+                         AND b.bien_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.bien_id = #{bienID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="codigoPatrimonial != null">
+                <choose>
+                    <when test="codigoPatrimonial_type == 'igual'">
+                         AND b.codigo_patrimonial = #{codigoPatrimonial,jdbcType=VARCHAR}
+                    </when>
+                    <when test="codigoPatrimonial_type == 'is_null'">
+                         AND b.codigo_patrimonial IS NULL 
+                    </when>
+                    <when test="codigoPatrimonial_type == 'is_not_null'">
+                         AND b.codigo_patrimonial IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.codigo_patrimonial like #{codigoPatrimonial,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entidadID != null">
+                <choose>
+                    <when test="entidadID_type == 'rango_incluye'">
+                         AND b.entidad_id &gt;= #{entidadID,jdbcType=INTEGER} AND b.entidad_id &lt;= #{entidadID,jdbcType=INTEGER}
+                    </when>
+                    <when test="entidadID_type == 'rango_excluye'">
+                         AND b.entidad_id &gt; #{entidadID,jdbcType=INTEGER} AND b.entidad_id &lt; #{entidadID,jdbcType=INTEGER}
+                    </when>
+                    <when test="entidadID_type == 'is_null'">
+                         AND b.entidad_id IS NULL 
+                    </when>
+                    <when test="entidadID_type == 'is_not_null'">
+                         AND b.entidad_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.entidad_id = #{entidadID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="localesID != null">
+                <choose>
+                    <when test="localesID_type == 'rango_incluye'">
+                         AND b.locales_id &gt;= #{localesID,jdbcType=INTEGER} AND b.locales_id &lt;= #{localesID,jdbcType=INTEGER}
+                    </when>
+                    <when test="localesID_type == 'rango_excluye'">
+                         AND b.locales_id &gt; #{localesID,jdbcType=INTEGER} AND b.locales_id &lt; #{localesID,jdbcType=INTEGER}
+                    </when>
+                    <when test="localesID_type == 'is_null'">
+                         AND b.locales_id IS NULL 
+                    </when>
+                    <when test="localesID_type == 'is_not_null'">
+                         AND b.locales_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.locales_id = #{localesID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="areaID != null">
+                <choose>
+                    <when test="areaID_type == 'rango_incluye'">
+                         AND b.area_id &gt;= #{areaID,jdbcType=INTEGER} AND b.area_id &lt;= #{areaID,jdbcType=INTEGER}
+                    </when>
+                    <when test="areaID_type == 'rango_excluye'">
+                         AND b.area_id &gt; #{areaID,jdbcType=INTEGER} AND b.area_id &lt; #{areaID,jdbcType=INTEGER}
+                    </when>
+                    <when test="areaID_type == 'is_null'">
+                         AND b.area_id IS NULL 
+                    </when>
+                    <when test="areaID_type == 'is_not_null'">
+                         AND b.area_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.area_id = #{areaID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="empleadoID != null">
+                <choose>
+                    <when test="empleadoID_type == 'rango_incluye'">
+                         AND b.empleado_id &gt;= #{empleadoID,jdbcType=INTEGER} AND b.empleado_id &lt;= #{empleadoID,jdbcType=INTEGER}
+                    </when>
+                    <when test="empleadoID_type == 'rango_excluye'">
+                         AND b.empleado_id &gt; #{empleadoID,jdbcType=INTEGER} AND b.empleado_id &lt; #{empleadoID,jdbcType=INTEGER}
+                    </when>
+                    <when test="empleadoID_type == 'is_null'">
+                         AND b.empleado_id IS NULL 
+                    </when>
+                    <when test="empleadoID_type == 'is_not_null'">
+                         AND b.empleado_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.empleado_id = #{empleadoID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="oficinaID != null">
+                <choose>
+                    <when test="oficinaID_type == 'rango_incluye'">
+                         AND b.oficina_id &gt;= #{oficinaID,jdbcType=INTEGER} AND b.oficina_id &lt;= #{oficinaID,jdbcType=INTEGER}
+                    </when>
+                    <when test="oficinaID_type == 'rango_excluye'">
+                         AND b.oficina_id &gt; #{oficinaID,jdbcType=INTEGER} AND b.oficina_id &lt; #{oficinaID,jdbcType=INTEGER}
+                    </when>
+                    <when test="oficinaID_type == 'is_null'">
+                         AND b.oficina_id IS NULL 
+                    </when>
+                    <when test="oficinaID_type == 'is_not_null'">
+                         AND b.oficina_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.oficina_id = #{oficinaID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="tipoCausalAlta != null">
+                <choose>
+                    <when test="tipoCausalAlta_type == 'igual'">
+                         AND b.tipo_causal_alta = #{tipoCausalAlta,jdbcType=VARCHAR}
+                    </when>
+                    <when test="tipoCausalAlta_type == 'is_null'">
+                         AND b.tipo_causal_alta IS NULL 
+                    </when>
+                    <when test="tipoCausalAlta_type == 'is_not_null'">
+                         AND b.tipo_causal_alta IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.tipo_causal_alta like #{tipoCausalAlta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="anho != null">
+                <choose>
+                    <when test="anho_type == 'rango_incluye'">
+                         AND b.anho &gt;= #{anho,jdbcType=INTEGER} AND b.anho &lt;= #{anho,jdbcType=INTEGER}
+                    </when>
+                    <when test="anho_type == 'rango_excluye'">
+                         AND b.anho &gt; #{anho,jdbcType=INTEGER} AND b.anho &lt; #{anho,jdbcType=INTEGER}
+                    </when>
+                    <when test="anho_type == 'is_null'">
+                         AND b.anho IS NULL 
+                    </when>
+                    <when test="anho_type == 'is_not_null'">
+                         AND b.anho IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.anho = #{anho,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="matricula != null">
+                <choose>
+                    <when test="matricula_type == 'igual'">
+                         AND b.matricula = #{matricula,jdbcType=VARCHAR}
+                    </when>
+                    <when test="matricula_type == 'is_null'">
+                         AND b.matricula IS NULL 
+                    </when>
+                    <when test="matricula_type == 'is_not_null'">
+                         AND b.matricula IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.matricula like #{matricula,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="ancho != null">
+                <choose>
+                    <when test="ancho_type == 'rango_incluye'">
+                         AND b.ancho &gt;= #{ancho,jdbcType=DECIMAL} AND b.ancho &lt;= #{ancho,jdbcType=DECIMAL}
+                    </when>
+                    <when test="ancho_type == 'rango_excluye'">
+                         AND b.ancho &gt; #{ancho,jdbcType=DECIMAL} AND b.ancho &lt; #{ancho,jdbcType=DECIMAL}
+                    </when>
+                    <when test="ancho_type == 'igual'">
+                         AND b.ancho = #{ancho,jdbcType=DECIMAL}
+                    </when>
+                    <when test="ancho_type == 'is_null'">
+                         AND b.ancho IS NULL 
+                    </when>
+                    <when test="ancho_type == 'is_not_null'">
+                         AND b.ancho IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.ancho &gt;= #{ancho,jdbcType=DECIMAL} AND b.ancho &lt;= #{ancho,jdbcType=DECIMAL}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="valorLibro != null">
+                <choose>
+                    <when test="valorLibro_type == 'rango_incluye'">
+                         AND b.valor_libro &gt;= #{valorLibro,jdbcType=DECIMAL} AND b.valor_libro &lt;= #{valorLibro,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorLibro_type == 'rango_excluye'">
+                         AND b.valor_libro &gt; #{valorLibro,jdbcType=DECIMAL} AND b.valor_libro &lt; #{valorLibro,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorLibro_type == 'igual'">
+                         AND b.valor_libro = #{valorLibro,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorLibro_type == 'is_null'">
+                         AND b.valor_libro IS NULL 
+                    </when>
+                    <when test="valorLibro_type == 'is_not_null'">
+                         AND b.valor_libro IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.valor_libro &gt;= #{valorLibro,jdbcType=DECIMAL} AND b.valor_libro &lt;= #{valorLibro,jdbcType=DECIMAL}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="cuentaConSeguro != null">
+                <choose>
+                    <when test="cuentaConSeguro_type == 'igual'">
+                         AND b.cuenta_con_seguro = #{cuentaConSeguro,jdbcType=VARCHAR}
+                    </when>
+                    <when test="cuentaConSeguro_type == 'is_null'">
+                         AND b.cuenta_con_seguro IS NULL 
+                    </when>
+                    <when test="cuentaConSeguro_type == 'is_not_null'">
+                         AND b.cuenta_con_seguro IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.cuenta_con_seguro like #{cuentaConSeguro,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="estadoBien != null">
+                <choose>
+                    <when test="estadoBien_type == 'igual'">
+                         AND b.estado_bien = #{estadoBien,jdbcType=VARCHAR}
+                    </when>
+                    <when test="estadoBien_type == 'is_null'">
+                         AND b.estado_bien IS NULL 
+                    </when>
+                    <when test="estadoBien_type == 'is_not_null'">
+                         AND b.estado_bien IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.estado_bien like #{estadoBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dimension != null">
+                <choose>
+                    <when test="dimension_type == 'igual'">
+                         AND b.dimension = #{dimension,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dimension_type == 'is_null'">
+                         AND b.dimension IS NULL 
+                    </when>
+                    <when test="dimension_type == 'is_not_null'">
+                         AND b.dimension IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.dimension like #{dimension,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="condicion != null">
+                <choose>
+                    <when test="condicion_type == 'igual'">
+                         AND b.condicion = #{condicion,jdbcType=VARCHAR}
+                    </when>
+                    <when test="condicion_type == 'is_null'">
+                         AND b.condicion IS NULL 
+                    </when>
+                    <when test="condicion_type == 'is_not_null'">
+                         AND b.condicion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.condicion like #{condicion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroDocAdquisicion != null">
+                <choose>
+                    <when test="numeroDocAdquisicion_type == 'igual'">
+                         AND b.nro_doc_adquisicion = #{numeroDocAdquisicion,jdbcType=VARCHAR}
+                    </when>
+                    <when test="numeroDocAdquisicion_type == 'is_null'">
+                         AND b.nro_doc_adquisicion IS NULL 
+                    </when>
+                    <when test="numeroDocAdquisicion_type == 'is_not_null'">
+                         AND b.nro_doc_adquisicion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.nro_doc_adquisicion like #{numeroDocAdquisicion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="color != null">
+                <choose>
+                    <when test="color_type == 'igual'">
+                         AND b.color = #{color,jdbcType=VARCHAR}
+                    </when>
+                    <when test="color_type == 'is_null'">
+                         AND b.color IS NULL 
+                    </when>
+                    <when test="color_type == 'is_not_null'">
+                         AND b.color IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.color like #{color,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAdquisicion != null">
+                <choose>
+                    <when test="fechaAdquisicion_type == 'rango_incluye'">
+                         AND b.fecha_adquisicion &gt;= #{fechaAdquisicion,jdbcType=DATE} AND b.fecha_adquisicion &lt;= #{fechaAdquisicion,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAdquisicion_type == 'rango_excluye'">
+                         AND b.fecha_adquisicion &gt; #{fechaAdquisicion,jdbcType=DATE} AND b.fecha_adquisicion &lt; #{fechaAdquisicion,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAdquisicion_type == 'igual'">
+                         AND b.fecha_adquisicion = #{fechaAdquisicion,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAdquisicion_type == 'is_null'">
+                         AND b.fecha_adquisicion IS NULL 
+                    </when>
+                    <when test="fechaAdquisicion_type == 'is_not_null'">
+                         AND b.fecha_adquisicion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.fecha_adquisicion &gt;= #{fechaAdquisicion,jdbcType=DATE} AND b.fecha_adquisicion &lt;= #{fechaAdquisicion,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entDisp != null">
+                <choose>
+                    <when test="entDisp_type == 'igual'">
+                         AND b.ent_disp = #{entDisp,jdbcType=VARCHAR}
+                    </when>
+                    <when test="entDisp_type == 'is_null'">
+                         AND b.ent_disp IS NULL 
+                    </when>
+                    <when test="entDisp_type == 'is_not_null'">
+                         AND b.ent_disp IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.ent_disp like #{entDisp,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entArre != null">
+                <choose>
+                    <when test="entArre_type == 'igual'">
+                         AND b.ent_arre = #{entArre,jdbcType=VARCHAR}
+                    </when>
+                    <when test="entArre_type == 'is_null'">
+                         AND b.ent_arre IS NULL 
+                    </when>
+                    <when test="entArre_type == 'is_not_null'">
+                         AND b.ent_arre IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.ent_arre like #{entArre,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaVafec != null">
+                <choose>
+                    <when test="fechaVafec_type == 'rango_incluye'">
+                         AND b.fec_vafec &gt;= #{fechaVafec,jdbcType=DATE} AND b.fec_vafec &lt;= #{fechaVafec,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVafec_type == 'rango_excluye'">
+                         AND b.fec_vafec &gt; #{fechaVafec,jdbcType=DATE} AND b.fec_vafec &lt; #{fechaVafec,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVafec_type == 'igual'">
+                         AND b.fec_vafec = #{fechaVafec,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVafec_type == 'is_null'">
+                         AND b.fec_vafec IS NULL 
+                    </when>
+                    <when test="fechaVafec_type == 'is_not_null'">
+                         AND b.fec_vafec IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.fec_vafec &gt;= #{fechaVafec,jdbcType=DATE} AND b.fec_vafec &lt;= #{fechaVafec,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="edad != null">
+                <choose>
+                    <when test="edad_type == 'igual'">
+                         AND b.edad = #{edad,jdbcType=VARCHAR}
+                    </when>
+                    <when test="edad_type == 'is_null'">
+                         AND b.edad IS NULL 
+                    </when>
+                    <when test="edad_type == 'is_not_null'">
+                         AND b.edad IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.edad like #{edad,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="motivoEliminacionBien != null">
+                <choose>
+                    <when test="motivoEliminacionBien_type == 'igual'">
+                         AND b.motivo_eliminacion_bien = #{motivoEliminacionBien,jdbcType=VARCHAR}
+                    </when>
+                    <when test="motivoEliminacionBien_type == 'is_null'">
+                         AND b.motivo_eliminacion_bien IS NULL 
+                    </when>
+                    <when test="motivoEliminacionBien_type == 'is_not_null'">
+                         AND b.motivo_eliminacion_bien IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.motivo_eliminacion_bien like #{motivoEliminacionBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="valorAdquisicion != null">
+                <choose>
+                    <when test="valorAdquisicion_type == 'rango_incluye'">
+                         AND b.valor_adquisicion &gt;= #{valorAdquisicion,jdbcType=DECIMAL} AND b.valor_adquisicion &lt;= #{valorAdquisicion,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorAdquisicion_type == 'rango_excluye'">
+                         AND b.valor_adquisicion &gt; #{valorAdquisicion,jdbcType=DECIMAL} AND b.valor_adquisicion &lt; #{valorAdquisicion,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorAdquisicion_type == 'igual'">
+                         AND b.valor_adquisicion = #{valorAdquisicion,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorAdquisicion_type == 'is_null'">
+                         AND b.valor_adquisicion IS NULL 
+                    </when>
+                    <when test="valorAdquisicion_type == 'is_not_null'">
+                         AND b.valor_adquisicion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.valor_adquisicion &gt;= #{valorAdquisicion,jdbcType=DECIMAL} AND b.valor_adquisicion &lt;= #{valorAdquisicion,jdbcType=DECIMAL}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="anioFabricacion != null">
+                <choose>
+                    <when test="anioFabricacion_type == 'igual'">
+                         AND b.anio_fabricacion = #{anioFabricacion,jdbcType=VARCHAR}
+                    </when>
+                    <when test="anioFabricacion_type == 'is_null'">
+                         AND b.anio_fabricacion IS NULL 
+                    </when>
+                    <when test="anioFabricacion_type == 'is_not_null'">
+                         AND b.anio_fabricacion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.anio_fabricacion like #{anioFabricacion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="resolAfec != null">
+                <choose>
+                    <when test="resolAfec_type == 'igual'">
+                         AND b.resol_afec = #{resolAfec,jdbcType=VARCHAR}
+                    </when>
+                    <when test="resolAfec_type == 'is_null'">
+                         AND b.resol_afec IS NULL 
+                    </when>
+                    <when test="resolAfec_type == 'is_not_null'">
+                         AND b.resol_afec IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.resol_afec like #{resolAfec,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="especie != null">
+                <choose>
+                    <when test="especie_type == 'igual'">
+                         AND b.especie = #{especie,jdbcType=VARCHAR}
+                    </when>
+                    <when test="especie_type == 'is_null'">
+                         AND b.especie IS NULL 
+                    </when>
+                    <when test="especie_type == 'is_not_null'">
+                         AND b.especie IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.especie like #{especie,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="raza != null">
+                <choose>
+                    <when test="raza_type == 'igual'">
+                         AND b.raza = #{raza,jdbcType=VARCHAR}
+                    </when>
+                    <when test="raza_type == 'is_null'">
+                         AND b.raza IS NULL 
+                    </when>
+                    <when test="raza_type == 'is_not_null'">
+                         AND b.raza IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.raza like #{raza,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAfec != null">
+                <choose>
+                    <when test="fechaAfec_type == 'rango_incluye'">
+                         AND b.fec_afec &gt;= #{fechaAfec,jdbcType=DATE} AND b.fec_afec &lt;= #{fechaAfec,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAfec_type == 'rango_excluye'">
+                         AND b.fec_afec &gt; #{fechaAfec,jdbcType=DATE} AND b.fec_afec &lt; #{fechaAfec,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAfec_type == 'igual'">
+                         AND b.fec_afec = #{fechaAfec,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAfec_type == 'is_null'">
+                         AND b.fec_afec IS NULL 
+                    </when>
+                    <when test="fechaAfec_type == 'is_not_null'">
+                         AND b.fec_afec IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.fec_afec &gt;= #{fechaAfec,jdbcType=DATE} AND b.fec_afec &lt;= #{fechaAfec,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="flgActo != null">
+                <choose>
+                    <when test="flgActo_type == 'igual'">
+                         AND b.flg_acto = #{flgActo,jdbcType=VARCHAR}
+                    </when>
+                    <when test="flgActo_type == 'is_null'">
+                         AND b.flg_acto IS NULL 
+                    </when>
+                    <when test="flgActo_type == 'is_not_null'">
+                         AND b.flg_acto IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.flg_acto like #{flgActo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="modelo != null">
+                <choose>
+                    <when test="modelo_type == 'igual'">
+                         AND b.modelo = #{modelo,jdbcType=VARCHAR}
+                    </when>
+                    <when test="modelo_type == 'is_null'">
+                         AND b.modelo IS NULL 
+                    </when>
+                    <when test="modelo_type == 'is_not_null'">
+                         AND b.modelo IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.modelo like #{modelo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="flgCausal != null">
+                <choose>
+                    <when test="flgCausal_type == 'igual'">
+                         AND b.flg_causal = #{flgCausal,jdbcType=VARCHAR}
+                    </when>
+                    <when test="flgCausal_type == 'is_null'">
+                         AND b.flg_causal IS NULL 
+                    </when>
+                    <when test="flgCausal_type == 'is_not_null'">
+                         AND b.flg_causal IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.flg_causal like #{flgCausal,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="marca != null">
+                <choose>
+                    <when test="marca_type == 'igual'">
+                         AND b.marca = #{marca,jdbcType=VARCHAR}
+                    </when>
+                    <when test="marca_type == 'is_null'">
+                         AND b.marca IS NULL 
+                    </when>
+                    <when test="marca_type == 'is_not_null'">
+                         AND b.marca IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.marca like #{marca,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroResolucionBaja != null">
+                <choose>
+                    <when test="numeroResolucionBaja_type == 'igual'">
+                         AND b.nro_resolucion_baja = #{numeroResolucionBaja,jdbcType=VARCHAR}
+                    </when>
+                    <when test="numeroResolucionBaja_type == 'is_null'">
+                         AND b.nro_resolucion_baja IS NULL 
+                    </when>
+                    <when test="numeroResolucionBaja_type == 'is_not_null'">
+                         AND b.nro_resolucion_baja IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.nro_resolucion_baja like #{numeroResolucionBaja,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="resolArre != null">
+                <choose>
+                    <when test="resolArre_type == 'igual'">
+                         AND b.resol_arre = #{resolArre,jdbcType=VARCHAR}
+                    </when>
+                    <when test="resolArre_type == 'is_null'">
+                         AND b.resol_arre IS NULL 
+                    </when>
+                    <when test="resolArre_type == 'is_not_null'">
+                         AND b.resol_arre IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.resol_arre like #{resolArre,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dscOtros != null">
+                <choose>
+                    <when test="dscOtros_type == 'igual'">
+                         AND b.dsc_otros = #{dscOtros,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dscOtros_type == 'is_null'">
+                         AND b.dsc_otros IS NULL 
+                    </when>
+                    <when test="dscOtros_type == 'is_not_null'">
+                         AND b.dsc_otros IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.dsc_otros like #{dscOtros,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaArre != null">
+                <choose>
+                    <when test="fechaArre_type == 'rango_incluye'">
+                         AND b.fec_arre &gt;= #{fechaArre,jdbcType=DATE} AND b.fec_arre &lt;= #{fechaArre,jdbcType=DATE}
+                    </when>
+                    <when test="fechaArre_type == 'rango_excluye'">
+                         AND b.fec_arre &gt; #{fechaArre,jdbcType=DATE} AND b.fec_arre &lt; #{fechaArre,jdbcType=DATE}
+                    </when>
+                    <when test="fechaArre_type == 'igual'">
+                         AND b.fec_arre = #{fechaArre,jdbcType=DATE}
+                    </when>
+                    <when test="fechaArre_type == 'is_null'">
+                         AND b.fec_arre IS NULL 
+                    </when>
+                    <when test="fechaArre_type == 'is_not_null'">
+                         AND b.fec_arre IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.fec_arre &gt;= #{fechaArre,jdbcType=DATE} AND b.fec_arre &lt;= #{fechaArre,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaDisposicion != null">
+                <choose>
+                    <when test="fechaDisposicion_type == 'rango_incluye'">
+                         AND b.fecha_disposicion &gt;= #{fechaDisposicion,jdbcType=DATE} AND b.fecha_disposicion &lt;= #{fechaDisposicion,jdbcType=DATE}
+                    </when>
+                    <when test="fechaDisposicion_type == 'rango_excluye'">
+                         AND b.fecha_disposicion &gt; #{fechaDisposicion,jdbcType=DATE} AND b.fecha_disposicion &lt; #{fechaDisposicion,jdbcType=DATE}
+                    </when>
+                    <when test="fechaDisposicion_type == 'igual'">
+                         AND b.fecha_disposicion = #{fechaDisposicion,jdbcType=DATE}
+                    </when>
+                    <when test="fechaDisposicion_type == 'is_null'">
+                         AND b.fecha_disposicion IS NULL 
+                    </when>
+                    <when test="fechaDisposicion_type == 'is_not_null'">
+                         AND b.fecha_disposicion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.fecha_disposicion &gt;= #{fechaDisposicion,jdbcType=DATE} AND b.fecha_disposicion &lt;= #{fechaDisposicion,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="resolDisp != null">
+                <choose>
+                    <when test="resolDisp_type == 'igual'">
+                         AND b.resol_disp = #{resolDisp,jdbcType=VARCHAR}
+                    </when>
+                    <when test="resolDisp_type == 'is_null'">
+                         AND b.resol_disp IS NULL 
+                    </when>
+                    <when test="resolDisp_type == 'is_not_null'">
+                         AND b.resol_disp IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.resol_disp like #{resolDisp,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="altura != null">
+                <choose>
+                    <when test="altura_type == 'igual'">
+                         AND b.altura = #{altura,jdbcType=VARCHAR}
+                    </when>
+                    <when test="altura_type == 'is_null'">
+                         AND b.altura IS NULL 
+                    </when>
+                    <when test="altura_type == 'is_not_null'">
+                         AND b.altura IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.altura like #{altura,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroChasis != null">
+                <choose>
+                    <when test="numeroChasis_type == 'igual'">
+                         AND b.nro_chasis = #{numeroChasis,jdbcType=VARCHAR}
+                    </when>
+                    <when test="numeroChasis_type == 'is_null'">
+                         AND b.nro_chasis IS NULL 
+                    </when>
+                    <when test="numeroChasis_type == 'is_not_null'">
+                         AND b.nro_chasis IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.nro_chasis like #{numeroChasis,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="valortasa != null">
+                <choose>
+                    <when test="valortasa_type == 'igual'">
+                         AND b.valortasa = #{valortasa,jdbcType=VARCHAR}
+                    </when>
+                    <when test="valortasa_type == 'is_null'">
+                         AND b.valortasa IS NULL 
+                    </when>
+                    <when test="valortasa_type == 'is_not_null'">
+                         AND b.valortasa IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.valortasa like #{valortasa,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="placa != null">
+                <choose>
+                    <when test="placa_type == 'igual'">
+                         AND b.placa = #{placa,jdbcType=VARCHAR}
+                    </when>
+                    <when test="placa_type == 'is_null'">
+                         AND b.placa IS NULL 
+                    </when>
+                    <when test="placa_type == 'is_not_null'">
+                         AND b.placa IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.placa like #{placa,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="sitBinv != null">
+                <choose>
+                    <when test="sitBinv_type == 'igual'">
+                         AND b.sit_binv = #{sitBinv,jdbcType=VARCHAR}
+                    </when>
+                    <when test="sitBinv_type == 'is_null'">
+                         AND b.sit_binv IS NULL 
+                    </when>
+                    <when test="sitBinv_type == 'is_not_null'">
+                         AND b.sit_binv IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.sit_binv like #{sitBinv,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroCuentaContable != null">
+                <choose>
+                    <when test="numeroCuentaContable_type == 'igual'">
+                         AND b.nro_cuenta_contable = #{numeroCuentaContable,jdbcType=VARCHAR}
+                    </when>
+                    <when test="numeroCuentaContable_type == 'is_null'">
+                         AND b.nro_cuenta_contable IS NULL 
+                    </when>
+                    <when test="numeroCuentaContable_type == 'is_not_null'">
+                         AND b.nro_cuenta_contable IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.nro_cuenta_contable like #{numeroCuentaContable,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="serie != null">
+                <choose>
+                    <when test="serie_type == 'igual'">
+                         AND b.serie = #{serie,jdbcType=VARCHAR}
+                    </when>
+                    <when test="serie_type == 'is_null'">
+                         AND b.serie IS NULL 
+                    </when>
+                    <when test="serie_type == 'is_not_null'">
+                         AND b.serie IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.serie like #{serie,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="estBien != null">
+                <choose>
+                    <when test="estBien_type == 'igual'">
+                         AND b.est_bien = #{estBien,jdbcType=VARCHAR}
+                    </when>
+                    <when test="estBien_type == 'is_null'">
+                         AND b.est_bien IS NULL 
+                    </when>
+                    <when test="estBien_type == 'is_not_null'">
+                         AND b.est_bien IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.est_bien like #{estBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entAfec != null">
+                <choose>
+                    <when test="entAfec_type == 'igual'">
+                         AND b.ent_afec = #{entAfec,jdbcType=VARCHAR}
+                    </when>
+                    <when test="entAfec_type == 'is_null'">
+                         AND b.ent_afec IS NULL 
+                    </when>
+                    <when test="entAfec_type == 'is_not_null'">
+                         AND b.ent_afec IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.ent_afec like #{entAfec,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="codanterio != null">
+                <choose>
+                    <when test="codanterio_type == 'igual'">
+                         AND b.codanterio = #{codanterio,jdbcType=VARCHAR}
+                    </when>
+                    <when test="codanterio_type == 'is_null'">
+                         AND b.codanterio IS NULL 
+                    </when>
+                    <when test="codanterio_type == 'is_not_null'">
+                         AND b.codanterio IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.codanterio like #{codanterio,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="tipoCuenta != null">
+                <choose>
+                    <when test="tipoCuenta_type == 'igual'">
+                         AND b.tipo_cuenta = #{tipoCuenta,jdbcType=VARCHAR}
+                    </when>
+                    <when test="tipoCuenta_type == 'is_null'">
+                         AND b.tipo_cuenta IS NULL 
+                    </when>
+                    <when test="tipoCuenta_type == 'is_not_null'">
+                         AND b.tipo_cuenta IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.tipo_cuenta like #{tipoCuenta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="estGestio != null">
+                <choose>
+                    <when test="estGestio_type == 'igual'">
+                         AND b.est_gestio = #{estGestio,jdbcType=VARCHAR}
+                    </when>
+                    <when test="estGestio_type == 'is_null'">
+                         AND b.est_gestio IS NULL 
+                    </when>
+                    <when test="estGestio_type == 'is_not_null'">
+                         AND b.est_gestio IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.est_gestio like #{estGestio,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="docBaja != null">
+                <choose>
+                    <when test="docBaja_type == 'igual'">
+                         AND b.doc_baja = #{docBaja,jdbcType=VARCHAR}
+                    </when>
+                    <when test="docBaja_type == 'is_null'">
+                         AND b.doc_baja IS NULL 
+                    </when>
+                    <when test="docBaja_type == 'is_not_null'">
+                         AND b.doc_baja IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.doc_baja like #{docBaja,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroMotor != null">
+                <choose>
+                    <when test="numeroMotor_type == 'igual'">
+                         AND b.nro_motor = #{numeroMotor,jdbcType=VARCHAR}
+                    </when>
+                    <when test="numeroMotor_type == 'is_null'">
+                         AND b.nro_motor IS NULL 
+                    </when>
+                    <when test="numeroMotor_type == 'is_not_null'">
+                         AND b.nro_motor IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.nro_motor like #{numeroMotor,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="longitud != null">
+                <choose>
+                    <when test="longitud_type == 'igual'">
+                         AND b.longitud = #{longitud,jdbcType=VARCHAR}
+                    </when>
+                    <when test="longitud_type == 'is_null'">
+                         AND b.longitud IS NULL 
+                    </when>
+                    <when test="longitud_type == 'is_not_null'">
+                         AND b.longitud IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.longitud like #{longitud,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="pais != null">
+                <choose>
+                    <when test="pais_type == 'igual'">
+                         AND b.pais = #{pais,jdbcType=VARCHAR}
+                    </when>
+                    <when test="pais_type == 'is_null'">
+                         AND b.pais IS NULL 
+                    </when>
+                    <when test="pais_type == 'is_not_null'">
+                         AND b.pais IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.pais like #{pais,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaBaja != null">
+                <choose>
+                    <when test="fechaBaja_type == 'rango_incluye'">
+                         AND b.fecha_baja &gt;= #{fechaBaja,jdbcType=DATE} AND b.fecha_baja &lt;= #{fechaBaja,jdbcType=DATE}
+                    </when>
+                    <when test="fechaBaja_type == 'rango_excluye'">
+                         AND b.fecha_baja &gt; #{fechaBaja,jdbcType=DATE} AND b.fecha_baja &lt; #{fechaBaja,jdbcType=DATE}
+                    </when>
+                    <when test="fechaBaja_type == 'igual'">
+                         AND b.fecha_baja = #{fechaBaja,jdbcType=DATE}
+                    </when>
+                    <when test="fechaBaja_type == 'is_null'">
+                         AND b.fecha_baja IS NULL 
+                    </when>
+                    <when test="fechaBaja_type == 'is_not_null'">
+                         AND b.fecha_baja IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.fecha_baja &gt;= #{fechaBaja,jdbcType=DATE} AND b.fecha_baja &lt;= #{fechaBaja,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaVarre != null">
+                <choose>
+                    <when test="fechaVarre_type == 'rango_incluye'">
+                         AND b.fec_varre &gt;= #{fechaVarre,jdbcType=DATE} AND b.fec_varre &lt;= #{fechaVarre,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVarre_type == 'rango_excluye'">
+                         AND b.fec_varre &gt; #{fechaVarre,jdbcType=DATE} AND b.fec_varre &lt; #{fechaVarre,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVarre_type == 'igual'">
+                         AND b.fec_varre = #{fechaVarre,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVarre_type == 'is_null'">
+                         AND b.fec_varre IS NULL 
+                    </when>
+                    <when test="fechaVarre_type == 'is_not_null'">
+                         AND b.fec_varre IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.fec_varre &gt;= #{fechaVarre,jdbcType=DATE} AND b.fec_varre &lt;= #{fechaVarre,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="denominacionBien != null">
+                <choose>
+                    <when test="denominacionBien_type == 'igual'">
+                         AND b.denominacion_bien = #{denominacionBien,jdbcType=VARCHAR}
+                    </when>
+                    <when test="denominacionBien_type == 'is_null'">
+                         AND b.denominacion_bien IS NULL 
+                    </when>
+                    <when test="denominacionBien_type == 'is_not_null'">
+                         AND b.denominacion_bien IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.denominacion_bien like #{denominacionBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaDepreciacion != null">
+                <choose>
+                    <when test="fechaDepreciacion_type == 'rango_incluye'">
+                         AND b.fecha_depreciacion &gt;= #{fechaDepreciacion,jdbcType=DATE} AND b.fecha_depreciacion &lt;= #{fechaDepreciacion,jdbcType=DATE}
+                    </when>
+                    <when test="fechaDepreciacion_type == 'rango_excluye'">
+                         AND b.fecha_depreciacion &gt; #{fechaDepreciacion,jdbcType=DATE} AND b.fecha_depreciacion &lt; #{fechaDepreciacion,jdbcType=DATE}
+                    </when>
+                    <when test="fechaDepreciacion_type == 'igual'">
+                         AND b.fecha_depreciacion = #{fechaDepreciacion,jdbcType=DATE}
+                    </when>
+                    <when test="fechaDepreciacion_type == 'is_null'">
+                         AND b.fecha_depreciacion IS NULL 
+                    </when>
+                    <when test="fechaDepreciacion_type == 'is_not_null'">
+                         AND b.fecha_depreciacion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.fecha_depreciacion &gt;= #{fechaDepreciacion,jdbcType=DATE} AND b.fecha_depreciacion &lt;= #{fechaDepreciacion,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="valorDeprecEjercicio != null">
+                <choose>
+                    <when test="valorDeprecEjercicio_type == 'rango_incluye'">
+                         AND b.valor_deprec_ejercicio &gt;= #{valorDeprecEjercicio,jdbcType=DECIMAL} AND b.valor_deprec_ejercicio &lt;= #{valorDeprecEjercicio,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorDeprecEjercicio_type == 'rango_excluye'">
+                         AND b.valor_deprec_ejercicio &gt; #{valorDeprecEjercicio,jdbcType=DECIMAL} AND b.valor_deprec_ejercicio &lt; #{valorDeprecEjercicio,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorDeprecEjercicio_type == 'igual'">
+                         AND b.valor_deprec_ejercicio = #{valorDeprecEjercicio,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorDeprecEjercicio_type == 'is_null'">
+                         AND b.valor_deprec_ejercicio IS NULL 
+                    </when>
+                    <when test="valorDeprecEjercicio_type == 'is_not_null'">
+                         AND b.valor_deprec_ejercicio IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.valor_deprec_ejercicio &gt;= #{valorDeprecEjercicio,jdbcType=DECIMAL} AND b.valor_deprec_ejercicio &lt;= #{valorDeprecEjercicio,jdbcType=DECIMAL}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="valorDeprecAcumulado != null">
+                <choose>
+                    <when test="valorDeprecAcumulado_type == 'rango_incluye'">
+                         AND b.valor_deprec_acumulado &gt;= #{valorDeprecAcumulado,jdbcType=DECIMAL} AND b.valor_deprec_acumulado &lt;= #{valorDeprecAcumulado,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorDeprecAcumulado_type == 'rango_excluye'">
+                         AND b.valor_deprec_acumulado &gt; #{valorDeprecAcumulado,jdbcType=DECIMAL} AND b.valor_deprec_acumulado &lt; #{valorDeprecAcumulado,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorDeprecAcumulado_type == 'igual'">
+                         AND b.valor_deprec_acumulado = #{valorDeprecAcumulado,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorDeprecAcumulado_type == 'is_null'">
+                         AND b.valor_deprec_acumulado IS NULL 
+                    </when>
+                    <when test="valorDeprecAcumulado_type == 'is_not_null'">
+                         AND b.valor_deprec_acumulado IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.valor_deprec_acumulado &gt;= #{valorDeprecAcumulado,jdbcType=DECIMAL} AND b.valor_deprec_acumulado &lt;= #{valorDeprecAcumulado,jdbcType=DECIMAL}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="valorNeto != null">
+                <choose>
+                    <when test="valorNeto_type == 'rango_incluye'">
+                         AND b.valor_neto &gt;= #{valorNeto,jdbcType=DECIMAL} AND b.valor_neto &lt;= #{valorNeto,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorNeto_type == 'rango_excluye'">
+                         AND b.valor_neto &gt; #{valorNeto,jdbcType=DECIMAL} AND b.valor_neto &lt; #{valorNeto,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorNeto_type == 'igual'">
+                         AND b.valor_neto = #{valorNeto,jdbcType=DECIMAL}
+                    </when>
+                    <when test="valorNeto_type == 'is_null'">
+                         AND b.valor_neto IS NULL 
+                    </when>
+                    <when test="valorNeto_type == 'is_not_null'">
+                         AND b.valor_neto IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.valor_neto &gt;= #{valorNeto,jdbcType=DECIMAL} AND b.valor_neto &lt;= #{valorNeto,jdbcType=DECIMAL}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="tipUsoCuenta != null">
+                <choose>
+                    <when test="tipUsoCuenta_type == 'igual'">
+                         AND b.tip_uso_cuenta = #{tipUsoCuenta,jdbcType=VARCHAR}
+                    </when>
+                    <when test="tipUsoCuenta_type == 'is_null'">
+                         AND b.tip_uso_cuenta IS NULL 
+                    </when>
+                    <when test="tipUsoCuenta_type == 'is_not_null'">
+                         AND b.tip_uso_cuenta IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.tip_uso_cuenta like #{tipUsoCuenta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="catalogoBienID != null">
+                <choose>
+                    <when test="catalogoBienID_type == 'rango_incluye'">
+                         AND b.catalogo_bien_id &gt;= #{catalogoBienID,jdbcType=INTEGER} AND b.catalogo_bien_id &lt;= #{catalogoBienID,jdbcType=INTEGER}
+                    </when>
+                    <when test="catalogoBienID_type == 'rango_excluye'">
+                         AND b.catalogo_bien_id &gt; #{catalogoBienID,jdbcType=INTEGER} AND b.catalogo_bien_id &lt; #{catalogoBienID,jdbcType=INTEGER}
+                    </when>
+                    <when test="catalogoBienID_type == 'is_null'">
+                         AND b.catalogo_bien_id IS NULL 
+                    </when>
+                    <when test="catalogoBienID_type == 'is_not_null'">
+                         AND b.catalogo_bien_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.catalogo_bien_id = #{catalogoBienID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="otrasCaract != null">
+                <choose>
+                    <when test="otrasCaract_type == 'igual'">
+                         AND b.otras_caract = #{otrasCaract,jdbcType=VARCHAR}
+                    </when>
+                    <when test="otrasCaract_type == 'is_null'">
+                         AND b.otras_caract IS NULL 
+                    </when>
+                    <when test="otrasCaract_type == 'is_not_null'">
+                         AND b.otras_caract IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.otras_caract like #{otrasCaract,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="descripcionUbicacionBien != null">
+                <choose>
+                    <when test="descripcionUbicacionBien_type == 'igual'">
+                         AND b.descripcion_ubicacion_bien = #{descripcionUbicacionBien,jdbcType=VARCHAR}
+                    </when>
+                    <when test="descripcionUbicacionBien_type == 'is_null'">
+                         AND b.descripcion_ubicacion_bien IS NULL 
+                    </when>
+                    <when test="descripcionUbicacionBien_type == 'is_not_null'">
+                         AND b.descripcion_ubicacion_bien IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.descripcion_ubicacion_bien like #{descripcionUbicacionBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="causalBaja != null">
+                <choose>
+                    <when test="causalBaja_type == 'igual'">
+                         AND b.causal_baja = #{causalBaja,jdbcType=VARCHAR}
+                    </when>
+                    <when test="causalBaja_type == 'is_null'">
+                         AND b.causal_baja IS NULL 
+                    </when>
+                    <when test="causalBaja_type == 'is_not_null'">
+                         AND b.causal_baja IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.causal_baja like #{causalBaja,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="actoDisposicionBien != null">
+                <choose>
+                    <when test="actoDisposicionBien_type == 'igual'">
+                         AND b.acto_disposicion_bien = #{actoDisposicionBien,jdbcType=VARCHAR}
+                    </when>
+                    <when test="actoDisposicionBien_type == 'is_null'">
+                         AND b.acto_disposicion_bien IS NULL 
+                    </when>
+                    <when test="actoDisposicionBien_type == 'is_not_null'">
+                         AND b.acto_disposicion_bien IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.acto_disposicion_bien like #{actoDisposicionBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entidadBeneficiadaActoDisposicion != null">
+                <choose>
+                    <when test="entidadBeneficiadaActoDisposicion_type == 'igual'">
+                         AND b.entidad_beneficiada_acto_disposicion = #{entidadBeneficiadaActoDisposicion,jdbcType=VARCHAR}
+                    </when>
+                    <when test="entidadBeneficiadaActoDisposicion_type == 'is_null'">
+                         AND b.entidad_beneficiada_acto_disposicion IS NULL 
+                    </when>
+                    <when test="entidadBeneficiadaActoDisposicion_type == 'is_not_null'">
+                         AND b.entidad_beneficiada_acto_disposicion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.entidad_beneficiada_acto_disposicion like #{entidadBeneficiadaActoDisposicion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="actoAdministracionBien != null">
+                <choose>
+                    <when test="actoAdministracionBien_type == 'igual'">
+                         AND b.acto_administracion_bien = #{actoAdministracionBien,jdbcType=VARCHAR}
+                    </when>
+                    <when test="actoAdministracionBien_type == 'is_null'">
+                         AND b.acto_administracion_bien IS NULL 
+                    </when>
+                    <when test="actoAdministracionBien_type == 'is_not_null'">
+                         AND b.acto_administracion_bien IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.acto_administracion_bien like #{actoAdministracionBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroResolucionAdministracion != null">
+                <choose>
+                    <when test="numeroResolucionAdministracion_type == 'igual'">
+                         AND b.num_resolucion_administracion = #{numeroResolucionAdministracion,jdbcType=VARCHAR}
+                    </when>
+                    <when test="numeroResolucionAdministracion_type == 'is_null'">
+                         AND b.num_resolucion_administracion IS NULL 
+                    </when>
+                    <when test="numeroResolucionAdministracion_type == 'is_not_null'">
+                         AND b.num_resolucion_administracion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.num_resolucion_administracion like #{numeroResolucionAdministracion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAdministracion != null">
+                <choose>
+                    <when test="fechaAdministracion_type == 'rango_incluye'">
+                         AND b.fecha_administracion &gt;= #{fechaAdministracion,jdbcType=DATE} AND b.fecha_administracion &lt;= #{fechaAdministracion,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAdministracion_type == 'rango_excluye'">
+                         AND b.fecha_administracion &gt; #{fechaAdministracion,jdbcType=DATE} AND b.fecha_administracion &lt; #{fechaAdministracion,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAdministracion_type == 'igual'">
+                         AND b.fecha_administracion = #{fechaAdministracion,jdbcType=DATE}
+                    </when>
+                    <when test="fechaAdministracion_type == 'is_null'">
+                         AND b.fecha_administracion IS NULL 
+                    </when>
+                    <when test="fechaAdministracion_type == 'is_not_null'">
+                         AND b.fecha_administracion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.fecha_administracion &gt;= #{fechaAdministracion,jdbcType=DATE} AND b.fecha_administracion &lt;= #{fechaAdministracion,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaVencActoAdmin != null">
+                <choose>
+                    <when test="fechaVencActoAdmin_type == 'rango_incluye'">
+                         AND b.fecha_venc_acto_admin &gt;= #{fechaVencActoAdmin,jdbcType=DATE} AND b.fecha_venc_acto_admin &lt;= #{fechaVencActoAdmin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVencActoAdmin_type == 'rango_excluye'">
+                         AND b.fecha_venc_acto_admin &gt; #{fechaVencActoAdmin,jdbcType=DATE} AND b.fecha_venc_acto_admin &lt; #{fechaVencActoAdmin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVencActoAdmin_type == 'igual'">
+                         AND b.fecha_venc_acto_admin = #{fechaVencActoAdmin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaVencActoAdmin_type == 'is_null'">
+                         AND b.fecha_venc_acto_admin IS NULL 
+                    </when>
+                    <when test="fechaVencActoAdmin_type == 'is_not_null'">
+                         AND b.fecha_venc_acto_admin IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.fecha_venc_acto_admin &gt;= #{fechaVencActoAdmin,jdbcType=DATE} AND b.fecha_venc_acto_admin &lt;= #{fechaVencActoAdmin,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entidadBeneficiadaActoAdmin != null">
+                <choose>
+                    <when test="entidadBeneficiadaActoAdmin_type == 'igual'">
+                         AND b.entidad_beneficiada_acto_admin = #{entidadBeneficiadaActoAdmin,jdbcType=VARCHAR}
+                    </when>
+                    <when test="entidadBeneficiadaActoAdmin_type == 'is_null'">
+                         AND b.entidad_beneficiada_acto_admin IS NULL 
+                    </when>
+                    <when test="entidadBeneficiadaActoAdmin_type == 'is_not_null'">
+                         AND b.entidad_beneficiada_acto_admin IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.entidad_beneficiada_acto_admin like #{entidadBeneficiadaActoAdmin,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="docAltaSbn != null">
+                <choose>
+                    <when test="docAltaSbn_type == 'igual'">
+                         AND b.doc_alta_sbn = #{docAltaSbn,jdbcType=VARCHAR}
+                    </when>
+                    <when test="docAltaSbn_type == 'is_null'">
+                         AND b.doc_alta_sbn IS NULL 
+                    </when>
+                    <when test="docAltaSbn_type == 'is_not_null'">
+                         AND b.doc_alta_sbn IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.doc_alta_sbn like #{docAltaSbn,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="docBajaSbn != null">
+                <choose>
+                    <when test="docBajaSbn_type == 'igual'">
+                         AND b.doc_baja_sbn = #{docBajaSbn,jdbcType=VARCHAR}
+                    </when>
+                    <when test="docBajaSbn_type == 'is_null'">
+                         AND b.doc_baja_sbn IS NULL 
+                    </when>
+                    <when test="docBajaSbn_type == 'is_not_null'">
+                         AND b.doc_baja_sbn IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.doc_baja_sbn like #{docBajaSbn,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND b.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indDel_type == 'is_null'">
+                         AND b.ind_del IS NULL 
+                    </when>
+                    <when test="indDel_type == 'is_not_null'">
+                         AND b.ind_del IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND b.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND b.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND b.fec_reg &gt; #{fechaReg,jdbcType=TIMESTAMP} AND b.fec_reg &lt; #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND b.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'is_null'">
+                         AND b.fec_reg IS NULL 
+                    </when>
+                    <when test="fechaReg_type == 'is_not_null'">
+                         AND b.fec_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND b.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND b.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND b.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND b.fec_act &gt; #{fechaAct,jdbcType=TIMESTAMP} AND b.fec_act &lt; #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND b.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'is_null'">
+                         AND b.fec_act IS NULL 
+                    </when>
+                    <when test="fechaAct_type == 'is_not_null'">
+                         AND b.fec_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND b.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND b.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuReg_type == 'is_null'">
+                         AND b.usu_reg IS NULL 
+                    </when>
+                    <when test="usuReg_type == 'is_not_null'">
+                         AND b.usu_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND b.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuAct_type == 'is_null'">
+                         AND b.usu_act IS NULL 
+                    </when>
+                    <when test="usuAct_type == 'is_not_null'">
+                         AND b.usu_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="tipo != null">
+                <choose>
+                    <when test="tipo_type == 'igual'">
+                         AND b.tipo = #{tipo,jdbcType=VARCHAR}
+                    </when>
+                    <when test="tipo_type == 'is_null'">
+                         AND b.tipo IS NULL 
+                    </when>
+                    <when test="tipo_type == 'is_not_null'">
+                         AND b.tipo IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.tipo like #{tipo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroResolucionDisp != null">
+                <choose>
+                    <when test="numeroResolucionDisp_type == 'igual'">
+                         AND b.nro_resolucion_disp = #{numeroResolucionDisp,jdbcType=VARCHAR}
+                    </when>
+                    <when test="numeroResolucionDisp_type == 'is_null'">
+                         AND b.nro_resolucion_disp IS NULL 
+                    </when>
+                    <when test="numeroResolucionDisp_type == 'is_not_null'">
+                         AND b.nro_resolucion_disp IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.nro_resolucion_disp like #{numeroResolucionDisp,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="codigoBarras != null">
+                <choose>
+                    <when test="codigoBarras_type == 'igual'">
+                         AND b.codigo_barras = #{codigoBarras,jdbcType=VARCHAR}
+                    </when>
+                    <when test="codigoBarras_type == 'is_null'">
+                         AND b.codigo_barras IS NULL 
+                    </when>
+                    <when test="codigoBarras_type == 'is_not_null'">
+                         AND b.codigo_barras IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.codigo_barras like #{codigoBarras,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectNextID" useCache="false" resultType="java.lang.Integer">
+        select nextval('bien_bien_id_seq')
+    </select>
+
+    <select id="selectCurrentID" useCache="false" resultType="java.lang.Integer">
+        select currval('bien_bien_id_seq')
+    </select>
+
+    <insert id="insert" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.BienEntity"
+        useGeneratedKeys="true" keyProperty="bienID">
+
+        INSERT INTO inventario.bien 
+        (
+            codigo_patrimonial,
+            entidad_id,
+            locales_id,
+            area_id,
+            empleado_id,
+            oficina_id,
+            tipo_causal_alta,
+            anho,
+            matricula,
+            ancho,
+            valor_libro,
+            cuenta_con_seguro,
+            estado_bien,
+            dimension,
+            condicion,
+            nro_doc_adquisicion,
+            color,
+            fecha_adquisicion,
+            ent_disp,
+            ent_arre,
+            fec_vafec,
+            edad,
+            motivo_eliminacion_bien,
+            valor_adquisicion,
+            anio_fabricacion,
+            resol_afec,
+            especie,
+            raza,
+            fec_afec,
+            flg_acto,
+            modelo,
+            flg_causal,
+            marca,
+            nro_resolucion_baja,
+            resol_arre,
+            dsc_otros,
+            fec_arre,
+            fecha_disposicion,
+            resol_disp,
+            altura,
+            nro_chasis,
+            valortasa,
+            placa,
+            sit_binv,
+            nro_cuenta_contable,
+            serie,
+            est_bien,
+            ent_afec,
+            codanterio,
+            tipo_cuenta,
+            est_gestio,
+            doc_baja,
+            nro_motor,
+            longitud,
+            pais,
+            fecha_baja,
+            fec_varre,
+            denominacion_bien,
+            fecha_depreciacion,
+            valor_deprec_ejercicio,
+            valor_deprec_acumulado,
+            valor_neto,
+            tip_uso_cuenta,
+            catalogo_bien_id,
+            otras_caract,
+            descripcion_ubicacion_bien,
+            causal_baja,
+            acto_disposicion_bien,
+            entidad_beneficiada_acto_disposicion,
+            acto_administracion_bien,
+            num_resolucion_administracion,
+            fecha_administracion,
+            fecha_venc_acto_admin,
+            entidad_beneficiada_acto_admin,
+            doc_alta_sbn,
+            doc_baja_sbn,
+            ind_del,
+            fec_reg,
+            fec_act,
+            usu_reg,
+            usu_act,
+            tipo,
+            nro_resolucion_disp,
+            codigo_barras
+        )
+        VALUES
+        (
+            #{codigoPatrimonial,jdbcType=VARCHAR},
+            #{entidadID,jdbcType=INTEGER},
+            #{localesID,jdbcType=INTEGER},
+            #{areaID,jdbcType=INTEGER},
+            #{empleadoID,jdbcType=INTEGER},
+            #{oficinaID,jdbcType=INTEGER},
+            #{tipoCausalAlta,jdbcType=VARCHAR},
+            #{anho,jdbcType=INTEGER},
+            #{matricula,jdbcType=VARCHAR},
+            #{ancho,jdbcType=DECIMAL},
+            #{valorLibro,jdbcType=DECIMAL},
+            #{cuentaConSeguro,jdbcType=VARCHAR},
+            #{estadoBien,jdbcType=VARCHAR},
+            #{dimension,jdbcType=VARCHAR},
+            #{condicion,jdbcType=VARCHAR},
+            #{numeroDocAdquisicion,jdbcType=VARCHAR},
+            #{color,jdbcType=VARCHAR},
+            #{fechaAdquisicion,jdbcType=DATE},
+            #{entDisp,jdbcType=VARCHAR},
+            #{entArre,jdbcType=VARCHAR},
+            #{fechaVafec,jdbcType=DATE},
+            #{edad,jdbcType=VARCHAR},
+            #{motivoEliminacionBien,jdbcType=VARCHAR},
+            #{valorAdquisicion,jdbcType=DECIMAL},
+            #{anioFabricacion,jdbcType=VARCHAR},
+            #{resolAfec,jdbcType=VARCHAR},
+            #{especie,jdbcType=VARCHAR},
+            #{raza,jdbcType=VARCHAR},
+            #{fechaAfec,jdbcType=DATE},
+            #{flgActo,jdbcType=VARCHAR},
+            #{modelo,jdbcType=VARCHAR},
+            #{flgCausal,jdbcType=VARCHAR},
+            #{marca,jdbcType=VARCHAR},
+            #{numeroResolucionBaja,jdbcType=VARCHAR},
+            #{resolArre,jdbcType=VARCHAR},
+            #{dscOtros,jdbcType=VARCHAR},
+            #{fechaArre,jdbcType=DATE},
+            #{fechaDisposicion,jdbcType=DATE},
+            #{resolDisp,jdbcType=VARCHAR},
+            #{altura,jdbcType=VARCHAR},
+            #{numeroChasis,jdbcType=VARCHAR},
+            #{valortasa,jdbcType=VARCHAR},
+            #{placa,jdbcType=VARCHAR},
+            #{sitBinv,jdbcType=VARCHAR},
+            #{numeroCuentaContable,jdbcType=VARCHAR},
+            #{serie,jdbcType=VARCHAR},
+            #{estBien,jdbcType=VARCHAR},
+            #{entAfec,jdbcType=VARCHAR},
+            #{codanterio,jdbcType=VARCHAR},
+            #{tipoCuenta,jdbcType=VARCHAR},
+            #{estGestio,jdbcType=VARCHAR},
+            #{docBaja,jdbcType=VARCHAR},
+            #{numeroMotor,jdbcType=VARCHAR},
+            #{longitud,jdbcType=VARCHAR},
+            #{pais,jdbcType=VARCHAR},
+            #{fechaBaja,jdbcType=DATE},
+            #{fechaVarre,jdbcType=DATE},
+            #{denominacionBien,jdbcType=VARCHAR},
+            #{fechaDepreciacion,jdbcType=DATE},
+            #{valorDeprecEjercicio,jdbcType=DECIMAL},
+            #{valorDeprecAcumulado,jdbcType=DECIMAL},
+            #{valorNeto,jdbcType=DECIMAL},
+            #{tipUsoCuenta,jdbcType=VARCHAR},
+            #{catalogoBienID,jdbcType=INTEGER},
+            #{otrasCaract,jdbcType=VARCHAR},
+            #{descripcionUbicacionBien,jdbcType=VARCHAR},
+            #{causalBaja,jdbcType=VARCHAR},
+            #{actoDisposicionBien,jdbcType=VARCHAR},
+            #{entidadBeneficiadaActoDisposicion,jdbcType=VARCHAR},
+            #{actoAdministracionBien,jdbcType=VARCHAR},
+            #{numeroResolucionAdministracion,jdbcType=VARCHAR},
+            #{fechaAdministracion,jdbcType=DATE},
+            #{fechaVencActoAdmin,jdbcType=DATE},
+            #{entidadBeneficiadaActoAdmin,jdbcType=VARCHAR},
+            #{docAltaSbn,jdbcType=VARCHAR},
+            #{docBajaSbn,jdbcType=VARCHAR},
+            #{indDel,jdbcType=VARCHAR},
+            #{fechaReg,jdbcType=TIMESTAMP},
+            #{fechaAct,jdbcType=TIMESTAMP},
+            #{usuReg,jdbcType=VARCHAR},
+            #{usuAct,jdbcType=VARCHAR},
+            #{tipo,jdbcType=VARCHAR},
+            #{numeroResolucionDisp,jdbcType=VARCHAR},
+            #{codigoBarras,jdbcType=VARCHAR}
+        )
+
+    </insert>
+
+    <update id="update" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.BienEntity">
+
+        UPDATE inventario.bien
+        <set>
+            <if test="codigoPatrimonial != null">
+                codigo_patrimonial = #{codigoPatrimonial,jdbcType=VARCHAR},
+            </if>
+            <if test="entidadID != null">
+                entidad_id = #{entidadID,jdbcType=INTEGER},
+            </if>
+            <if test="localesID != null">
+                locales_id = #{localesID,jdbcType=INTEGER},
+            </if>
+            <if test="areaID != null">
+                area_id = #{areaID,jdbcType=INTEGER},
+            </if>
+            <if test="empleadoID != null">
+                empleado_id = #{empleadoID,jdbcType=INTEGER},
+            </if>
+            <if test="oficinaID != null">
+                oficina_id = #{oficinaID,jdbcType=INTEGER},
+            </if>
+            <if test="tipoCausalAlta != null">
+                tipo_causal_alta = #{tipoCausalAlta,jdbcType=VARCHAR},
+            </if>
+            <if test="anho != null">
+                anho = #{anho,jdbcType=INTEGER},
+            </if>
+            <if test="matricula != null">
+                matricula = #{matricula,jdbcType=VARCHAR},
+            </if>
+            <if test="ancho != null">
+                ancho = #{ancho,jdbcType=DECIMAL},
+            </if>
+            <if test="valorLibro != null">
+                valor_libro = #{valorLibro,jdbcType=DECIMAL},
+            </if>
+            <if test="cuentaConSeguro != null">
+                cuenta_con_seguro = #{cuentaConSeguro,jdbcType=VARCHAR},
+            </if>
+            <if test="estadoBien != null">
+                estado_bien = #{estadoBien,jdbcType=VARCHAR},
+            </if>
+            <if test="dimension != null">
+                dimension = #{dimension,jdbcType=VARCHAR},
+            </if>
+            <if test="condicion != null">
+                condicion = #{condicion,jdbcType=VARCHAR},
+            </if>
+            <if test="numeroDocAdquisicion != null">
+                nro_doc_adquisicion = #{numeroDocAdquisicion,jdbcType=VARCHAR},
+            </if>
+            <if test="color != null">
+                color = #{color,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaAdquisicion != null">
+                fecha_adquisicion = #{fechaAdquisicion,jdbcType=DATE},
+            </if>
+            <if test="entDisp != null">
+                ent_disp = #{entDisp,jdbcType=VARCHAR},
+            </if>
+            <if test="entArre != null">
+                ent_arre = #{entArre,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaVafec != null">
+                fec_vafec = #{fechaVafec,jdbcType=DATE},
+            </if>
+            <if test="edad != null">
+                edad = #{edad,jdbcType=VARCHAR},
+            </if>
+            <if test="motivoEliminacionBien != null">
+                motivo_eliminacion_bien = #{motivoEliminacionBien,jdbcType=VARCHAR},
+            </if>
+            <if test="valorAdquisicion != null">
+                valor_adquisicion = #{valorAdquisicion,jdbcType=DECIMAL},
+            </if>
+            <if test="anioFabricacion != null">
+                anio_fabricacion = #{anioFabricacion,jdbcType=VARCHAR},
+            </if>
+            <if test="resolAfec != null">
+                resol_afec = #{resolAfec,jdbcType=VARCHAR},
+            </if>
+            <if test="especie != null">
+                especie = #{especie,jdbcType=VARCHAR},
+            </if>
+            <if test="raza != null">
+                raza = #{raza,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaAfec != null">
+                fec_afec = #{fechaAfec,jdbcType=DATE},
+            </if>
+            <if test="flgActo != null">
+                flg_acto = #{flgActo,jdbcType=VARCHAR},
+            </if>
+            <if test="modelo != null">
+                modelo = #{modelo,jdbcType=VARCHAR},
+            </if>
+            <if test="flgCausal != null">
+                flg_causal = #{flgCausal,jdbcType=VARCHAR},
+            </if>
+            <if test="marca != null">
+                marca = #{marca,jdbcType=VARCHAR},
+            </if>
+            <if test="numeroResolucionBaja != null">
+                nro_resolucion_baja = #{numeroResolucionBaja,jdbcType=VARCHAR},
+            </if>
+            <if test="resolArre != null">
+                resol_arre = #{resolArre,jdbcType=VARCHAR},
+            </if>
+            <if test="dscOtros != null">
+                dsc_otros = #{dscOtros,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaArre != null">
+                fec_arre = #{fechaArre,jdbcType=DATE},
+            </if>
+            <if test="fechaDisposicion != null">
+                fecha_disposicion = #{fechaDisposicion,jdbcType=DATE},
+            </if>
+            <if test="resolDisp != null">
+                resol_disp = #{resolDisp,jdbcType=VARCHAR},
+            </if>
+            <if test="altura != null">
+                altura = #{altura,jdbcType=VARCHAR},
+            </if>
+            <if test="numeroChasis != null">
+                nro_chasis = #{numeroChasis,jdbcType=VARCHAR},
+            </if>
+            <if test="valortasa != null">
+                valortasa = #{valortasa,jdbcType=VARCHAR},
+            </if>
+            <if test="placa != null">
+                placa = #{placa,jdbcType=VARCHAR},
+            </if>
+            <if test="sitBinv != null">
+                sit_binv = #{sitBinv,jdbcType=VARCHAR},
+            </if>
+            <if test="numeroCuentaContable != null">
+                nro_cuenta_contable = #{numeroCuentaContable,jdbcType=VARCHAR},
+            </if>
+            <if test="serie != null">
+                serie = #{serie,jdbcType=VARCHAR},
+            </if>
+            <if test="estBien != null">
+                est_bien = #{estBien,jdbcType=VARCHAR},
+            </if>
+            <if test="entAfec != null">
+                ent_afec = #{entAfec,jdbcType=VARCHAR},
+            </if>
+            <if test="codanterio != null">
+                codanterio = #{codanterio,jdbcType=VARCHAR},
+            </if>
+            <if test="tipoCuenta != null">
+                tipo_cuenta = #{tipoCuenta,jdbcType=VARCHAR},
+            </if>
+            <if test="estGestio != null">
+                est_gestio = #{estGestio,jdbcType=VARCHAR},
+            </if>
+            <if test="docBaja != null">
+                doc_baja = #{docBaja,jdbcType=VARCHAR},
+            </if>
+            <if test="numeroMotor != null">
+                nro_motor = #{numeroMotor,jdbcType=VARCHAR},
+            </if>
+            <if test="longitud != null">
+                longitud = #{longitud,jdbcType=VARCHAR},
+            </if>
+            <if test="pais != null">
+                pais = #{pais,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaBaja != null">
+                fecha_baja = #{fechaBaja,jdbcType=DATE},
+            </if>
+            <if test="fechaVarre != null">
+                fec_varre = #{fechaVarre,jdbcType=DATE},
+            </if>
+            <if test="denominacionBien != null">
+                denominacion_bien = #{denominacionBien,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaDepreciacion != null">
+                fecha_depreciacion = #{fechaDepreciacion,jdbcType=DATE},
+            </if>
+            <if test="valorDeprecEjercicio != null">
+                valor_deprec_ejercicio = #{valorDeprecEjercicio,jdbcType=DECIMAL},
+            </if>
+            <if test="valorDeprecAcumulado != null">
+                valor_deprec_acumulado = #{valorDeprecAcumulado,jdbcType=DECIMAL},
+            </if>
+            <if test="valorNeto != null">
+                valor_neto = #{valorNeto,jdbcType=DECIMAL},
+            </if>
+            <if test="tipUsoCuenta != null">
+                tip_uso_cuenta = #{tipUsoCuenta,jdbcType=VARCHAR},
+            </if>
+            <if test="catalogoBienID != null">
+                catalogo_bien_id = #{catalogoBienID,jdbcType=INTEGER},
+            </if>
+            <if test="otrasCaract != null">
+                otras_caract = #{otrasCaract,jdbcType=VARCHAR},
+            </if>
+            <if test="descripcionUbicacionBien != null">
+                descripcion_ubicacion_bien = #{descripcionUbicacionBien,jdbcType=VARCHAR},
+            </if>
+            <if test="causalBaja != null">
+                causal_baja = #{causalBaja,jdbcType=VARCHAR},
+            </if>
+            <if test="actoDisposicionBien != null">
+                acto_disposicion_bien = #{actoDisposicionBien,jdbcType=VARCHAR},
+            </if>
+            <if test="entidadBeneficiadaActoDisposicion != null">
+                entidad_beneficiada_acto_disposicion = #{entidadBeneficiadaActoDisposicion,jdbcType=VARCHAR},
+            </if>
+            <if test="actoAdministracionBien != null">
+                acto_administracion_bien = #{actoAdministracionBien,jdbcType=VARCHAR},
+            </if>
+            <if test="numeroResolucionAdministracion != null">
+                num_resolucion_administracion = #{numeroResolucionAdministracion,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaAdministracion != null">
+                fecha_administracion = #{fechaAdministracion,jdbcType=DATE},
+            </if>
+            <if test="fechaVencActoAdmin != null">
+                fecha_venc_acto_admin = #{fechaVencActoAdmin,jdbcType=DATE},
+            </if>
+            <if test="entidadBeneficiadaActoAdmin != null">
+                entidad_beneficiada_acto_admin = #{entidadBeneficiadaActoAdmin,jdbcType=VARCHAR},
+            </if>
+            <if test="docAltaSbn != null">
+                doc_alta_sbn = #{docAltaSbn,jdbcType=VARCHAR},
+            </if>
+            <if test="docBajaSbn != null">
+                doc_baja_sbn = #{docBajaSbn,jdbcType=VARCHAR},
+            </if>
+            <if test="indDel != null">
+                ind_del = #{indDel,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaReg != null">
+                fec_reg = #{fechaReg,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fechaAct != null">
+                fec_act = #{fechaAct,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usuReg != null">
+                usu_reg = #{usuReg,jdbcType=VARCHAR},
+            </if>
+            <if test="usuAct != null">
+                usu_act = #{usuAct,jdbcType=VARCHAR},
+            </if>
+            <if test="tipo != null">
+                tipo = #{tipo,jdbcType=VARCHAR},
+            </if>
+            <if test="numeroResolucionDisp != null">
+                nro_resolucion_disp = #{numeroResolucionDisp,jdbcType=VARCHAR},
+            </if>
+            <if test="codigoBarras != null">
+                codigo_barras = #{codigoBarras,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE 
+            bien_id = #{bienID,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateNullByCodigoPatrimonialEntidadID" flushCache="true"
+            parameterType="com.simios.simioapp.dominio.entidades.BienEntity">
+
+        UPDATE inventario.bien
+        SET
+            locales_id = #{localesID,jdbcType=INTEGER},
+            area_id = #{areaID,jdbcType=INTEGER},
+            empleado_id = #{empleadoID,jdbcType=INTEGER},
+            oficina_id = #{oficinaID,jdbcType=INTEGER},
+            tipo_causal_alta = #{tipoCausalAlta,jdbcType=VARCHAR},
+            anho = #{anho,jdbcType=INTEGER},
+            matricula = #{matricula,jdbcType=VARCHAR},
+            ancho = #{ancho,jdbcType=DECIMAL},
+            valor_libro = #{valorLibro,jdbcType=DECIMAL},
+            cuenta_con_seguro = #{cuentaConSeguro,jdbcType=VARCHAR},
+            estado_bien = #{estadoBien,jdbcType=VARCHAR},
+            dimension = #{dimension,jdbcType=VARCHAR},
+            condicion = #{condicion,jdbcType=VARCHAR},
+            nro_doc_adquisicion = #{numeroDocAdquisicion,jdbcType=VARCHAR},
+            color = #{color,jdbcType=VARCHAR},
+            fecha_adquisicion = #{fechaAdquisicion,jdbcType=DATE},
+            ent_disp = #{entDisp,jdbcType=VARCHAR},
+            ent_arre = #{entArre,jdbcType=VARCHAR},
+            fec_vafec = #{fechaVafec,jdbcType=DATE},
+            edad = #{edad,jdbcType=VARCHAR},
+            motivo_eliminacion_bien = #{motivoEliminacionBien,jdbcType=VARCHAR},
+            valor_adquisicion = #{valorAdquisicion,jdbcType=DECIMAL},
+            anio_fabricacion = #{anioFabricacion,jdbcType=VARCHAR},
+            resol_afec = #{resolAfec,jdbcType=VARCHAR},
+            especie = #{especie,jdbcType=VARCHAR},
+            raza = #{raza,jdbcType=VARCHAR},
+            fec_afec = #{fechaAfec,jdbcType=DATE},
+            flg_acto = #{flgActo,jdbcType=VARCHAR},
+            modelo = #{modelo,jdbcType=VARCHAR},
+            flg_causal = #{flgCausal,jdbcType=VARCHAR},
+            marca = #{marca,jdbcType=VARCHAR},
+            nro_resolucion_baja = #{numeroResolucionBaja,jdbcType=VARCHAR},
+            resol_arre = #{resolArre,jdbcType=VARCHAR},
+            dsc_otros = #{dscOtros,jdbcType=VARCHAR},
+            fec_arre = #{fechaArre,jdbcType=DATE},
+            fecha_disposicion = #{fechaDisposicion,jdbcType=DATE},
+            resol_disp = #{resolDisp,jdbcType=VARCHAR},
+            altura = #{altura,jdbcType=VARCHAR},
+            nro_chasis = #{numeroChasis,jdbcType=VARCHAR},
+            valortasa = #{valortasa,jdbcType=VARCHAR},
+            placa = #{placa,jdbcType=VARCHAR},
+            sit_binv = #{sitBinv,jdbcType=VARCHAR},
+            nro_cuenta_contable = #{numeroCuentaContable,jdbcType=VARCHAR},
+            serie = #{serie,jdbcType=VARCHAR},
+            est_bien = #{estBien,jdbcType=VARCHAR},
+            ent_afec = #{entAfec,jdbcType=VARCHAR},
+            codanterio = #{codanterio,jdbcType=VARCHAR},
+            tipo_cuenta = #{tipoCuenta,jdbcType=VARCHAR},
+            est_gestio = #{estGestio,jdbcType=VARCHAR},
+            doc_baja = #{docBaja,jdbcType=VARCHAR},
+            nro_motor = #{numeroMotor,jdbcType=VARCHAR},
+            longitud = #{longitud,jdbcType=VARCHAR},
+            pais = #{pais,jdbcType=VARCHAR},
+            fecha_baja = #{fechaBaja,jdbcType=DATE},
+            fec_varre = #{fechaVarre,jdbcType=DATE},
+            denominacion_bien = #{denominacionBien,jdbcType=VARCHAR},
+            fecha_depreciacion = #{fechaDepreciacion,jdbcType=DATE},
+            valor_deprec_ejercicio = #{valorDeprecEjercicio,jdbcType=DECIMAL},
+            valor_deprec_acumulado = #{valorDeprecAcumulado,jdbcType=DECIMAL},
+            valor_neto = #{valorNeto,jdbcType=DECIMAL},
+            tip_uso_cuenta = #{tipUsoCuenta,jdbcType=VARCHAR},
+            catalogo_bien_id = #{catalogoBienID,jdbcType=INTEGER},
+            otras_caract = #{otrasCaract,jdbcType=VARCHAR},
+            descripcion_ubicacion_bien = #{descripcionUbicacionBien,jdbcType=VARCHAR},
+            causal_baja = #{causalBaja,jdbcType=VARCHAR},
+            acto_disposicion_bien = #{actoDisposicionBien,jdbcType=VARCHAR},
+            entidad_beneficiada_acto_disposicion = #{entidadBeneficiadaActoDisposicion,jdbcType=VARCHAR},
+            acto_administracion_bien = #{actoAdministracionBien,jdbcType=VARCHAR},
+            num_resolucion_administracion = #{numeroResolucionAdministracion,jdbcType=VARCHAR},
+            fecha_administracion = #{fechaAdministracion,jdbcType=DATE},
+            fecha_venc_acto_admin = #{fechaVencActoAdmin,jdbcType=DATE},
+            entidad_beneficiada_acto_admin = #{entidadBeneficiadaActoAdmin,jdbcType=VARCHAR},
+            doc_alta_sbn = #{docAltaSbn,jdbcType=VARCHAR},
+            doc_baja_sbn = #{docBajaSbn,jdbcType=VARCHAR},
+            ind_del = #{indDel,jdbcType=VARCHAR},
+            fec_act = #{fechaAct,jdbcType=TIMESTAMP},
+            usu_act = #{usuAct,jdbcType=VARCHAR},
+            tipo = #{tipo,jdbcType=VARCHAR},
+            nro_resolucion_disp = #{numeroResolucionDisp,jdbcType=VARCHAR},
+            codigo_barras = #{codigoBarras,jdbcType=VARCHAR}
+        WHERE
+          codigo_patrimonial = #{codigoPatrimonial,jdbcType=VARCHAR} AND entidad_id = #{entidadID,jdbcType=INTEGER}
+    </update>
+
+</mapper>

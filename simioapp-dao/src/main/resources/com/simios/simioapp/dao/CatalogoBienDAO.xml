@@ -1,0 +1,1077 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simios.simioapp.dao.CatalogoBienDAO">
+
+    <cache />
+
+    <resultMap id="catalogoBienResultMap" type="com.simios.simioapp.dominio.entidades.CatalogoBienEntity">
+        <id column="catalogo_bien_id" property="catalogoBienID" jdbcType="INTEGER" />
+        <result column="codigo_bien" property="codigoBien" jdbcType="VARCHAR" />
+        <result column="denominacion" property="denominacion" jdbcType="VARCHAR" />
+        <result column="grupo_id" property="grupoID" jdbcType="INTEGER" />
+        <result column="clase_id" property="claseID" jdbcType="INTEGER" />
+        <result column="grupo" property="grupo" jdbcType="VARCHAR" />
+        <result column="clase" property="clase" jdbcType="VARCHAR" />
+        <result column="dt_marca" property="dtMarca" jdbcType="VARCHAR" />
+        <result column="dt_modelo" property="dtModelo" jdbcType="VARCHAR" />
+        <result column="dt_tipo" property="dtTipo" jdbcType="VARCHAR" />
+        <result column="dt_dimension" property="dtDimension" jdbcType="VARCHAR" />
+        <result column="dt_color" property="dtColor" jdbcType="VARCHAR" />
+        <result column="dt_serie" property="dtSerie" jdbcType="VARCHAR" />
+        <result column="dt_anio" property="dtAnio" jdbcType="VARCHAR" />
+        <result column="dt_placa" property="dtPlaca" jdbcType="VARCHAR" />
+        <result column="dt_raza" property="dtRaza" jdbcType="VARCHAR" />
+        <result column="dt_motor" property="dtMotor" jdbcType="VARCHAR" />
+        <result column="dt_nombre" property="dtNombre" jdbcType="VARCHAR" />
+        <result column="dt_chasis" property="dtChasis" jdbcType="VARCHAR" />
+        <result column="dt_edad" property="dtEdad" jdbcType="VARCHAR" />
+        <result column="dt_btn_otro" property="dtBtnOtro" jdbcType="VARCHAR" />
+        <result column="ind_del" property="indDel" jdbcType="VARCHAR" />
+        <result column="fec_reg" property="fechaReg" jdbcType="TIMESTAMP" />
+        <result column="fec_act" property="fechaAct" jdbcType="TIMESTAMP" />
+        <result column="usu_reg" property="usuReg" jdbcType="VARCHAR" />
+        <result column="usu_act" property="usuAct" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectByID" resultMap="catalogoBienResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.CatalogoBienEntity">
+
+        SELECT
+            catalogo_bien_id, codigo_bien, denominacion, grupo_id, 
+            clase_id, grupo, clase, dt_marca, 
+            dt_modelo, dt_tipo, dt_dimension, dt_color, 
+            dt_serie, dt_anio, dt_placa, dt_raza, 
+            dt_motor, dt_nombre, dt_chasis, dt_edad, 
+            dt_btn_otro, ind_del, fec_reg, fec_act, 
+            usu_reg, usu_act
+        FROM 
+            inventario.catalogo_bien
+        WHERE
+            catalogo_bien_id = #{catalogoBienID,jdbcType=INTEGER}
+    </select>
+
+    <select id="select" resultMap="catalogoBienResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.CatalogoBienEntity">
+
+        SELECT
+            catalogo_bien_id, codigo_bien, denominacion, grupo_id, 
+            clase_id, grupo, clase, dt_marca, 
+            dt_modelo, dt_tipo, dt_dimension, dt_color, 
+            dt_serie, dt_anio, dt_placa, dt_raza, 
+            dt_motor, dt_nombre, dt_chasis, dt_edad, 
+            dt_btn_otro, ind_del, fec_reg, fec_act, 
+            usu_reg, usu_act
+        FROM 
+            inventario.catalogo_bien
+        <where>
+            <if test="catalogoBienID != null">
+                 AND catalogo_bien_id = #{catalogoBienID,jdbcType=INTEGER}
+            </if>
+            <if test="codigoBien != null">
+                 AND codigo_bien = #{codigoBien,jdbcType=VARCHAR}
+            </if>
+            <if test="denominacion != null">
+                 AND denominacion = #{denominacion,jdbcType=VARCHAR}
+            </if>
+            <if test="grupoID != null">
+                 AND grupo_id = #{grupoID,jdbcType=INTEGER}
+            </if>
+            <if test="claseID != null">
+                 AND clase_id = #{claseID,jdbcType=INTEGER}
+            </if>
+            <if test="grupo != null">
+                 AND grupo = #{grupo,jdbcType=VARCHAR}
+            </if>
+            <if test="clase != null">
+                 AND clase = #{clase,jdbcType=VARCHAR}
+            </if>
+            <if test="dtMarca != null">
+                 AND dt_marca = #{dtMarca,jdbcType=VARCHAR}
+            </if>
+            <if test="dtModelo != null">
+                 AND dt_modelo = #{dtModelo,jdbcType=VARCHAR}
+            </if>
+            <if test="dtTipo != null">
+                 AND dt_tipo = #{dtTipo,jdbcType=VARCHAR}
+            </if>
+            <if test="dtDimension != null">
+                 AND dt_dimension = #{dtDimension,jdbcType=VARCHAR}
+            </if>
+            <if test="dtColor != null">
+                 AND dt_color = #{dtColor,jdbcType=VARCHAR}
+            </if>
+            <if test="dtSerie != null">
+                 AND dt_serie = #{dtSerie,jdbcType=VARCHAR}
+            </if>
+            <if test="dtAnio != null">
+                 AND dt_anio = #{dtAnio,jdbcType=VARCHAR}
+            </if>
+            <if test="dtPlaca != null">
+                 AND dt_placa = #{dtPlaca,jdbcType=VARCHAR}
+            </if>
+            <if test="dtRaza != null">
+                 AND dt_raza = #{dtRaza,jdbcType=VARCHAR}
+            </if>
+            <if test="dtMotor != null">
+                 AND dt_motor = #{dtMotor,jdbcType=VARCHAR}
+            </if>
+            <if test="dtNombre != null">
+                 AND dt_nombre = #{dtNombre,jdbcType=VARCHAR}
+            </if>
+            <if test="dtChasis != null">
+                 AND dt_chasis = #{dtChasis,jdbcType=VARCHAR}
+            </if>
+            <if test="dtEdad != null">
+                 AND dt_edad = #{dtEdad,jdbcType=VARCHAR}
+            </if>
+            <if test="dtBtnOtro != null">
+                 AND dt_btn_otro = #{dtBtnOtro,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMap" resultMap="catalogoBienResultMap" useCache="false" parameterType="java.util.Map">
+
+        SELECT
+            c.catalogo_bien_id, c.codigo_bien, c.denominacion, c.grupo_id, 
+            c.clase_id, c.grupo, c.clase, c.dt_marca, 
+            c.dt_modelo, c.dt_tipo, c.dt_dimension, c.dt_color, 
+            c.dt_serie, c.dt_anio, c.dt_placa, c.dt_raza, 
+            c.dt_motor, c.dt_nombre, c.dt_chasis, c.dt_edad, 
+            c.dt_btn_otro, c.ind_del, c.fec_reg, c.fec_act, 
+            c.usu_reg, c.usu_act
+        FROM 
+            inventario.catalogo_bien c
+        <where>
+            <if test="catalogoBienID != null">
+                <choose>
+                    <when test="catalogoBienID_type == 'rango_incluye'">
+                         AND c.catalogo_bien_id &gt;= #{catalogoBienID_ini,jdbcType=INTEGER} AND c.catalogo_bien_id &lt;= #{catalogoBienID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="catalogoBienID_type == 'rango_excluye'">
+                         AND c.catalogo_bien_id &gt; #{catalogoBienID_ini,jdbcType=INTEGER} AND c.catalogo_bien_id &lt; #{catalogoBienID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND c.catalogo_bien_id = #{catalogoBienID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="codigoBien != null">
+                <choose>
+                    <when test="codigoBien_type == 'igual'">
+                         AND c.codigo_bien = #{codigoBien,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.codigo_bien like #{codigoBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="denominacion != null">
+                <choose>
+                    <when test="denominacion_type == 'igual'">
+                         AND c.denominacion = #{denominacion,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.denominacion like #{denominacion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="grupoID != null">
+                <choose>
+                    <when test="grupoID_type == 'rango_incluye'">
+                         AND c.grupo_id &gt;= #{grupoID_ini,jdbcType=INTEGER} AND c.grupo_id &lt;= #{grupoID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="grupoID_type == 'rango_excluye'">
+                         AND c.grupo_id &gt; #{grupoID_ini,jdbcType=INTEGER} AND c.grupo_id &lt; #{grupoID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND c.grupo_id = #{grupoID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="claseID != null">
+                <choose>
+                    <when test="claseID_type == 'rango_incluye'">
+                         AND c.clase_id &gt;= #{claseID_ini,jdbcType=INTEGER} AND c.clase_id &lt;= #{claseID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="claseID_type == 'rango_excluye'">
+                         AND c.clase_id &gt; #{claseID_ini,jdbcType=INTEGER} AND c.clase_id &lt; #{claseID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND c.clase_id = #{claseID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="grupo != null">
+                <choose>
+                    <when test="grupo_type == 'igual'">
+                         AND c.grupo = #{grupo,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.grupo like #{grupo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="clase != null">
+                <choose>
+                    <when test="clase_type == 'igual'">
+                         AND c.clase = #{clase,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.clase like #{clase,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtMarca != null">
+                <choose>
+                    <when test="dtMarca_type == 'igual'">
+                         AND c.dt_marca = #{dtMarca,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.dt_marca like #{dtMarca,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtModelo != null">
+                <choose>
+                    <when test="dtModelo_type == 'igual'">
+                         AND c.dt_modelo = #{dtModelo,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.dt_modelo like #{dtModelo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtTipo != null">
+                <choose>
+                    <when test="dtTipo_type == 'igual'">
+                         AND c.dt_tipo = #{dtTipo,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.dt_tipo like #{dtTipo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtDimension != null">
+                <choose>
+                    <when test="dtDimension_type == 'igual'">
+                         AND c.dt_dimension = #{dtDimension,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.dt_dimension like #{dtDimension,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtColor != null">
+                <choose>
+                    <when test="dtColor_type == 'igual'">
+                         AND c.dt_color = #{dtColor,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.dt_color like #{dtColor,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtSerie != null">
+                <choose>
+                    <when test="dtSerie_type == 'igual'">
+                         AND c.dt_serie = #{dtSerie,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.dt_serie like #{dtSerie,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtAnio != null">
+                <choose>
+                    <when test="dtAnio_type == 'igual'">
+                         AND c.dt_anio = #{dtAnio,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.dt_anio like #{dtAnio,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtPlaca != null">
+                <choose>
+                    <when test="dtPlaca_type == 'igual'">
+                         AND c.dt_placa = #{dtPlaca,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.dt_placa like #{dtPlaca,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtRaza != null">
+                <choose>
+                    <when test="dtRaza_type == 'igual'">
+                         AND c.dt_raza = #{dtRaza,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.dt_raza like #{dtRaza,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtMotor != null">
+                <choose>
+                    <when test="dtMotor_type == 'igual'">
+                         AND c.dt_motor = #{dtMotor,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.dt_motor like #{dtMotor,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtNombre != null">
+                <choose>
+                    <when test="dtNombre_type == 'igual'">
+                         AND c.dt_nombre = #{dtNombre,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.dt_nombre like #{dtNombre,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtChasis != null">
+                <choose>
+                    <when test="dtChasis_type == 'igual'">
+                         AND c.dt_chasis = #{dtChasis,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.dt_chasis like #{dtChasis,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtEdad != null">
+                <choose>
+                    <when test="dtEdad_type == 'igual'">
+                         AND c.dt_edad = #{dtEdad,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.dt_edad like #{dtEdad,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtBtnOtro != null">
+                <choose>
+                    <when test="dtBtnOtro_type == 'igual'">
+                         AND c.dt_btn_otro = #{dtBtnOtro,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.dt_btn_otro like #{dtBtnOtro,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND c.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND c.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND c.fec_reg &gt; #{fechaReg_ini,jdbcType=TIMESTAMP} AND c.fec_reg &lt; #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND c.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND c.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND c.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND c.fec_act &gt; #{fechaAct_ini,jdbcType=TIMESTAMP} AND c.fec_act &lt; #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND c.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND c.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND c.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND c.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMapGrilla" useCache="false" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT
+            c.catalogo_bien_id as "catalogoBienID", 
+            c.codigo_bien as "codigoBien", 
+            c.denominacion as "denominacion", 
+            c.grupo_id as "grupoID", 
+            c.clase_id as "claseID", 
+            c.grupo as "grupo", 
+            c.clase as "clase", 
+            c.dt_marca as "dtMarca", 
+            c.dt_modelo as "dtModelo", 
+            c.dt_tipo as "dtTipo", 
+            c.dt_dimension as "dtDimension", 
+            c.dt_color as "dtColor", 
+            c.dt_serie as "dtSerie", 
+            c.dt_anio as "dtAnio", 
+            c.dt_placa as "dtPlaca", 
+            c.dt_raza as "dtRaza", 
+            c.dt_motor as "dtMotor", 
+            c.dt_nombre as "dtNombre", 
+            c.dt_chasis as "dtChasis", 
+            c.dt_edad as "dtEdad", 
+            c.dt_btn_otro as "dtBtnOtro", 
+            c.ind_del as "indDel", 
+            c.fec_reg as "fechaReg", 
+            c.fec_act as "fechaAct", 
+            c.usu_reg as "usuReg", 
+            c.usu_act as "usuAct"
+        FROM 
+            inventario.catalogo_bien c
+        <where>
+            <if test="catalogoBienID != null">
+                <choose>
+                    <when test="catalogoBienID_type == 'rango_incluye'">
+                         AND c.catalogo_bien_id &gt;= #{catalogoBienID,jdbcType=INTEGER} AND c.catalogo_bien_id &lt;= #{catalogoBienID,jdbcType=INTEGER}
+                    </when>
+                    <when test="catalogoBienID_type == 'rango_excluye'">
+                         AND c.catalogo_bien_id &gt; #{catalogoBienID,jdbcType=INTEGER} AND c.catalogo_bien_id &lt; #{catalogoBienID,jdbcType=INTEGER}
+                    </when>
+                    <when test="catalogoBienID_type == 'is_null'">
+                         AND c.catalogo_bien_id IS NULL 
+                    </when>
+                    <when test="catalogoBienID_type == 'is_not_null'">
+                         AND c.catalogo_bien_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.catalogo_bien_id = #{catalogoBienID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="codigoBien != null">
+                <choose>
+                    <when test="codigoBien_type == 'igual'">
+                         AND c.codigo_bien = #{codigoBien,jdbcType=VARCHAR}
+                    </when>
+                    <when test="codigoBien_type == 'is_null'">
+                         AND c.codigo_bien IS NULL 
+                    </when>
+                    <when test="codigoBien_type == 'is_not_null'">
+                         AND c.codigo_bien IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.codigo_bien like #{codigoBien,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="denominacion != null">
+                <choose>
+                    <when test="denominacion_type == 'igual'">
+                         AND c.denominacion = #{denominacion,jdbcType=VARCHAR}
+                    </when>
+                    <when test="denominacion_type == 'is_null'">
+                         AND c.denominacion IS NULL 
+                    </when>
+                    <when test="denominacion_type == 'is_not_null'">
+                         AND c.denominacion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.denominacion like #{denominacion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="grupoID != null">
+                <choose>
+                    <when test="grupoID_type == 'rango_incluye'">
+                         AND c.grupo_id &gt;= #{grupoID,jdbcType=INTEGER} AND c.grupo_id &lt;= #{grupoID,jdbcType=INTEGER}
+                    </when>
+                    <when test="grupoID_type == 'rango_excluye'">
+                         AND c.grupo_id &gt; #{grupoID,jdbcType=INTEGER} AND c.grupo_id &lt; #{grupoID,jdbcType=INTEGER}
+                    </when>
+                    <when test="grupoID_type == 'is_null'">
+                         AND c.grupo_id IS NULL 
+                    </when>
+                    <when test="grupoID_type == 'is_not_null'">
+                         AND c.grupo_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.grupo_id = #{grupoID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="claseID != null">
+                <choose>
+                    <when test="claseID_type == 'rango_incluye'">
+                         AND c.clase_id &gt;= #{claseID,jdbcType=INTEGER} AND c.clase_id &lt;= #{claseID,jdbcType=INTEGER}
+                    </when>
+                    <when test="claseID_type == 'rango_excluye'">
+                         AND c.clase_id &gt; #{claseID,jdbcType=INTEGER} AND c.clase_id &lt; #{claseID,jdbcType=INTEGER}
+                    </when>
+                    <when test="claseID_type == 'is_null'">
+                         AND c.clase_id IS NULL 
+                    </when>
+                    <when test="claseID_type == 'is_not_null'">
+                         AND c.clase_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.clase_id = #{claseID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="grupo != null">
+                <choose>
+                    <when test="grupo_type == 'igual'">
+                         AND c.grupo = #{grupo,jdbcType=VARCHAR}
+                    </when>
+                    <when test="grupo_type == 'is_null'">
+                         AND c.grupo IS NULL 
+                    </when>
+                    <when test="grupo_type == 'is_not_null'">
+                         AND c.grupo IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.grupo like #{grupo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="clase != null">
+                <choose>
+                    <when test="clase_type == 'igual'">
+                         AND c.clase = #{clase,jdbcType=VARCHAR}
+                    </when>
+                    <when test="clase_type == 'is_null'">
+                         AND c.clase IS NULL 
+                    </when>
+                    <when test="clase_type == 'is_not_null'">
+                         AND c.clase IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.clase like #{clase,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtMarca != null">
+                <choose>
+                    <when test="dtMarca_type == 'igual'">
+                         AND c.dt_marca = #{dtMarca,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dtMarca_type == 'is_null'">
+                         AND c.dt_marca IS NULL 
+                    </when>
+                    <when test="dtMarca_type == 'is_not_null'">
+                         AND c.dt_marca IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.dt_marca like #{dtMarca,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtModelo != null">
+                <choose>
+                    <when test="dtModelo_type == 'igual'">
+                         AND c.dt_modelo = #{dtModelo,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dtModelo_type == 'is_null'">
+                         AND c.dt_modelo IS NULL 
+                    </when>
+                    <when test="dtModelo_type == 'is_not_null'">
+                         AND c.dt_modelo IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.dt_modelo like #{dtModelo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtTipo != null">
+                <choose>
+                    <when test="dtTipo_type == 'igual'">
+                         AND c.dt_tipo = #{dtTipo,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dtTipo_type == 'is_null'">
+                         AND c.dt_tipo IS NULL 
+                    </when>
+                    <when test="dtTipo_type == 'is_not_null'">
+                         AND c.dt_tipo IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.dt_tipo like #{dtTipo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtDimension != null">
+                <choose>
+                    <when test="dtDimension_type == 'igual'">
+                         AND c.dt_dimension = #{dtDimension,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dtDimension_type == 'is_null'">
+                         AND c.dt_dimension IS NULL 
+                    </when>
+                    <when test="dtDimension_type == 'is_not_null'">
+                         AND c.dt_dimension IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.dt_dimension like #{dtDimension,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtColor != null">
+                <choose>
+                    <when test="dtColor_type == 'igual'">
+                         AND c.dt_color = #{dtColor,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dtColor_type == 'is_null'">
+                         AND c.dt_color IS NULL 
+                    </when>
+                    <when test="dtColor_type == 'is_not_null'">
+                         AND c.dt_color IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.dt_color like #{dtColor,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtSerie != null">
+                <choose>
+                    <when test="dtSerie_type == 'igual'">
+                         AND c.dt_serie = #{dtSerie,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dtSerie_type == 'is_null'">
+                         AND c.dt_serie IS NULL 
+                    </when>
+                    <when test="dtSerie_type == 'is_not_null'">
+                         AND c.dt_serie IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.dt_serie like #{dtSerie,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtAnio != null">
+                <choose>
+                    <when test="dtAnio_type == 'igual'">
+                         AND c.dt_anio = #{dtAnio,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dtAnio_type == 'is_null'">
+                         AND c.dt_anio IS NULL 
+                    </when>
+                    <when test="dtAnio_type == 'is_not_null'">
+                         AND c.dt_anio IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.dt_anio like #{dtAnio,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtPlaca != null">
+                <choose>
+                    <when test="dtPlaca_type == 'igual'">
+                         AND c.dt_placa = #{dtPlaca,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dtPlaca_type == 'is_null'">
+                         AND c.dt_placa IS NULL 
+                    </when>
+                    <when test="dtPlaca_type == 'is_not_null'">
+                         AND c.dt_placa IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.dt_placa like #{dtPlaca,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtRaza != null">
+                <choose>
+                    <when test="dtRaza_type == 'igual'">
+                         AND c.dt_raza = #{dtRaza,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dtRaza_type == 'is_null'">
+                         AND c.dt_raza IS NULL 
+                    </when>
+                    <when test="dtRaza_type == 'is_not_null'">
+                         AND c.dt_raza IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.dt_raza like #{dtRaza,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtMotor != null">
+                <choose>
+                    <when test="dtMotor_type == 'igual'">
+                         AND c.dt_motor = #{dtMotor,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dtMotor_type == 'is_null'">
+                         AND c.dt_motor IS NULL 
+                    </when>
+                    <when test="dtMotor_type == 'is_not_null'">
+                         AND c.dt_motor IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.dt_motor like #{dtMotor,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtNombre != null">
+                <choose>
+                    <when test="dtNombre_type == 'igual'">
+                         AND c.dt_nombre = #{dtNombre,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dtNombre_type == 'is_null'">
+                         AND c.dt_nombre IS NULL 
+                    </when>
+                    <when test="dtNombre_type == 'is_not_null'">
+                         AND c.dt_nombre IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.dt_nombre like #{dtNombre,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtChasis != null">
+                <choose>
+                    <when test="dtChasis_type == 'igual'">
+                         AND c.dt_chasis = #{dtChasis,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dtChasis_type == 'is_null'">
+                         AND c.dt_chasis IS NULL 
+                    </when>
+                    <when test="dtChasis_type == 'is_not_null'">
+                         AND c.dt_chasis IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.dt_chasis like #{dtChasis,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtEdad != null">
+                <choose>
+                    <when test="dtEdad_type == 'igual'">
+                         AND c.dt_edad = #{dtEdad,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dtEdad_type == 'is_null'">
+                         AND c.dt_edad IS NULL 
+                    </when>
+                    <when test="dtEdad_type == 'is_not_null'">
+                         AND c.dt_edad IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.dt_edad like #{dtEdad,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dtBtnOtro != null">
+                <choose>
+                    <when test="dtBtnOtro_type == 'igual'">
+                         AND c.dt_btn_otro = #{dtBtnOtro,jdbcType=VARCHAR}
+                    </when>
+                    <when test="dtBtnOtro_type == 'is_null'">
+                         AND c.dt_btn_otro IS NULL 
+                    </when>
+                    <when test="dtBtnOtro_type == 'is_not_null'">
+                         AND c.dt_btn_otro IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.dt_btn_otro like #{dtBtnOtro,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND c.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indDel_type == 'is_null'">
+                         AND c.ind_del IS NULL 
+                    </when>
+                    <when test="indDel_type == 'is_not_null'">
+                         AND c.ind_del IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND c.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND c.fec_reg &gt; #{fechaReg,jdbcType=TIMESTAMP} AND c.fec_reg &lt; #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND c.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'is_null'">
+                         AND c.fec_reg IS NULL 
+                    </when>
+                    <when test="fechaReg_type == 'is_not_null'">
+                         AND c.fec_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND c.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND c.fec_act &gt; #{fechaAct,jdbcType=TIMESTAMP} AND c.fec_act &lt; #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND c.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'is_null'">
+                         AND c.fec_act IS NULL 
+                    </when>
+                    <when test="fechaAct_type == 'is_not_null'">
+                         AND c.fec_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND c.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuReg_type == 'is_null'">
+                         AND c.usu_reg IS NULL 
+                    </when>
+                    <when test="usuReg_type == 'is_not_null'">
+                         AND c.usu_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND c.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuAct_type == 'is_null'">
+                         AND c.usu_act IS NULL 
+                    </when>
+                    <when test="usuAct_type == 'is_not_null'">
+                         AND c.usu_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectNextID" useCache="false" resultType="java.lang.Integer">
+        select nextval('catalogo_bien_catalogo_bien_id_seq')
+    </select>
+
+    <select id="selectCurrentID" useCache="false" resultType="java.lang.Integer">
+        select currval('catalogo_bien_catalogo_bien_id_seq')
+    </select>
+
+    <insert id="insert" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.CatalogoBienEntity"
+        useGeneratedKeys="true" keyProperty="catalogoBienID">
+
+        INSERT INTO inventario.catalogo_bien 
+        (
+            codigo_bien,
+            denominacion,
+            grupo_id,
+            clase_id,
+            grupo,
+            clase,
+            dt_marca,
+            dt_modelo,
+            dt_tipo,
+            dt_dimension,
+            dt_color,
+            dt_serie,
+            dt_anio,
+            dt_placa,
+            dt_raza,
+            dt_motor,
+            dt_nombre,
+            dt_chasis,
+            dt_edad,
+            dt_btn_otro,
+            ind_del,
+            fec_reg,
+            fec_act,
+            usu_reg,
+            usu_act
+        )
+        VALUES
+        (
+            #{codigoBien,jdbcType=VARCHAR},
+            #{denominacion,jdbcType=VARCHAR},
+            #{grupoID,jdbcType=INTEGER},
+            #{claseID,jdbcType=INTEGER},
+            #{grupo,jdbcType=VARCHAR},
+            #{clase,jdbcType=VARCHAR},
+            #{dtMarca,jdbcType=VARCHAR},
+            #{dtModelo,jdbcType=VARCHAR},
+            #{dtTipo,jdbcType=VARCHAR},
+            #{dtDimension,jdbcType=VARCHAR},
+            #{dtColor,jdbcType=VARCHAR},
+            #{dtSerie,jdbcType=VARCHAR},
+            #{dtAnio,jdbcType=VARCHAR},
+            #{dtPlaca,jdbcType=VARCHAR},
+            #{dtRaza,jdbcType=VARCHAR},
+            #{dtMotor,jdbcType=VARCHAR},
+            #{dtNombre,jdbcType=VARCHAR},
+            #{dtChasis,jdbcType=VARCHAR},
+            #{dtEdad,jdbcType=VARCHAR},
+            #{dtBtnOtro,jdbcType=VARCHAR},
+            #{indDel,jdbcType=VARCHAR},
+            #{fechaReg,jdbcType=TIMESTAMP},
+            #{fechaAct,jdbcType=TIMESTAMP},
+            #{usuReg,jdbcType=VARCHAR},
+            #{usuAct,jdbcType=VARCHAR}
+        )
+
+    </insert>
+
+    <update id="update" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.CatalogoBienEntity">
+
+        UPDATE inventario.catalogo_bien
+        <set>
+            <if test="codigoBien != null">
+                codigo_bien = #{codigoBien,jdbcType=VARCHAR},
+            </if>
+            <if test="denominacion != null">
+                denominacion = #{denominacion,jdbcType=VARCHAR},
+            </if>
+            <if test="grupoID != null">
+                grupo_id = #{grupoID,jdbcType=INTEGER},
+            </if>
+            <if test="claseID != null">
+                clase_id = #{claseID,jdbcType=INTEGER},
+            </if>
+            <if test="grupo != null">
+                grupo = #{grupo,jdbcType=VARCHAR},
+            </if>
+            <if test="clase != null">
+                clase = #{clase,jdbcType=VARCHAR},
+            </if>
+            <if test="dtMarca != null">
+                dt_marca = #{dtMarca,jdbcType=VARCHAR},
+            </if>
+            <if test="dtModelo != null">
+                dt_modelo = #{dtModelo,jdbcType=VARCHAR},
+            </if>
+            <if test="dtTipo != null">
+                dt_tipo = #{dtTipo,jdbcType=VARCHAR},
+            </if>
+            <if test="dtDimension != null">
+                dt_dimension = #{dtDimension,jdbcType=VARCHAR},
+            </if>
+            <if test="dtColor != null">
+                dt_color = #{dtColor,jdbcType=VARCHAR},
+            </if>
+            <if test="dtSerie != null">
+                dt_serie = #{dtSerie,jdbcType=VARCHAR},
+            </if>
+            <if test="dtAnio != null">
+                dt_anio = #{dtAnio,jdbcType=VARCHAR},
+            </if>
+            <if test="dtPlaca != null">
+                dt_placa = #{dtPlaca,jdbcType=VARCHAR},
+            </if>
+            <if test="dtRaza != null">
+                dt_raza = #{dtRaza,jdbcType=VARCHAR},
+            </if>
+            <if test="dtMotor != null">
+                dt_motor = #{dtMotor,jdbcType=VARCHAR},
+            </if>
+            <if test="dtNombre != null">
+                dt_nombre = #{dtNombre,jdbcType=VARCHAR},
+            </if>
+            <if test="dtChasis != null">
+                dt_chasis = #{dtChasis,jdbcType=VARCHAR},
+            </if>
+            <if test="dtEdad != null">
+                dt_edad = #{dtEdad,jdbcType=VARCHAR},
+            </if>
+            <if test="dtBtnOtro != null">
+                dt_btn_otro = #{dtBtnOtro,jdbcType=VARCHAR},
+            </if>
+            <if test="indDel != null">
+                ind_del = #{indDel,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaReg != null">
+                fec_reg = #{fechaReg,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fechaAct != null">
+                fec_act = #{fechaAct,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usuReg != null">
+                usu_reg = #{usuReg,jdbcType=VARCHAR},
+            </if>
+            <if test="usuAct != null">
+                usu_act = #{usuAct,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE 
+            catalogo_bien_id = #{catalogoBienID,jdbcType=INTEGER}
+    </update>
+
+</mapper>

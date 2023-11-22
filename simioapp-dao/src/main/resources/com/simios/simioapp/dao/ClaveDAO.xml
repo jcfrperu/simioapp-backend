@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simios.simioapp.dao.ClaveDAO">
+
+    <cache />
+
+    <resultMap id="claveResultMap" type="com.simios.simioapp.dominio.entidades.ClaveEntity">
+        <id column="clave_id" property="claveID" jdbcType="INTEGER" />
+        <result column="clave_metodo" property="claveMetodo" jdbcType="VARCHAR" />
+        <result column="clave_params" property="claveParams" jdbcType="VARCHAR" />
+        <result column="clave" property="clave" jdbcType="VARCHAR" />
+        <result column="clave_bytes" property="claveBytes" jdbcType="BLOB" />
+        <result column="clave_bytes_length" property="claveBytesLength" jdbcType="INTEGER" />
+        <result column="ind_del" property="indDel" jdbcType="VARCHAR" />
+        <result column="fec_reg" property="fechaReg" jdbcType="TIMESTAMP" />
+        <result column="fec_act" property="fechaAct" jdbcType="TIMESTAMP" />
+        <result column="usu_reg" property="usuReg" jdbcType="VARCHAR" />
+        <result column="usu_act" property="usuAct" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectByID" resultMap="claveResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.ClaveEntity">
+
+        SELECT
+            clave_id, clave_metodo, clave_params, clave, 
+            clave_bytes, clave_bytes_length, ind_del, fec_reg, 
+            fec_act, usu_reg, usu_act
+        FROM 
+            inventario.clave
+        WHERE
+            clave_id = #{claveID,jdbcType=INTEGER}
+    </select>
+
+    <select id="select" resultMap="claveResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.ClaveEntity">
+
+        SELECT
+            clave_id, clave_metodo, clave_params, clave, 
+            clave_bytes, clave_bytes_length, ind_del, fec_reg, 
+            fec_act, usu_reg, usu_act
+        FROM 
+            inventario.clave
+        <where>
+            <if test="claveID != null">
+                 AND clave_id = #{claveID,jdbcType=INTEGER}
+            </if>
+            <if test="claveMetodo != null">
+                 AND clave_metodo = #{claveMetodo,jdbcType=VARCHAR}
+            </if>
+            <if test="claveParams != null">
+                 AND clave_params = #{claveParams,jdbcType=VARCHAR}
+            </if>
+            <if test="clave != null">
+                 AND clave = #{clave,jdbcType=VARCHAR}
+            </if>
+            <if test="claveBytes != null">
+                 AND clave_bytes = #{claveBytes,jdbcType=BLOB}
+            </if>
+            <if test="claveBytesLength != null">
+                 AND clave_bytes_length = #{claveBytesLength,jdbcType=INTEGER}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMap" resultMap="claveResultMap" useCache="false" parameterType="java.util.Map">
+
+        SELECT
+            c.clave_id, c.clave_metodo, c.clave_params, c.clave, 
+            c.clave_bytes, c.clave_bytes_length, c.ind_del, c.fec_reg, 
+            c.fec_act, c.usu_reg, c.usu_act
+        FROM 
+            inventario.clave c
+        <where>
+            <if test="claveID != null">
+                <choose>
+                    <when test="claveID_type == 'rango_incluye'">
+                         AND c.clave_id &gt;= #{claveID_ini,jdbcType=INTEGER} AND c.clave_id &lt;= #{claveID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="claveID_type == 'rango_excluye'">
+                         AND c.clave_id &gt; #{claveID_ini,jdbcType=INTEGER} AND c.clave_id &lt; #{claveID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND c.clave_id = #{claveID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="claveMetodo != null">
+                <choose>
+                    <when test="claveMetodo_type == 'igual'">
+                         AND c.clave_metodo = #{claveMetodo,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.clave_metodo like #{claveMetodo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="claveParams != null">
+                <choose>
+                    <when test="claveParams_type == 'igual'">
+                         AND c.clave_params = #{claveParams,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.clave_params like #{claveParams,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="clave != null">
+                <choose>
+                    <when test="clave_type == 'igual'">
+                         AND c.clave = #{clave,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.clave like #{clave,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="claveBytes != null">
+                <choose>
+                    <when test="claveBytes_type == 'rango_incluye'">
+                         AND c.clave_bytes &gt;= #{claveBytes_ini,jdbcType=BLOB} AND c.clave_bytes &lt;= #{claveBytes_fin,jdbcType=BLOB}
+                    </when>
+                    <when test="claveBytes_type == 'rango_excluye'">
+                         AND c.clave_bytes &gt; #{claveBytes_ini,jdbcType=BLOB} AND c.clave_bytes &lt; #{claveBytes_fin,jdbcType=BLOB}
+                    </when>
+                    <otherwise>
+                         AND c.clave_bytes = #{claveBytes,jdbcType=BLOB}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="claveBytesLength != null">
+                <choose>
+                    <when test="claveBytesLength_type == 'rango_incluye'">
+                         AND c.clave_bytes_length &gt;= #{claveBytesLength_ini,jdbcType=INTEGER} AND c.clave_bytes_length &lt;= #{claveBytesLength_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="claveBytesLength_type == 'rango_excluye'">
+                         AND c.clave_bytes_length &gt; #{claveBytesLength_ini,jdbcType=INTEGER} AND c.clave_bytes_length &lt; #{claveBytesLength_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND c.clave_bytes_length = #{claveBytesLength,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND c.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND c.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND c.fec_reg &gt; #{fechaReg_ini,jdbcType=TIMESTAMP} AND c.fec_reg &lt; #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND c.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND c.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND c.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND c.fec_act &gt; #{fechaAct_ini,jdbcType=TIMESTAMP} AND c.fec_act &lt; #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND c.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND c.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND c.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND c.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMapGrilla" useCache="false" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT
+            c.clave_id as "claveID", 
+            c.clave_metodo as "claveMetodo", 
+            c.clave_params as "claveParams", 
+            c.clave as "clave", 
+            c.clave_bytes as "claveBytes", 
+            c.clave_bytes_length as "claveBytesLength", 
+            c.ind_del as "indDel", 
+            c.fec_reg as "fechaReg", 
+            c.fec_act as "fechaAct", 
+            c.usu_reg as "usuReg", 
+            c.usu_act as "usuAct"
+        FROM 
+            inventario.clave c
+        <where>
+            <if test="claveID != null">
+                <choose>
+                    <when test="claveID_type == 'rango_incluye'">
+                         AND c.clave_id &gt;= #{claveID,jdbcType=INTEGER} AND c.clave_id &lt;= #{claveID,jdbcType=INTEGER}
+                    </when>
+                    <when test="claveID_type == 'rango_excluye'">
+                         AND c.clave_id &gt; #{claveID,jdbcType=INTEGER} AND c.clave_id &lt; #{claveID,jdbcType=INTEGER}
+                    </when>
+                    <when test="claveID_type == 'is_null'">
+                         AND c.clave_id IS NULL 
+                    </when>
+                    <when test="claveID_type == 'is_not_null'">
+                         AND c.clave_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.clave_id = #{claveID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="claveMetodo != null">
+                <choose>
+                    <when test="claveMetodo_type == 'igual'">
+                         AND c.clave_metodo = #{claveMetodo,jdbcType=VARCHAR}
+                    </when>
+                    <when test="claveMetodo_type == 'is_null'">
+                         AND c.clave_metodo IS NULL 
+                    </when>
+                    <when test="claveMetodo_type == 'is_not_null'">
+                         AND c.clave_metodo IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.clave_metodo like #{claveMetodo,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="claveParams != null">
+                <choose>
+                    <when test="claveParams_type == 'igual'">
+                         AND c.clave_params = #{claveParams,jdbcType=VARCHAR}
+                    </when>
+                    <when test="claveParams_type == 'is_null'">
+                         AND c.clave_params IS NULL 
+                    </when>
+                    <when test="claveParams_type == 'is_not_null'">
+                         AND c.clave_params IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.clave_params like #{claveParams,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="clave != null">
+                <choose>
+                    <when test="clave_type == 'igual'">
+                         AND c.clave = #{clave,jdbcType=VARCHAR}
+                    </when>
+                    <when test="clave_type == 'is_null'">
+                         AND c.clave IS NULL 
+                    </when>
+                    <when test="clave_type == 'is_not_null'">
+                         AND c.clave IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.clave like #{clave,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="claveBytes != null">
+                <choose>
+                    <when test="claveBytes_type == 'rango_incluye'">
+                         AND c.clave_bytes &gt;= #{claveBytes,jdbcType=BLOB} AND c.clave_bytes &lt;= #{claveBytes,jdbcType=BLOB}
+                    </when>
+                    <when test="claveBytes_type == 'rango_excluye'">
+                         AND c.clave_bytes &gt; #{claveBytes,jdbcType=BLOB} AND c.clave_bytes &lt; #{claveBytes,jdbcType=BLOB}
+                    </when>
+                    <when test="claveBytes_type == 'is_null'">
+                         AND c.clave_bytes IS NULL 
+                    </when>
+                    <when test="claveBytes_type == 'is_not_null'">
+                         AND c.clave_bytes IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.clave_bytes = #{claveBytes,jdbcType=BLOB}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="claveBytesLength != null">
+                <choose>
+                    <when test="claveBytesLength_type == 'rango_incluye'">
+                         AND c.clave_bytes_length &gt;= #{claveBytesLength,jdbcType=INTEGER} AND c.clave_bytes_length &lt;= #{claveBytesLength,jdbcType=INTEGER}
+                    </when>
+                    <when test="claveBytesLength_type == 'rango_excluye'">
+                         AND c.clave_bytes_length &gt; #{claveBytesLength,jdbcType=INTEGER} AND c.clave_bytes_length &lt; #{claveBytesLength,jdbcType=INTEGER}
+                    </when>
+                    <when test="claveBytesLength_type == 'is_null'">
+                         AND c.clave_bytes_length IS NULL 
+                    </when>
+                    <when test="claveBytesLength_type == 'is_not_null'">
+                         AND c.clave_bytes_length IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.clave_bytes_length = #{claveBytesLength,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND c.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indDel_type == 'is_null'">
+                         AND c.ind_del IS NULL 
+                    </when>
+                    <when test="indDel_type == 'is_not_null'">
+                         AND c.ind_del IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND c.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND c.fec_reg &gt; #{fechaReg,jdbcType=TIMESTAMP} AND c.fec_reg &lt; #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND c.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'is_null'">
+                         AND c.fec_reg IS NULL 
+                    </when>
+                    <when test="fechaReg_type == 'is_not_null'">
+                         AND c.fec_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND c.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND c.fec_act &gt; #{fechaAct,jdbcType=TIMESTAMP} AND c.fec_act &lt; #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND c.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'is_null'">
+                         AND c.fec_act IS NULL 
+                    </when>
+                    <when test="fechaAct_type == 'is_not_null'">
+                         AND c.fec_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND c.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuReg_type == 'is_null'">
+                         AND c.usu_reg IS NULL 
+                    </when>
+                    <when test="usuReg_type == 'is_not_null'">
+                         AND c.usu_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND c.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuAct_type == 'is_null'">
+                         AND c.usu_act IS NULL 
+                    </when>
+                    <when test="usuAct_type == 'is_not_null'">
+                         AND c.usu_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectNextID" useCache="false" resultType="java.lang.Integer">
+        select nextval('clave_clave_id_seq')
+    </select>
+
+    <select id="selectCurrentID" useCache="false" resultType="java.lang.Integer">
+        select currval('clave_clave_id_seq')
+    </select>
+
+    <insert id="insert" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.ClaveEntity"
+        useGeneratedKeys="true" keyProperty="claveID">
+
+        INSERT INTO inventario.clave 
+        (
+            clave_metodo,
+            clave_params,
+            clave,
+            clave_bytes,
+            clave_bytes_length,
+            ind_del,
+            fec_reg,
+            fec_act,
+            usu_reg,
+            usu_act
+        )
+        VALUES
+        (
+            #{claveMetodo,jdbcType=VARCHAR},
+            #{claveParams,jdbcType=VARCHAR},
+            #{clave,jdbcType=VARCHAR},
+            #{claveBytes,jdbcType=BLOB},
+            #{claveBytesLength,jdbcType=INTEGER},
+            #{indDel,jdbcType=VARCHAR},
+            #{fechaReg,jdbcType=TIMESTAMP},
+            #{fechaAct,jdbcType=TIMESTAMP},
+            #{usuReg,jdbcType=VARCHAR},
+            #{usuAct,jdbcType=VARCHAR}
+        )
+
+    </insert>
+
+    <update id="update" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.ClaveEntity">
+
+        UPDATE inventario.clave
+        <set>
+            <if test="claveMetodo != null">
+                clave_metodo = #{claveMetodo,jdbcType=VARCHAR},
+            </if>
+            <if test="claveParams != null">
+                clave_params = #{claveParams,jdbcType=VARCHAR},
+            </if>
+            <if test="clave != null">
+                clave = #{clave,jdbcType=VARCHAR},
+            </if>
+            <if test="claveBytes != null">
+                clave_bytes = #{claveBytes,jdbcType=BLOB},
+            </if>
+            <if test="claveBytesLength != null">
+                clave_bytes_length = #{claveBytesLength,jdbcType=INTEGER},
+            </if>
+            <if test="indDel != null">
+                ind_del = #{indDel,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaReg != null">
+                fec_reg = #{fechaReg,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fechaAct != null">
+                fec_act = #{fechaAct,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usuReg != null">
+                usu_reg = #{usuReg,jdbcType=VARCHAR},
+            </if>
+            <if test="usuAct != null">
+                usu_act = #{usuAct,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE 
+            clave_id = #{claveID,jdbcType=INTEGER}
+    </update>
+
+</mapper>

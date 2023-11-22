@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simios.simioapp.dao.UsuarioSessionDAO">
+
+    <cache />
+
+    <resultMap id="usuarioSessionResultMap" type="com.simios.simioapp.dominio.entidades.UsuarioSessionEntity">
+        <id column="usuario_id" property="usuarioID" jdbcType="VARCHAR" />
+        <result column="entidad_id" property="entidadID" jdbcType="INTEGER" />
+        <result column="ultimo_login" property="ultimoLogin" jdbcType="TIMESTAMP" />
+        <result column="ultimo_cierre" property="ultimoCierre" jdbcType="TIMESTAMP" />
+        <result column="ultima_accion" property="ultimaAccion" jdbcType="TIMESTAMP" />
+        <result column="minutos_validez" property="minutosValidez" jdbcType="INTEGER" />
+        <result column="estado" property="estado" jdbcType="VARCHAR" />
+        <result column="ind_politica_inactividad" property="indPoliticaInactividad" jdbcType="VARCHAR" />
+        <result column="datos_ip_login" property="datosIpLogin" jdbcType="VARCHAR" />
+        <result column="datos_ip_accion" property="datosIpAccion" jdbcType="VARCHAR" />
+        <result column="ind_politica_intentos" property="indPoliticaIntentos" jdbcType="VARCHAR" />
+        <result column="numero_intentos" property="numeroIntentos" jdbcType="INTEGER" />
+        <result column="nombres_usuario" property="nombresUsuario" jdbcType="VARCHAR" />
+        <result column="apellidos_usuario" property="apellidosUsuario" jdbcType="VARCHAR" />
+        <result column="ind_del" property="indDel" jdbcType="VARCHAR" />
+        <result column="usu_reg" property="usuReg" jdbcType="VARCHAR" />
+        <result column="fec_reg" property="fechaReg" jdbcType="TIMESTAMP" />
+        <result column="usu_act" property="usuAct" jdbcType="VARCHAR" />
+        <result column="fec_act" property="fechaAct" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <select id="selectByID" resultMap="usuarioSessionResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.UsuarioSessionEntity">
+
+        SELECT
+            usuario_id, entidad_id, ultimo_login, ultimo_cierre, 
+            ultima_accion, minutos_validez, estado, ind_politica_inactividad, 
+            datos_ip_login, datos_ip_accion, ind_politica_intentos, numero_intentos, 
+            nombres_usuario, apellidos_usuario, ind_del, usu_reg, 
+            fec_reg, usu_act, fec_act
+        FROM 
+            inventario.usuario_session
+        WHERE
+            usuario_id = #{usuarioID,jdbcType=VARCHAR}
+    </select>
+
+    <select id="select" resultMap="usuarioSessionResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.UsuarioSessionEntity">
+
+        SELECT
+            usuario_id, entidad_id, ultimo_login, ultimo_cierre, 
+            ultima_accion, minutos_validez, estado, ind_politica_inactividad, 
+            datos_ip_login, datos_ip_accion, ind_politica_intentos, numero_intentos, 
+            nombres_usuario, apellidos_usuario, ind_del, usu_reg, 
+            fec_reg, usu_act, fec_act
+        FROM 
+            inventario.usuario_session
+        <where>
+            <if test="usuarioID != null">
+                 AND usuario_id = #{usuarioID,jdbcType=VARCHAR}
+            </if>
+            <if test="entidadID != null">
+                 AND entidad_id = #{entidadID,jdbcType=INTEGER}
+            </if>
+            <if test="ultimoLogin != null">
+                 AND ultimo_login = #{ultimoLogin,jdbcType=TIMESTAMP}
+            </if>
+            <if test="ultimoCierre != null">
+                 AND ultimo_cierre = #{ultimoCierre,jdbcType=TIMESTAMP}
+            </if>
+            <if test="ultimaAccion != null">
+                 AND ultima_accion = #{ultimaAccion,jdbcType=TIMESTAMP}
+            </if>
+            <if test="minutosValidez != null">
+                 AND minutos_validez = #{minutosValidez,jdbcType=INTEGER}
+            </if>
+            <if test="estado != null">
+                 AND estado = #{estado,jdbcType=VARCHAR}
+            </if>
+            <if test="indPoliticaInactividad != null">
+                 AND ind_politica_inactividad = #{indPoliticaInactividad,jdbcType=VARCHAR}
+            </if>
+            <if test="datosIpLogin != null">
+                 AND datos_ip_login = #{datosIpLogin,jdbcType=VARCHAR}
+            </if>
+            <if test="datosIpAccion != null">
+                 AND datos_ip_accion = #{datosIpAccion,jdbcType=VARCHAR}
+            </if>
+            <if test="indPoliticaIntentos != null">
+                 AND ind_politica_intentos = #{indPoliticaIntentos,jdbcType=VARCHAR}
+            </if>
+            <if test="numeroIntentos != null">
+                 AND numero_intentos = #{numeroIntentos,jdbcType=INTEGER}
+            </if>
+            <if test="nombresUsuario != null">
+                 AND nombres_usuario = #{nombresUsuario,jdbcType=VARCHAR}
+            </if>
+            <if test="apellidosUsuario != null">
+                 AND apellidos_usuario = #{apellidosUsuario,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMap" resultMap="usuarioSessionResultMap" useCache="false" parameterType="java.util.Map">
+
+        SELECT
+            u.usuario_id, u.entidad_id, u.ultimo_login, u.ultimo_cierre, 
+            u.ultima_accion, u.minutos_validez, u.estado, u.ind_politica_inactividad, 
+            u.datos_ip_login, u.datos_ip_accion, u.ind_politica_intentos, u.numero_intentos, 
+            u.nombres_usuario, u.apellidos_usuario, u.ind_del, u.usu_reg, 
+            u.fec_reg, u.usu_act, u.fec_act
+        FROM 
+            inventario.usuario_session u
+        <where>
+            <if test="usuarioID != null">
+                <choose>
+                    <when test="usuarioID_type == 'igual'">
+                         AND u.usuario_id = #{usuarioID,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.usuario_id like #{usuarioID,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entidadID != null">
+                <choose>
+                    <when test="entidadID_type == 'rango_incluye'">
+                         AND u.entidad_id &gt;= #{entidadID_ini,jdbcType=INTEGER} AND u.entidad_id &lt;= #{entidadID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="entidadID_type == 'rango_excluye'">
+                         AND u.entidad_id &gt; #{entidadID_ini,jdbcType=INTEGER} AND u.entidad_id &lt; #{entidadID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND u.entidad_id = #{entidadID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="ultimoLogin != null">
+                <choose>
+                    <when test="ultimoLogin_type == 'rango_incluye'">
+                         AND u.ultimo_login &gt;= #{ultimoLogin_ini,jdbcType=TIMESTAMP} AND u.ultimo_login &lt;= #{ultimoLogin_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimoLogin_type == 'rango_excluye'">
+                         AND u.ultimo_login &gt; #{ultimoLogin_ini,jdbcType=TIMESTAMP} AND u.ultimo_login &lt; #{ultimoLogin_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimoLogin_type == 'igual'">
+                         AND u.ultimo_login = #{ultimoLogin,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND u.ultimo_login &gt;= #{ultimoLogin_ini,jdbcType=TIMESTAMP} AND u.ultimo_login &lt;= #{ultimoLogin_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="ultimoCierre != null">
+                <choose>
+                    <when test="ultimoCierre_type == 'rango_incluye'">
+                         AND u.ultimo_cierre &gt;= #{ultimoCierre_ini,jdbcType=TIMESTAMP} AND u.ultimo_cierre &lt;= #{ultimoCierre_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimoCierre_type == 'rango_excluye'">
+                         AND u.ultimo_cierre &gt; #{ultimoCierre_ini,jdbcType=TIMESTAMP} AND u.ultimo_cierre &lt; #{ultimoCierre_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimoCierre_type == 'igual'">
+                         AND u.ultimo_cierre = #{ultimoCierre,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND u.ultimo_cierre &gt;= #{ultimoCierre_ini,jdbcType=TIMESTAMP} AND u.ultimo_cierre &lt;= #{ultimoCierre_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="ultimaAccion != null">
+                <choose>
+                    <when test="ultimaAccion_type == 'rango_incluye'">
+                         AND u.ultima_accion &gt;= #{ultimaAccion_ini,jdbcType=TIMESTAMP} AND u.ultima_accion &lt;= #{ultimaAccion_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimaAccion_type == 'rango_excluye'">
+                         AND u.ultima_accion &gt; #{ultimaAccion_ini,jdbcType=TIMESTAMP} AND u.ultima_accion &lt; #{ultimaAccion_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimaAccion_type == 'igual'">
+                         AND u.ultima_accion = #{ultimaAccion,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND u.ultima_accion &gt;= #{ultimaAccion_ini,jdbcType=TIMESTAMP} AND u.ultima_accion &lt;= #{ultimaAccion_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="minutosValidez != null">
+                <choose>
+                    <when test="minutosValidez_type == 'rango_incluye'">
+                         AND u.minutos_validez &gt;= #{minutosValidez_ini,jdbcType=INTEGER} AND u.minutos_validez &lt;= #{minutosValidez_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="minutosValidez_type == 'rango_excluye'">
+                         AND u.minutos_validez &gt; #{minutosValidez_ini,jdbcType=INTEGER} AND u.minutos_validez &lt; #{minutosValidez_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND u.minutos_validez = #{minutosValidez,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="estado != null">
+                <choose>
+                    <when test="estado_type == 'igual'">
+                         AND u.estado = #{estado,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.estado like #{estado,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indPoliticaInactividad != null">
+                <choose>
+                    <when test="indPoliticaInactividad_type == 'igual'">
+                         AND u.ind_politica_inactividad = #{indPoliticaInactividad,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.ind_politica_inactividad like #{indPoliticaInactividad,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="datosIpLogin != null">
+                <choose>
+                    <when test="datosIpLogin_type == 'igual'">
+                         AND u.datos_ip_login = #{datosIpLogin,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.datos_ip_login like #{datosIpLogin,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="datosIpAccion != null">
+                <choose>
+                    <when test="datosIpAccion_type == 'igual'">
+                         AND u.datos_ip_accion = #{datosIpAccion,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.datos_ip_accion like #{datosIpAccion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indPoliticaIntentos != null">
+                <choose>
+                    <when test="indPoliticaIntentos_type == 'igual'">
+                         AND u.ind_politica_intentos = #{indPoliticaIntentos,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.ind_politica_intentos like #{indPoliticaIntentos,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroIntentos != null">
+                <choose>
+                    <when test="numeroIntentos_type == 'rango_incluye'">
+                         AND u.numero_intentos &gt;= #{numeroIntentos_ini,jdbcType=INTEGER} AND u.numero_intentos &lt;= #{numeroIntentos_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="numeroIntentos_type == 'rango_excluye'">
+                         AND u.numero_intentos &gt; #{numeroIntentos_ini,jdbcType=INTEGER} AND u.numero_intentos &lt; #{numeroIntentos_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND u.numero_intentos = #{numeroIntentos,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="nombresUsuario != null">
+                <choose>
+                    <when test="nombresUsuario_type == 'igual'">
+                         AND u.nombres_usuario = #{nombresUsuario,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.nombres_usuario like #{nombresUsuario,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="apellidosUsuario != null">
+                <choose>
+                    <when test="apellidosUsuario_type == 'igual'">
+                         AND u.apellidos_usuario = #{apellidosUsuario,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.apellidos_usuario like #{apellidosUsuario,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND u.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND u.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND u.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND u.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND u.fec_reg &gt; #{fechaReg_ini,jdbcType=TIMESTAMP} AND u.fec_reg &lt; #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND u.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND u.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND u.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND u.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND u.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND u.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND u.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND u.fec_act &gt; #{fechaAct_ini,jdbcType=TIMESTAMP} AND u.fec_act &lt; #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND u.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND u.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND u.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMapGrilla" useCache="false" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT
+            u.usuario_id as "usuarioID", 
+            u.entidad_id as "entidadID", 
+            u.ultimo_login as "ultimoLogin", 
+            u.ultimo_cierre as "ultimoCierre", 
+            u.ultima_accion as "ultimaAccion", 
+            u.minutos_validez as "minutosValidez", 
+            u.estado as "estado", 
+            u.ind_politica_inactividad as "indPoliticaInactividad", 
+            u.datos_ip_login as "datosIpLogin", 
+            u.datos_ip_accion as "datosIpAccion", 
+            u.ind_politica_intentos as "indPoliticaIntentos", 
+            u.numero_intentos as "numeroIntentos", 
+            u.nombres_usuario as "nombresUsuario", 
+            u.apellidos_usuario as "apellidosUsuario", 
+            u.ind_del as "indDel", 
+            u.usu_reg as "usuReg", 
+            u.fec_reg as "fechaReg", 
+            u.usu_act as "usuAct", 
+            u.fec_act as "fechaAct"
+        FROM 
+            inventario.usuario_session u
+        <where>
+            <if test="usuarioID != null">
+                <choose>
+                    <when test="usuarioID_type == 'igual'">
+                         AND u.usuario_id = #{usuarioID,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuarioID_type == 'is_null'">
+                         AND u.usuario_id IS NULL 
+                    </when>
+                    <when test="usuarioID_type == 'is_not_null'">
+                         AND u.usuario_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.usuario_id like #{usuarioID,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entidadID != null">
+                <choose>
+                    <when test="entidadID_type == 'rango_incluye'">
+                         AND u.entidad_id &gt;= #{entidadID,jdbcType=INTEGER} AND u.entidad_id &lt;= #{entidadID,jdbcType=INTEGER}
+                    </when>
+                    <when test="entidadID_type == 'rango_excluye'">
+                         AND u.entidad_id &gt; #{entidadID,jdbcType=INTEGER} AND u.entidad_id &lt; #{entidadID,jdbcType=INTEGER}
+                    </when>
+                    <when test="entidadID_type == 'is_null'">
+                         AND u.entidad_id IS NULL 
+                    </when>
+                    <when test="entidadID_type == 'is_not_null'">
+                         AND u.entidad_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.entidad_id = #{entidadID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="ultimoLogin != null">
+                <choose>
+                    <when test="ultimoLogin_type == 'rango_incluye'">
+                         AND u.ultimo_login &gt;= #{ultimoLogin,jdbcType=TIMESTAMP} AND u.ultimo_login &lt;= #{ultimoLogin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimoLogin_type == 'rango_excluye'">
+                         AND u.ultimo_login &gt; #{ultimoLogin,jdbcType=TIMESTAMP} AND u.ultimo_login &lt; #{ultimoLogin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimoLogin_type == 'igual'">
+                         AND u.ultimo_login = #{ultimoLogin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimoLogin_type == 'is_null'">
+                         AND u.ultimo_login IS NULL 
+                    </when>
+                    <when test="ultimoLogin_type == 'is_not_null'">
+                         AND u.ultimo_login IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.ultimo_login &gt;= #{ultimoLogin,jdbcType=TIMESTAMP} AND u.ultimo_login &lt;= #{ultimoLogin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="ultimoCierre != null">
+                <choose>
+                    <when test="ultimoCierre_type == 'rango_incluye'">
+                         AND u.ultimo_cierre &gt;= #{ultimoCierre,jdbcType=TIMESTAMP} AND u.ultimo_cierre &lt;= #{ultimoCierre,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimoCierre_type == 'rango_excluye'">
+                         AND u.ultimo_cierre &gt; #{ultimoCierre,jdbcType=TIMESTAMP} AND u.ultimo_cierre &lt; #{ultimoCierre,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimoCierre_type == 'igual'">
+                         AND u.ultimo_cierre = #{ultimoCierre,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimoCierre_type == 'is_null'">
+                         AND u.ultimo_cierre IS NULL 
+                    </when>
+                    <when test="ultimoCierre_type == 'is_not_null'">
+                         AND u.ultimo_cierre IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.ultimo_cierre &gt;= #{ultimoCierre,jdbcType=TIMESTAMP} AND u.ultimo_cierre &lt;= #{ultimoCierre,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="ultimaAccion != null">
+                <choose>
+                    <when test="ultimaAccion_type == 'rango_incluye'">
+                         AND u.ultima_accion &gt;= #{ultimaAccion,jdbcType=TIMESTAMP} AND u.ultima_accion &lt;= #{ultimaAccion,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimaAccion_type == 'rango_excluye'">
+                         AND u.ultima_accion &gt; #{ultimaAccion,jdbcType=TIMESTAMP} AND u.ultima_accion &lt; #{ultimaAccion,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimaAccion_type == 'igual'">
+                         AND u.ultima_accion = #{ultimaAccion,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="ultimaAccion_type == 'is_null'">
+                         AND u.ultima_accion IS NULL 
+                    </when>
+                    <when test="ultimaAccion_type == 'is_not_null'">
+                         AND u.ultima_accion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.ultima_accion &gt;= #{ultimaAccion,jdbcType=TIMESTAMP} AND u.ultima_accion &lt;= #{ultimaAccion,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="minutosValidez != null">
+                <choose>
+                    <when test="minutosValidez_type == 'rango_incluye'">
+                         AND u.minutos_validez &gt;= #{minutosValidez,jdbcType=INTEGER} AND u.minutos_validez &lt;= #{minutosValidez,jdbcType=INTEGER}
+                    </when>
+                    <when test="minutosValidez_type == 'rango_excluye'">
+                         AND u.minutos_validez &gt; #{minutosValidez,jdbcType=INTEGER} AND u.minutos_validez &lt; #{minutosValidez,jdbcType=INTEGER}
+                    </when>
+                    <when test="minutosValidez_type == 'is_null'">
+                         AND u.minutos_validez IS NULL 
+                    </when>
+                    <when test="minutosValidez_type == 'is_not_null'">
+                         AND u.minutos_validez IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.minutos_validez = #{minutosValidez,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="estado != null">
+                <choose>
+                    <when test="estado_type == 'igual'">
+                         AND u.estado = #{estado,jdbcType=VARCHAR}
+                    </when>
+                    <when test="estado_type == 'is_null'">
+                         AND u.estado IS NULL 
+                    </when>
+                    <when test="estado_type == 'is_not_null'">
+                         AND u.estado IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.estado like #{estado,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indPoliticaInactividad != null">
+                <choose>
+                    <when test="indPoliticaInactividad_type == 'igual'">
+                         AND u.ind_politica_inactividad = #{indPoliticaInactividad,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indPoliticaInactividad_type == 'is_null'">
+                         AND u.ind_politica_inactividad IS NULL 
+                    </when>
+                    <when test="indPoliticaInactividad_type == 'is_not_null'">
+                         AND u.ind_politica_inactividad IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.ind_politica_inactividad like #{indPoliticaInactividad,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="datosIpLogin != null">
+                <choose>
+                    <when test="datosIpLogin_type == 'igual'">
+                         AND u.datos_ip_login = #{datosIpLogin,jdbcType=VARCHAR}
+                    </when>
+                    <when test="datosIpLogin_type == 'is_null'">
+                         AND u.datos_ip_login IS NULL 
+                    </when>
+                    <when test="datosIpLogin_type == 'is_not_null'">
+                         AND u.datos_ip_login IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.datos_ip_login like #{datosIpLogin,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="datosIpAccion != null">
+                <choose>
+                    <when test="datosIpAccion_type == 'igual'">
+                         AND u.datos_ip_accion = #{datosIpAccion,jdbcType=VARCHAR}
+                    </when>
+                    <when test="datosIpAccion_type == 'is_null'">
+                         AND u.datos_ip_accion IS NULL 
+                    </when>
+                    <when test="datosIpAccion_type == 'is_not_null'">
+                         AND u.datos_ip_accion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.datos_ip_accion like #{datosIpAccion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indPoliticaIntentos != null">
+                <choose>
+                    <when test="indPoliticaIntentos_type == 'igual'">
+                         AND u.ind_politica_intentos = #{indPoliticaIntentos,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indPoliticaIntentos_type == 'is_null'">
+                         AND u.ind_politica_intentos IS NULL 
+                    </when>
+                    <when test="indPoliticaIntentos_type == 'is_not_null'">
+                         AND u.ind_politica_intentos IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.ind_politica_intentos like #{indPoliticaIntentos,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroIntentos != null">
+                <choose>
+                    <when test="numeroIntentos_type == 'rango_incluye'">
+                         AND u.numero_intentos &gt;= #{numeroIntentos,jdbcType=INTEGER} AND u.numero_intentos &lt;= #{numeroIntentos,jdbcType=INTEGER}
+                    </when>
+                    <when test="numeroIntentos_type == 'rango_excluye'">
+                         AND u.numero_intentos &gt; #{numeroIntentos,jdbcType=INTEGER} AND u.numero_intentos &lt; #{numeroIntentos,jdbcType=INTEGER}
+                    </when>
+                    <when test="numeroIntentos_type == 'is_null'">
+                         AND u.numero_intentos IS NULL 
+                    </when>
+                    <when test="numeroIntentos_type == 'is_not_null'">
+                         AND u.numero_intentos IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.numero_intentos = #{numeroIntentos,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="nombresUsuario != null">
+                <choose>
+                    <when test="nombresUsuario_type == 'igual'">
+                         AND u.nombres_usuario = #{nombresUsuario,jdbcType=VARCHAR}
+                    </when>
+                    <when test="nombresUsuario_type == 'is_null'">
+                         AND u.nombres_usuario IS NULL 
+                    </when>
+                    <when test="nombresUsuario_type == 'is_not_null'">
+                         AND u.nombres_usuario IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.nombres_usuario like #{nombresUsuario,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="apellidosUsuario != null">
+                <choose>
+                    <when test="apellidosUsuario_type == 'igual'">
+                         AND u.apellidos_usuario = #{apellidosUsuario,jdbcType=VARCHAR}
+                    </when>
+                    <when test="apellidosUsuario_type == 'is_null'">
+                         AND u.apellidos_usuario IS NULL 
+                    </when>
+                    <when test="apellidosUsuario_type == 'is_not_null'">
+                         AND u.apellidos_usuario IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.apellidos_usuario like #{apellidosUsuario,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND u.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indDel_type == 'is_null'">
+                         AND u.ind_del IS NULL 
+                    </when>
+                    <when test="indDel_type == 'is_not_null'">
+                         AND u.ind_del IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND u.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuReg_type == 'is_null'">
+                         AND u.usu_reg IS NULL 
+                    </when>
+                    <when test="usuReg_type == 'is_not_null'">
+                         AND u.usu_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND u.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND u.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND u.fec_reg &gt; #{fechaReg,jdbcType=TIMESTAMP} AND u.fec_reg &lt; #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND u.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'is_null'">
+                         AND u.fec_reg IS NULL 
+                    </when>
+                    <when test="fechaReg_type == 'is_not_null'">
+                         AND u.fec_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND u.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND u.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuAct_type == 'is_null'">
+                         AND u.usu_act IS NULL 
+                    </when>
+                    <when test="usuAct_type == 'is_not_null'">
+                         AND u.usu_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND u.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND u.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND u.fec_act &gt; #{fechaAct,jdbcType=TIMESTAMP} AND u.fec_act &lt; #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND u.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'is_null'">
+                         AND u.fec_act IS NULL 
+                    </when>
+                    <when test="fechaAct_type == 'is_not_null'">
+                         AND u.fec_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND u.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND u.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <insert id="insert" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.UsuarioSessionEntity">
+
+        INSERT INTO inventario.usuario_session 
+        (
+            usuario_id,
+            entidad_id,
+            ultimo_login,
+            ultimo_cierre,
+            ultima_accion,
+            minutos_validez,
+            estado,
+            ind_politica_inactividad,
+            datos_ip_login,
+            datos_ip_accion,
+            ind_politica_intentos,
+            numero_intentos,
+            nombres_usuario,
+            apellidos_usuario,
+            ind_del,
+            usu_reg,
+            fec_reg,
+            usu_act,
+            fec_act
+        )
+        VALUES
+        (
+            #{usuarioID,jdbcType=INTEGER},
+            #{entidadID,jdbcType=INTEGER},
+            #{ultimoLogin,jdbcType=TIMESTAMP},
+            #{ultimoCierre,jdbcType=TIMESTAMP},
+            #{ultimaAccion,jdbcType=TIMESTAMP},
+            #{minutosValidez,jdbcType=INTEGER},
+            #{estado,jdbcType=VARCHAR},
+            #{indPoliticaInactividad,jdbcType=VARCHAR},
+            #{datosIpLogin,jdbcType=VARCHAR},
+            #{datosIpAccion,jdbcType=VARCHAR},
+            #{indPoliticaIntentos,jdbcType=VARCHAR},
+            #{numeroIntentos,jdbcType=INTEGER},
+            #{nombresUsuario,jdbcType=VARCHAR},
+            #{apellidosUsuario,jdbcType=VARCHAR},
+            #{indDel,jdbcType=VARCHAR},
+            #{usuReg,jdbcType=VARCHAR},
+            #{fechaReg,jdbcType=TIMESTAMP},
+            #{usuAct,jdbcType=VARCHAR},
+            #{fechaAct,jdbcType=TIMESTAMP}
+        )
+
+    </insert>
+
+    <update id="update" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.UsuarioSessionEntity">
+
+        UPDATE inventario.usuario_session
+        <set>
+            <if test="entidadID != null">
+                entidad_id = #{entidadID,jdbcType=INTEGER},
+            </if>
+            <if test="ultimoLogin != null">
+                ultimo_login = #{ultimoLogin,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ultimoCierre != null">
+                ultimo_cierre = #{ultimoCierre,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ultimaAccion != null">
+                ultima_accion = #{ultimaAccion,jdbcType=TIMESTAMP},
+            </if>
+            <if test="minutosValidez != null">
+                minutos_validez = #{minutosValidez,jdbcType=INTEGER},
+            </if>
+            <if test="estado != null">
+                estado = #{estado,jdbcType=VARCHAR},
+            </if>
+            <if test="indPoliticaInactividad != null">
+                ind_politica_inactividad = #{indPoliticaInactividad,jdbcType=VARCHAR},
+            </if>
+            <if test="datosIpLogin != null">
+                datos_ip_login = #{datosIpLogin,jdbcType=VARCHAR},
+            </if>
+            <if test="datosIpAccion != null">
+                datos_ip_accion = #{datosIpAccion,jdbcType=VARCHAR},
+            </if>
+            <if test="indPoliticaIntentos != null">
+                ind_politica_intentos = #{indPoliticaIntentos,jdbcType=VARCHAR},
+            </if>
+            <if test="numeroIntentos != null">
+                numero_intentos = #{numeroIntentos,jdbcType=INTEGER},
+            </if>
+            <if test="nombresUsuario != null">
+                nombres_usuario = #{nombresUsuario,jdbcType=VARCHAR},
+            </if>
+            <if test="apellidosUsuario != null">
+                apellidos_usuario = #{apellidosUsuario,jdbcType=VARCHAR},
+            </if>
+            <if test="indDel != null">
+                ind_del = #{indDel,jdbcType=VARCHAR},
+            </if>
+            <if test="usuReg != null">
+                usu_reg = #{usuReg,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaReg != null">
+                fec_reg = #{fechaReg,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usuAct != null">
+                usu_act = #{usuAct,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaAct != null">
+                fec_act = #{fechaAct,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE 
+            usuario_id = #{usuarioID,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

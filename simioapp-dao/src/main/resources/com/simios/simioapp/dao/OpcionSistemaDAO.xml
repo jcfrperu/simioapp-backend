@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simios.simioapp.dao.OpcionSistemaDAO">
+
+    <cache />
+
+    <resultMap id="opcionSistemaResultMap" type="com.simios.simioapp.dominio.entidades.OpcionSistemaEntity">
+        <id column="opcion_id" property="opcionID" jdbcType="INTEGER" />
+        <result column="nombre_opcion" property="nombreOpcion" jdbcType="VARCHAR" />
+        <result column="nivel_opcion" property="nivelOpcion" jdbcType="INTEGER" />
+        <result column="numero_orden_opcion" property="numeroOrdenOpcion" jdbcType="INTEGER" />
+        <result column="url_opcion" property="urlOpcion" jdbcType="VARCHAR" />
+        <result column="ind_del" property="indDel" jdbcType="VARCHAR" />
+        <result column="parent_opcion" property="parentOpcion" jdbcType="INTEGER" />
+        <result column="usu_reg" property="usuReg" jdbcType="VARCHAR" />
+        <result column="fec_reg" property="fechaReg" jdbcType="TIMESTAMP" />
+        <result column="usu_act" property="usuAct" jdbcType="VARCHAR" />
+        <result column="fec_act" property="fechaAct" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <select id="selectByID" resultMap="opcionSistemaResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.OpcionSistemaEntity">
+
+        SELECT
+            opcion_id, nombre_opcion, nivel_opcion, numero_orden_opcion, 
+            url_opcion, ind_del, parent_opcion, usu_reg, 
+            fec_reg, usu_act, fec_act
+        FROM 
+            inventario.opcion_sistema
+        WHERE
+            opcion_id = #{opcionID,jdbcType=INTEGER}
+    </select>
+
+    <select id="select" resultMap="opcionSistemaResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.OpcionSistemaEntity">
+
+        SELECT
+            opcion_id, nombre_opcion, nivel_opcion, numero_orden_opcion, 
+            url_opcion, ind_del, parent_opcion, usu_reg, 
+            fec_reg, usu_act, fec_act
+        FROM 
+            inventario.opcion_sistema
+        <where>
+            <if test="opcionID != null">
+                 AND opcion_id = #{opcionID,jdbcType=INTEGER}
+            </if>
+            <if test="nombreOpcion != null">
+                 AND nombre_opcion = #{nombreOpcion,jdbcType=VARCHAR}
+            </if>
+            <if test="nivelOpcion != null">
+                 AND nivel_opcion = #{nivelOpcion,jdbcType=INTEGER}
+            </if>
+            <if test="numeroOrdenOpcion != null">
+                 AND numero_orden_opcion = #{numeroOrdenOpcion,jdbcType=INTEGER}
+            </if>
+            <if test="urlOpcion != null">
+                 AND url_opcion = #{urlOpcion,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="parentOpcion != null">
+                 AND parent_opcion = #{parentOpcion,jdbcType=INTEGER}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMap" resultMap="opcionSistemaResultMap" useCache="false" parameterType="java.util.Map">
+
+        SELECT
+            o.opcion_id, o.nombre_opcion, o.nivel_opcion, o.numero_orden_opcion, 
+            o.url_opcion, o.ind_del, o.parent_opcion, o.usu_reg, 
+            o.fec_reg, o.usu_act, o.fec_act
+        FROM 
+            inventario.opcion_sistema o
+        <where>
+            <if test="opcionID != null">
+                <choose>
+                    <when test="opcionID_type == 'rango_incluye'">
+                         AND o.opcion_id &gt;= #{opcionID_ini,jdbcType=INTEGER} AND o.opcion_id &lt;= #{opcionID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="opcionID_type == 'rango_excluye'">
+                         AND o.opcion_id &gt; #{opcionID_ini,jdbcType=INTEGER} AND o.opcion_id &lt; #{opcionID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND o.opcion_id = #{opcionID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="nombreOpcion != null">
+                <choose>
+                    <when test="nombreOpcion_type == 'igual'">
+                         AND o.nombre_opcion = #{nombreOpcion,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND o.nombre_opcion like #{nombreOpcion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="nivelOpcion != null">
+                <choose>
+                    <when test="nivelOpcion_type == 'rango_incluye'">
+                         AND o.nivel_opcion &gt;= #{nivelOpcion_ini,jdbcType=INTEGER} AND o.nivel_opcion &lt;= #{nivelOpcion_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="nivelOpcion_type == 'rango_excluye'">
+                         AND o.nivel_opcion &gt; #{nivelOpcion_ini,jdbcType=INTEGER} AND o.nivel_opcion &lt; #{nivelOpcion_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND o.nivel_opcion = #{nivelOpcion,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroOrdenOpcion != null">
+                <choose>
+                    <when test="numeroOrdenOpcion_type == 'rango_incluye'">
+                         AND o.numero_orden_opcion &gt;= #{numeroOrdenOpcion_ini,jdbcType=INTEGER} AND o.numero_orden_opcion &lt;= #{numeroOrdenOpcion_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="numeroOrdenOpcion_type == 'rango_excluye'">
+                         AND o.numero_orden_opcion &gt; #{numeroOrdenOpcion_ini,jdbcType=INTEGER} AND o.numero_orden_opcion &lt; #{numeroOrdenOpcion_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND o.numero_orden_opcion = #{numeroOrdenOpcion,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="urlOpcion != null">
+                <choose>
+                    <when test="urlOpcion_type == 'igual'">
+                         AND o.url_opcion = #{urlOpcion,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND o.url_opcion like #{urlOpcion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND o.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND o.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="parentOpcion != null">
+                <choose>
+                    <when test="parentOpcion_type == 'rango_incluye'">
+                         AND o.parent_opcion &gt;= #{parentOpcion_ini,jdbcType=INTEGER} AND o.parent_opcion &lt;= #{parentOpcion_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="parentOpcion_type == 'rango_excluye'">
+                         AND o.parent_opcion &gt; #{parentOpcion_ini,jdbcType=INTEGER} AND o.parent_opcion &lt; #{parentOpcion_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND o.parent_opcion = #{parentOpcion,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND o.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND o.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND o.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND o.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND o.fec_reg &gt; #{fechaReg_ini,jdbcType=TIMESTAMP} AND o.fec_reg &lt; #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND o.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND o.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND o.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND o.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND o.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND o.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND o.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND o.fec_act &gt; #{fechaAct_ini,jdbcType=TIMESTAMP} AND o.fec_act &lt; #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND o.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND o.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND o.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMapGrilla" useCache="false" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT
+            o.opcion_id as "opcionID", 
+            o.nombre_opcion as "nombreOpcion", 
+            o.nivel_opcion as "nivelOpcion", 
+            o.numero_orden_opcion as "numeroOrdenOpcion", 
+            o.url_opcion as "urlOpcion", 
+            o.ind_del as "indDel", 
+            o.parent_opcion as "parentOpcion", 
+            o.usu_reg as "usuReg", 
+            o.fec_reg as "fechaReg", 
+            o.usu_act as "usuAct", 
+            o.fec_act as "fechaAct"
+        FROM 
+            inventario.opcion_sistema o
+        <where>
+            <if test="opcionID != null">
+                <choose>
+                    <when test="opcionID_type == 'rango_incluye'">
+                         AND o.opcion_id &gt;= #{opcionID,jdbcType=INTEGER} AND o.opcion_id &lt;= #{opcionID,jdbcType=INTEGER}
+                    </when>
+                    <when test="opcionID_type == 'rango_excluye'">
+                         AND o.opcion_id &gt; #{opcionID,jdbcType=INTEGER} AND o.opcion_id &lt; #{opcionID,jdbcType=INTEGER}
+                    </when>
+                    <when test="opcionID_type == 'is_null'">
+                         AND o.opcion_id IS NULL 
+                    </when>
+                    <when test="opcionID_type == 'is_not_null'">
+                         AND o.opcion_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND o.opcion_id = #{opcionID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="nombreOpcion != null">
+                <choose>
+                    <when test="nombreOpcion_type == 'igual'">
+                         AND o.nombre_opcion = #{nombreOpcion,jdbcType=VARCHAR}
+                    </when>
+                    <when test="nombreOpcion_type == 'is_null'">
+                         AND o.nombre_opcion IS NULL 
+                    </when>
+                    <when test="nombreOpcion_type == 'is_not_null'">
+                         AND o.nombre_opcion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND o.nombre_opcion like #{nombreOpcion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="nivelOpcion != null">
+                <choose>
+                    <when test="nivelOpcion_type == 'rango_incluye'">
+                         AND o.nivel_opcion &gt;= #{nivelOpcion,jdbcType=INTEGER} AND o.nivel_opcion &lt;= #{nivelOpcion,jdbcType=INTEGER}
+                    </when>
+                    <when test="nivelOpcion_type == 'rango_excluye'">
+                         AND o.nivel_opcion &gt; #{nivelOpcion,jdbcType=INTEGER} AND o.nivel_opcion &lt; #{nivelOpcion,jdbcType=INTEGER}
+                    </when>
+                    <when test="nivelOpcion_type == 'is_null'">
+                         AND o.nivel_opcion IS NULL 
+                    </when>
+                    <when test="nivelOpcion_type == 'is_not_null'">
+                         AND o.nivel_opcion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND o.nivel_opcion = #{nivelOpcion,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="numeroOrdenOpcion != null">
+                <choose>
+                    <when test="numeroOrdenOpcion_type == 'rango_incluye'">
+                         AND o.numero_orden_opcion &gt;= #{numeroOrdenOpcion,jdbcType=INTEGER} AND o.numero_orden_opcion &lt;= #{numeroOrdenOpcion,jdbcType=INTEGER}
+                    </when>
+                    <when test="numeroOrdenOpcion_type == 'rango_excluye'">
+                         AND o.numero_orden_opcion &gt; #{numeroOrdenOpcion,jdbcType=INTEGER} AND o.numero_orden_opcion &lt; #{numeroOrdenOpcion,jdbcType=INTEGER}
+                    </when>
+                    <when test="numeroOrdenOpcion_type == 'is_null'">
+                         AND o.numero_orden_opcion IS NULL 
+                    </when>
+                    <when test="numeroOrdenOpcion_type == 'is_not_null'">
+                         AND o.numero_orden_opcion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND o.numero_orden_opcion = #{numeroOrdenOpcion,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="urlOpcion != null">
+                <choose>
+                    <when test="urlOpcion_type == 'igual'">
+                         AND o.url_opcion = #{urlOpcion,jdbcType=VARCHAR}
+                    </when>
+                    <when test="urlOpcion_type == 'is_null'">
+                         AND o.url_opcion IS NULL 
+                    </when>
+                    <when test="urlOpcion_type == 'is_not_null'">
+                         AND o.url_opcion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND o.url_opcion like #{urlOpcion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND o.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indDel_type == 'is_null'">
+                         AND o.ind_del IS NULL 
+                    </when>
+                    <when test="indDel_type == 'is_not_null'">
+                         AND o.ind_del IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND o.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="parentOpcion != null">
+                <choose>
+                    <when test="parentOpcion_type == 'rango_incluye'">
+                         AND o.parent_opcion &gt;= #{parentOpcion,jdbcType=INTEGER} AND o.parent_opcion &lt;= #{parentOpcion,jdbcType=INTEGER}
+                    </when>
+                    <when test="parentOpcion_type == 'rango_excluye'">
+                         AND o.parent_opcion &gt; #{parentOpcion,jdbcType=INTEGER} AND o.parent_opcion &lt; #{parentOpcion,jdbcType=INTEGER}
+                    </when>
+                    <when test="parentOpcion_type == 'is_null'">
+                         AND o.parent_opcion IS NULL 
+                    </when>
+                    <when test="parentOpcion_type == 'is_not_null'">
+                         AND o.parent_opcion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND o.parent_opcion = #{parentOpcion,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND o.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuReg_type == 'is_null'">
+                         AND o.usu_reg IS NULL 
+                    </when>
+                    <when test="usuReg_type == 'is_not_null'">
+                         AND o.usu_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND o.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND o.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND o.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND o.fec_reg &gt; #{fechaReg,jdbcType=TIMESTAMP} AND o.fec_reg &lt; #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND o.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'is_null'">
+                         AND o.fec_reg IS NULL 
+                    </when>
+                    <when test="fechaReg_type == 'is_not_null'">
+                         AND o.fec_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND o.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND o.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND o.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuAct_type == 'is_null'">
+                         AND o.usu_act IS NULL 
+                    </when>
+                    <when test="usuAct_type == 'is_not_null'">
+                         AND o.usu_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND o.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND o.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND o.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND o.fec_act &gt; #{fechaAct,jdbcType=TIMESTAMP} AND o.fec_act &lt; #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND o.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'is_null'">
+                         AND o.fec_act IS NULL 
+                    </when>
+                    <when test="fechaAct_type == 'is_not_null'">
+                         AND o.fec_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND o.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND o.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectNextID" useCache="false" resultType="java.lang.Integer">
+        select nextval('opcion_sistema_opcion_sistema_id_seq')
+    </select>
+
+    <select id="selectCurrentID" useCache="false" resultType="java.lang.Integer">
+        select currval('opcion_sistema_opcion_sistema_id_seq')
+    </select>
+
+    <insert id="insert" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.OpcionSistemaEntity"
+        useGeneratedKeys="true" keyProperty="opcionID">
+
+        INSERT INTO inventario.opcion_sistema 
+        (
+            nombre_opcion,
+            nivel_opcion,
+            numero_orden_opcion,
+            url_opcion,
+            ind_del,
+            parent_opcion,
+            usu_reg,
+            fec_reg,
+            usu_act,
+            fec_act
+        )
+        VALUES
+        (
+            #{nombreOpcion,jdbcType=VARCHAR},
+            #{nivelOpcion,jdbcType=INTEGER},
+            #{numeroOrdenOpcion,jdbcType=INTEGER},
+            #{urlOpcion,jdbcType=VARCHAR},
+            #{indDel,jdbcType=VARCHAR},
+            #{parentOpcion,jdbcType=INTEGER},
+            #{usuReg,jdbcType=VARCHAR},
+            #{fechaReg,jdbcType=TIMESTAMP},
+            #{usuAct,jdbcType=VARCHAR},
+            #{fechaAct,jdbcType=TIMESTAMP}
+        )
+
+    </insert>
+
+    <update id="update" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.OpcionSistemaEntity">
+
+        UPDATE inventario.opcion_sistema
+        <set>
+            <if test="nombreOpcion != null">
+                nombre_opcion = #{nombreOpcion,jdbcType=VARCHAR},
+            </if>
+            <if test="nivelOpcion != null">
+                nivel_opcion = #{nivelOpcion,jdbcType=INTEGER},
+            </if>
+            <if test="numeroOrdenOpcion != null">
+                numero_orden_opcion = #{numeroOrdenOpcion,jdbcType=INTEGER},
+            </if>
+            <if test="urlOpcion != null">
+                url_opcion = #{urlOpcion,jdbcType=VARCHAR},
+            </if>
+            <if test="indDel != null">
+                ind_del = #{indDel,jdbcType=VARCHAR},
+            </if>
+            <if test="parentOpcion != null">
+                parent_opcion = #{parentOpcion,jdbcType=INTEGER},
+            </if>
+            <if test="usuReg != null">
+                usu_reg = #{usuReg,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaReg != null">
+                fec_reg = #{fechaReg,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usuAct != null">
+                usu_act = #{usuAct,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaAct != null">
+                fec_act = #{fechaAct,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE 
+            opcion_id = #{opcionID,jdbcType=INTEGER}
+    </update>
+
+</mapper>

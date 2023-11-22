@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simios.simioapp.dao.AreaDAO">
+
+    <cache />
+
+    <resultMap id="areaResultMap" type="com.simios.simioapp.dominio.entidades.AreaEntity">
+        <id column="area_id" property="areaID" jdbcType="INTEGER" />
+        <result column="abreviatura_area" property="abreviaturaArea" jdbcType="VARCHAR" />
+        <result column="entidad_id" property="entidadID" jdbcType="INTEGER" />
+        <result column="locales_id" property="localesID" jdbcType="INTEGER" />
+        <result column="nombre_area" property="nombreArea" jdbcType="VARCHAR" />
+        <result column="ind_del" property="indDel" jdbcType="VARCHAR" />
+        <result column="fec_reg" property="fechaReg" jdbcType="TIMESTAMP" />
+        <result column="fec_act" property="fechaAct" jdbcType="TIMESTAMP" />
+        <result column="usu_reg" property="usuReg" jdbcType="VARCHAR" />
+        <result column="usu_act" property="usuAct" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectByID" resultMap="areaResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.AreaEntity">
+
+        SELECT
+            area_id, abreviatura_area, entidad_id, locales_id, 
+            nombre_area, ind_del, fec_reg, fec_act, 
+            usu_reg, usu_act
+        FROM 
+            inventario.area
+        WHERE
+            area_id = #{areaID,jdbcType=INTEGER}
+    </select>
+
+    <select id="select" resultMap="areaResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.AreaEntity">
+
+        SELECT
+            area_id, abreviatura_area, entidad_id, locales_id, 
+            nombre_area, ind_del, fec_reg, fec_act, 
+            usu_reg, usu_act
+        FROM 
+            inventario.area
+        <where>
+            <if test="areaID != null">
+                 AND area_id = #{areaID,jdbcType=INTEGER}
+            </if>
+            <if test="abreviaturaArea != null">
+                 AND abreviatura_area = #{abreviaturaArea,jdbcType=VARCHAR}
+            </if>
+            <if test="entidadID != null">
+                 AND entidad_id = #{entidadID,jdbcType=INTEGER}
+            </if>
+            <if test="localesID != null">
+                 AND locales_id = #{localesID,jdbcType=INTEGER}
+            </if>
+            <if test="nombreArea != null">
+                 AND nombre_area = #{nombreArea,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMap" resultMap="areaResultMap" useCache="false" parameterType="java.util.Map">
+
+        SELECT
+            a.area_id, a.abreviatura_area, a.entidad_id, a.locales_id, 
+            a.nombre_area, a.ind_del, a.fec_reg, a.fec_act, 
+            a.usu_reg, a.usu_act
+        FROM 
+            inventario.area a
+        <where>
+            <if test="areaID != null">
+                <choose>
+                    <when test="areaID_type == 'rango_incluye'">
+                         AND a.area_id &gt;= #{areaID_ini,jdbcType=INTEGER} AND a.area_id &lt;= #{areaID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="areaID_type == 'rango_excluye'">
+                         AND a.area_id &gt; #{areaID_ini,jdbcType=INTEGER} AND a.area_id &lt; #{areaID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND a.area_id = #{areaID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="abreviaturaArea != null">
+                <choose>
+                    <when test="abreviaturaArea_type == 'igual'">
+                         AND a.abreviatura_area = #{abreviaturaArea,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND a.abreviatura_area like #{abreviaturaArea,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entidadID != null">
+                <choose>
+                    <when test="entidadID_type == 'rango_incluye'">
+                         AND a.entidad_id &gt;= #{entidadID_ini,jdbcType=INTEGER} AND a.entidad_id &lt;= #{entidadID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="entidadID_type == 'rango_excluye'">
+                         AND a.entidad_id &gt; #{entidadID_ini,jdbcType=INTEGER} AND a.entidad_id &lt; #{entidadID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND a.entidad_id = #{entidadID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="localesID != null">
+                <choose>
+                    <when test="localesID_type == 'rango_incluye'">
+                         AND a.locales_id &gt;= #{localesID_ini,jdbcType=INTEGER} AND a.locales_id &lt;= #{localesID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="localesID_type == 'rango_excluye'">
+                         AND a.locales_id &gt; #{localesID_ini,jdbcType=INTEGER} AND a.locales_id &lt; #{localesID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND a.locales_id = #{localesID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="nombreArea != null">
+                <choose>
+                    <when test="nombreArea_type == 'igual'">
+                         AND a.nombre_area = #{nombreArea,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND a.nombre_area like #{nombreArea,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND a.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND a.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND a.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND a.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND a.fec_reg &gt; #{fechaReg_ini,jdbcType=TIMESTAMP} AND a.fec_reg &lt; #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND a.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND a.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND a.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND a.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND a.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND a.fec_act &gt; #{fechaAct_ini,jdbcType=TIMESTAMP} AND a.fec_act &lt; #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND a.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND a.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND a.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND a.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND a.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND a.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND a.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMapGrilla" useCache="false" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT
+            a.area_id as "areaID", 
+            a.abreviatura_area as "abreviaturaArea", 
+		    a.entidad_id as "entidadID",
+		    (select e.entidad from entidad e where e.entidad_id = a.entidad_id) as "entidadDescrip", 
+		    a.locales_id as "localesID",
+		    (select l.nombre_local from locales l where l.locales_id = a.locales_id) as "localesDescrip",
+		    a.nombre_area as "nombreArea", 
+            a.nombre_area as "nombreArea", 
+            a.ind_del as "indDel", 
+            a.fec_reg as "fechaReg", 
+            a.fec_act as "fechaAct", 
+            a.usu_reg as "usuReg", 
+            a.usu_act as "usuAct"
+        FROM 
+            inventario.area a
+        <where>
+            <if test="areaID != null">
+                <choose>
+                    <when test="areaID_type == 'rango_incluye'">
+                         AND a.area_id &gt;= #{areaID,jdbcType=INTEGER} AND a.area_id &lt;= #{areaID,jdbcType=INTEGER}
+                    </when>
+                    <when test="areaID_type == 'rango_excluye'">
+                         AND a.area_id &gt; #{areaID,jdbcType=INTEGER} AND a.area_id &lt; #{areaID,jdbcType=INTEGER}
+                    </when>
+                    <when test="areaID_type == 'is_null'">
+                         AND a.area_id IS NULL 
+                    </when>
+                    <when test="areaID_type == 'is_not_null'">
+                         AND a.area_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND a.area_id = #{areaID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="abreviaturaArea != null">
+                <choose>
+                    <when test="abreviaturaArea_type == 'igual'">
+                         AND a.abreviatura_area = #{abreviaturaArea,jdbcType=VARCHAR}
+                    </when>
+                    <when test="abreviaturaArea_type == 'is_null'">
+                         AND a.abreviatura_area IS NULL 
+                    </when>
+                    <when test="abreviaturaArea_type == 'is_not_null'">
+                         AND a.abreviatura_area IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND a.abreviatura_area like #{abreviaturaArea,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entidadID != null">
+                <choose>
+                    <when test="entidadID_type == 'rango_incluye'">
+                         AND a.entidad_id &gt;= #{entidadID,jdbcType=INTEGER} AND a.entidad_id &lt;= #{entidadID,jdbcType=INTEGER}
+                    </when>
+                    <when test="entidadID_type == 'rango_excluye'">
+                         AND a.entidad_id &gt; #{entidadID,jdbcType=INTEGER} AND a.entidad_id &lt; #{entidadID,jdbcType=INTEGER}
+                    </when>
+                    <when test="entidadID_type == 'is_null'">
+                         AND a.entidad_id IS NULL 
+                    </when>
+                    <when test="entidadID_type == 'is_not_null'">
+                         AND a.entidad_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND a.entidad_id = #{entidadID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="localesID != null">
+                <choose>
+                    <when test="localesID_type == 'rango_incluye'">
+                         AND a.locales_id &gt;= #{localesID,jdbcType=INTEGER} AND a.locales_id &lt;= #{localesID,jdbcType=INTEGER}
+                    </when>
+                    <when test="localesID_type == 'rango_excluye'">
+                         AND a.locales_id &gt; #{localesID,jdbcType=INTEGER} AND a.locales_id &lt; #{localesID,jdbcType=INTEGER}
+                    </when>
+                    <when test="localesID_type == 'is_null'">
+                         AND a.locales_id IS NULL 
+                    </when>
+                    <when test="localesID_type == 'is_not_null'">
+                         AND a.locales_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND a.locales_id = #{localesID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="nombreArea != null">
+                <choose>
+                    <when test="nombreArea_type == 'igual'">
+                         AND a.nombre_area = #{nombreArea,jdbcType=VARCHAR}
+                    </when>
+                    <when test="nombreArea_type == 'is_null'">
+                         AND a.nombre_area IS NULL 
+                    </when>
+                    <when test="nombreArea_type == 'is_not_null'">
+                         AND a.nombre_area IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND a.nombre_area like #{nombreArea,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND a.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indDel_type == 'is_null'">
+                         AND a.ind_del IS NULL 
+                    </when>
+                    <when test="indDel_type == 'is_not_null'">
+                         AND a.ind_del IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND a.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND a.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND a.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND a.fec_reg &gt; #{fechaReg,jdbcType=TIMESTAMP} AND a.fec_reg &lt; #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND a.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'is_null'">
+                         AND a.fec_reg IS NULL 
+                    </when>
+                    <when test="fechaReg_type == 'is_not_null'">
+                         AND a.fec_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND a.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND a.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND a.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND a.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND a.fec_act &gt; #{fechaAct,jdbcType=TIMESTAMP} AND a.fec_act &lt; #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND a.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'is_null'">
+                         AND a.fec_act IS NULL 
+                    </when>
+                    <when test="fechaAct_type == 'is_not_null'">
+                         AND a.fec_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND a.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND a.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND a.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuReg_type == 'is_null'">
+                         AND a.usu_reg IS NULL 
+                    </when>
+                    <when test="usuReg_type == 'is_not_null'">
+                         AND a.usu_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND a.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND a.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuAct_type == 'is_null'">
+                         AND a.usu_act IS NULL 
+                    </when>
+                    <when test="usuAct_type == 'is_not_null'">
+                         AND a.usu_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND a.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectNextID" useCache="false" resultType="java.lang.Integer">
+        select nextval('area_area_id_seq')
+    </select>
+
+    <select id="selectCurrentID" useCache="false" resultType="java.lang.Integer">
+        select currval('area_area_id_seq')
+    </select>
+
+    <insert id="insert" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.AreaEntity"
+        useGeneratedKeys="true" keyProperty="areaID">
+
+        INSERT INTO inventario.area 
+        (
+            abreviatura_area,
+            entidad_id,
+            locales_id,
+            nombre_area,
+            ind_del,
+            fec_reg,
+            fec_act,
+            usu_reg,
+            usu_act
+        )
+        VALUES
+        (
+            #{abreviaturaArea,jdbcType=VARCHAR},
+            #{entidadID,jdbcType=INTEGER},
+            #{localesID,jdbcType=INTEGER},
+            #{nombreArea,jdbcType=VARCHAR},
+            #{indDel,jdbcType=VARCHAR},
+            #{fechaReg,jdbcType=TIMESTAMP},
+            #{fechaAct,jdbcType=TIMESTAMP},
+            #{usuReg,jdbcType=VARCHAR},
+            #{usuAct,jdbcType=VARCHAR}
+        )
+
+    </insert>
+
+    <update id="update" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.AreaEntity">
+
+        UPDATE inventario.area
+        <set>
+            <if test="abreviaturaArea != null">
+                abreviatura_area = #{abreviaturaArea,jdbcType=VARCHAR},
+            </if>
+            <if test="entidadID != null">
+                entidad_id = #{entidadID,jdbcType=INTEGER},
+            </if>
+            <if test="localesID != null">
+                locales_id = #{localesID,jdbcType=INTEGER},
+            </if>
+            <if test="nombreArea != null">
+                nombre_area = #{nombreArea,jdbcType=VARCHAR},
+            </if>
+            <if test="indDel != null">
+                ind_del = #{indDel,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaReg != null">
+                fec_reg = #{fechaReg,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fechaAct != null">
+                fec_act = #{fechaAct,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usuReg != null">
+                usu_reg = #{usuReg,jdbcType=VARCHAR},
+            </if>
+            <if test="usuAct != null">
+                usu_act = #{usuAct,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE 
+            area_id = #{areaID,jdbcType=INTEGER}
+    </update>
+    
+    <select id="selectAreaCombo" resultType="com.jcfr.utiles.ListaItem" useCache="false"
+         parameterType="com.simios.simioapp.dominio.entidades.AreaEntity">
+
+        SELECT
+            area_id as "id",  
+            upper(nombre_area) as "label"
+        FROM 
+            inventario.area
+        <where>
+            <if test="areaID != null">
+                 AND area_id = #{areaID,jdbcType=INTEGER}
+            </if>
+            <if test="abreviaturaArea != null">
+                 AND abreviatura_area = #{abreviaturaArea,jdbcType=VARCHAR}
+            </if>
+            <if test="entidadID != null">
+                 AND entidad_id = #{entidadID,jdbcType=INTEGER}
+            </if>
+            <if test="localesID != null">
+                 AND locales_id = #{localesID,jdbcType=INTEGER}
+            </if>
+            <if test="nombreArea != null">
+                 AND nombre_area = #{nombreArea,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=DATE}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=DATE}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+
+
+</mapper>

@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simios.simioapp.dao.CuentaDAO">
+
+    <cache />
+
+    <resultMap id="cuentaResultMap" type="com.simios.simioapp.dominio.entidades.CuentaEntity">
+        <id column="cuenta_id" property="cuentaID" jdbcType="INTEGER" />
+        <result column="cuenta" property="cuenta" jdbcType="VARCHAR" />
+        <result column="denomina" property="denomina" jdbcType="VARCHAR" />
+        <result column="tipo_cta" property="tipoCta" jdbcType="VARCHAR" />
+        <result column="flag_cta" property="flagCta" jdbcType="VARCHAR" />
+        <result column="uso_cta" property="usoCta" jdbcType="VARCHAR" />
+        <result column="ind_del" property="indDel" jdbcType="VARCHAR" />
+        <result column="fec_reg" property="fechaReg" jdbcType="TIMESTAMP" />
+        <result column="fec_act" property="fechaAct" jdbcType="TIMESTAMP" />
+        <result column="usu_reg" property="usuReg" jdbcType="VARCHAR" />
+        <result column="usu_act" property="usuAct" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectByID" resultMap="cuentaResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.CuentaEntity">
+
+        SELECT
+            cuenta_id, cuenta, denomina, tipo_cta, 
+            flag_cta, uso_cta, ind_del, fec_reg, 
+            fec_act, usu_reg, usu_act
+        FROM 
+            inventario.cuenta
+        WHERE
+            cuenta_id = #{cuentaID,jdbcType=INTEGER}
+    </select>
+
+    <select id="select" resultMap="cuentaResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.CuentaEntity">
+
+        SELECT
+            cuenta_id, cuenta, denomina, tipo_cta, 
+            flag_cta, uso_cta, ind_del, fec_reg, 
+            fec_act, usu_reg, usu_act
+        FROM 
+            inventario.cuenta
+        <where>
+            <if test="cuentaID != null">
+                 AND cuenta_id = #{cuentaID,jdbcType=INTEGER}
+            </if>
+            <if test="cuenta != null">
+                 AND cuenta = #{cuenta,jdbcType=VARCHAR}
+            </if>
+            <if test="denomina != null">
+                 AND denomina = #{denomina,jdbcType=VARCHAR}
+            </if>
+            <if test="tipoCta != null">
+                 AND tipo_cta = #{tipoCta,jdbcType=VARCHAR}
+            </if>
+            <if test="flagCta != null">
+                 AND flag_cta = #{flagCta,jdbcType=VARCHAR}
+            </if>
+            <if test="usoCta != null">
+                 AND uso_cta = #{usoCta,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMap" resultMap="cuentaResultMap" useCache="false" parameterType="java.util.Map">
+
+        SELECT
+            c.cuenta_id, c.cuenta, c.denomina, c.tipo_cta, 
+            c.flag_cta, c.uso_cta, c.ind_del, c.fec_reg, 
+            c.fec_act, c.usu_reg, c.usu_act
+        FROM 
+            inventario.cuenta c
+        <where>
+            <if test="cuentaID != null">
+                <choose>
+                    <when test="cuentaID_type == 'rango_incluye'">
+                         AND c.cuenta_id &gt;= #{cuentaID_ini,jdbcType=INTEGER} AND c.cuenta_id &lt;= #{cuentaID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="cuentaID_type == 'rango_excluye'">
+                         AND c.cuenta_id &gt; #{cuentaID_ini,jdbcType=INTEGER} AND c.cuenta_id &lt; #{cuentaID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND c.cuenta_id = #{cuentaID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="cuenta != null">
+                <choose>
+                    <when test="cuenta_type == 'igual'">
+                         AND c.cuenta = #{cuenta,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.cuenta like #{cuenta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="denomina != null">
+                <choose>
+                    <when test="denomina_type == 'igual'">
+                         AND c.denomina = #{denomina,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.denomina like #{denomina,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="tipoCta != null">
+                <choose>
+                    <when test="tipoCta_type == 'igual'">
+                         AND c.tipo_cta = #{tipoCta,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.tipo_cta like #{tipoCta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="flagCta != null">
+                <choose>
+                    <when test="flagCta_type == 'igual'">
+                         AND c.flag_cta = #{flagCta,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.flag_cta like #{flagCta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usoCta != null">
+                <choose>
+                    <when test="usoCta_type == 'igual'">
+                         AND c.uso_cta = #{usoCta,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.uso_cta like #{usoCta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND c.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND c.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND c.fec_reg &gt; #{fechaReg_ini,jdbcType=TIMESTAMP} AND c.fec_reg &lt; #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND c.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND c.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND c.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND c.fec_act &gt; #{fechaAct_ini,jdbcType=TIMESTAMP} AND c.fec_act &lt; #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND c.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND c.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND c.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND c.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND c.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMapGrilla" useCache="false" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT
+		    c.cuenta_id as "cuentaID", 
+		    c.cuenta as "cuenta", 
+		    c.denomina as "denomina", 
+		    c.tipo_cta as "tipoCta",
+		    (select cat.descripcion from catalogo cat where cat.catalogo = 'CUENTA_TIPOCUENTA' and cat.tipo = 'DET' and cat.datacatalogo = c.tipo_cta ) as "tipoCtaDescrip", 
+		    c.flag_cta as "flagCta",
+		    (select cat.descripcion from catalogo cat where cat.catalogo = 'CUENTA_FLAGCUENTA' and cat.tipo = 'DET' and cat.datacatalogo = c.flag_cta ) as "flagCtaDescrip", 
+		    c.uso_cta as "usoCta",
+		    (select cat.descripcion from catalogo cat where cat.catalogo = 'CUENTA_USOCUENTA' and cat.tipo = 'DET' and cat.datacatalogo = c.uso_cta ) as "usoCtaDescrip", 
+		    c.ind_del as "indDel", 
+		    c.fec_reg as "fechaReg", 
+		    c.fec_act as "fechaAct", 
+		    c.usu_reg as "usuReg", 
+		    c.usu_act as "usuAct"
+        FROM 
+            inventario.cuenta c
+        <where>
+            <if test="cuentaID != null">
+                <choose>
+                    <when test="cuentaID_type == 'rango_incluye'">
+                         AND c.cuenta_id &gt;= #{cuentaID,jdbcType=INTEGER} AND c.cuenta_id &lt;= #{cuentaID,jdbcType=INTEGER}
+                    </when>
+                    <when test="cuentaID_type == 'rango_excluye'">
+                         AND c.cuenta_id &gt; #{cuentaID,jdbcType=INTEGER} AND c.cuenta_id &lt; #{cuentaID,jdbcType=INTEGER}
+                    </when>
+                    <when test="cuentaID_type == 'is_null'">
+                         AND c.cuenta_id IS NULL 
+                    </when>
+                    <when test="cuentaID_type == 'is_not_null'">
+                         AND c.cuenta_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.cuenta_id = #{cuentaID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="cuenta != null">
+                <choose>
+                    <when test="cuenta_type == 'igual'">
+                         AND c.cuenta = #{cuenta,jdbcType=VARCHAR}
+                    </when>
+                    <when test="cuenta_type == 'is_null'">
+                         AND c.cuenta IS NULL 
+                    </when>
+                    <when test="cuenta_type == 'is_not_null'">
+                         AND c.cuenta IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.cuenta like #{cuenta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="denomina != null">
+                <choose>
+                    <when test="denomina_type == 'igual'">
+                         AND c.denomina = #{denomina,jdbcType=VARCHAR}
+                    </when>
+                    <when test="denomina_type == 'is_null'">
+                         AND c.denomina IS NULL 
+                    </when>
+                    <when test="denomina_type == 'is_not_null'">
+                         AND c.denomina IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.denomina like #{denomina,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="tipoCta != null">
+                <choose>
+                    <when test="tipoCta_type == 'igual'">
+                         AND c.tipo_cta = #{tipoCta,jdbcType=VARCHAR}
+                    </when>
+                    <when test="tipoCta_type == 'is_null'">
+                         AND c.tipo_cta IS NULL 
+                    </when>
+                    <when test="tipoCta_type == 'is_not_null'">
+                         AND c.tipo_cta IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.tipo_cta like #{tipoCta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="flagCta != null">
+                <choose>
+                    <when test="flagCta_type == 'igual'">
+                         AND c.flag_cta = #{flagCta,jdbcType=VARCHAR}
+                    </when>
+                    <when test="flagCta_type == 'is_null'">
+                         AND c.flag_cta IS NULL 
+                    </when>
+                    <when test="flagCta_type == 'is_not_null'">
+                         AND c.flag_cta IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.flag_cta like #{flagCta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usoCta != null">
+                <choose>
+                    <when test="usoCta_type == 'igual'">
+                         AND c.uso_cta = #{usoCta,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usoCta_type == 'is_null'">
+                         AND c.uso_cta IS NULL 
+                    </when>
+                    <when test="usoCta_type == 'is_not_null'">
+                         AND c.uso_cta IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.uso_cta like #{usoCta,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND c.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indDel_type == 'is_null'">
+                         AND c.ind_del IS NULL 
+                    </when>
+                    <when test="indDel_type == 'is_not_null'">
+                         AND c.ind_del IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND c.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND c.fec_reg &gt; #{fechaReg,jdbcType=TIMESTAMP} AND c.fec_reg &lt; #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND c.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'is_null'">
+                         AND c.fec_reg IS NULL 
+                    </when>
+                    <when test="fechaReg_type == 'is_not_null'">
+                         AND c.fec_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND c.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND c.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND c.fec_act &gt; #{fechaAct,jdbcType=TIMESTAMP} AND c.fec_act &lt; #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND c.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'is_null'">
+                         AND c.fec_act IS NULL 
+                    </when>
+                    <when test="fechaAct_type == 'is_not_null'">
+                         AND c.fec_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND c.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND c.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuReg_type == 'is_null'">
+                         AND c.usu_reg IS NULL 
+                    </when>
+                    <when test="usuReg_type == 'is_not_null'">
+                         AND c.usu_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND c.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuAct_type == 'is_null'">
+                         AND c.usu_act IS NULL 
+                    </when>
+                    <when test="usuAct_type == 'is_not_null'">
+                         AND c.usu_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND c.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectNextID" useCache="false" resultType="java.lang.Integer">
+        select nextval('cuenta_cuenta_id_seq')
+    </select>
+
+    <select id="selectCurrentID" useCache="false" resultType="java.lang.Integer">
+        select currval('cuenta_cuenta_id_seq')
+    </select>
+
+    <insert id="insert" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.CuentaEntity"
+        useGeneratedKeys="true" keyProperty="cuentaID">
+
+        INSERT INTO inventario.cuenta 
+        (
+            cuenta,
+            denomina,
+            tipo_cta,
+            flag_cta,
+            uso_cta,
+            ind_del,
+            fec_reg,
+            fec_act,
+            usu_reg,
+            usu_act
+        )
+        VALUES
+        (
+            #{cuenta,jdbcType=VARCHAR},
+            #{denomina,jdbcType=VARCHAR},
+            #{tipoCta,jdbcType=VARCHAR},
+            #{flagCta,jdbcType=VARCHAR},
+            #{usoCta,jdbcType=VARCHAR},
+            #{indDel,jdbcType=VARCHAR},
+            #{fechaReg,jdbcType=TIMESTAMP},
+            #{fechaAct,jdbcType=TIMESTAMP},
+            #{usuReg,jdbcType=VARCHAR},
+            #{usuAct,jdbcType=VARCHAR}
+        )
+
+    </insert>
+
+    <update id="update" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.CuentaEntity">
+
+        UPDATE inventario.cuenta
+        <set>
+            <if test="cuenta != null">
+                cuenta = #{cuenta,jdbcType=VARCHAR},
+            </if>
+            <if test="denomina != null">
+                denomina = #{denomina,jdbcType=VARCHAR},
+            </if>
+            <if test="tipoCta != null">
+                tipo_cta = #{tipoCta,jdbcType=VARCHAR},
+            </if>
+            <if test="flagCta != null">
+                flag_cta = #{flagCta,jdbcType=VARCHAR},
+            </if>
+            <if test="usoCta != null">
+                uso_cta = #{usoCta,jdbcType=VARCHAR},
+            </if>
+            <if test="indDel != null">
+                ind_del = #{indDel,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaReg != null">
+                fec_reg = #{fechaReg,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fechaAct != null">
+                fec_act = #{fechaAct,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usuReg != null">
+                usu_reg = #{usuReg,jdbcType=VARCHAR},
+            </if>
+            <if test="usuAct != null">
+                usu_act = #{usuAct,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE 
+            cuenta_id = #{cuentaID,jdbcType=INTEGER}
+    </update>
+	
+    <select id="selectCuentaCombo" resultType="com.jcfr.utiles.ListaItem" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.CuentaEntity">
+
+        SELECT
+            cuenta_id AS "id",  
+            CONCAT(UPPER(cuenta),CONCAT(" | ",UPPER(denomina))) AS "label"
+        FROM 
+            inventario.cuenta
+      
+        <where>
+            <if test="cuentaID != null">
+                 AND cuenta_id = #{cuentaID,jdbcType=INTEGER}
+            </if>
+            <if test="cuenta != null">
+                 AND cuenta = #{cuenta,jdbcType=VARCHAR}
+            </if>
+            <if test="denomina != null">
+                 AND denomina = #{denomina,jdbcType=VARCHAR}
+            </if>
+            <if test="tipoCta != null">
+                 AND tipo_cta = #{tipoCta,jdbcType=VARCHAR}
+            </if>
+            <if test="flagCta != null">
+                 AND flag_cta = #{flagCta,jdbcType=VARCHAR}
+            </if>
+            <if test="usoCta != null">
+                 AND uso_cta = #{usoCta,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=DATE}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=DATE}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+    
+</mapper>

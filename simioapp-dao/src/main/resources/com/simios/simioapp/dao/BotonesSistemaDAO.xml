@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simios.simioapp.dao.BotonesSistemaDAO">
+
+    <cache />
+
+    <resultMap id="botonesSistemaResultMap" type="com.simios.simioapp.dominio.entidades.BotonesSistemaEntity">
+        <id column="boton_id" property="botonID" jdbcType="INTEGER" />
+        <result column="nombre_boton" property="nombreBoton" jdbcType="VARCHAR" />
+        <result column="key_boton" property="keyBoton" jdbcType="VARCHAR" />
+        <result column="ind_del" property="indDel" jdbcType="VARCHAR" />
+        <result column="usu_reg" property="usuReg" jdbcType="VARCHAR" />
+        <result column="fec_reg" property="fechaReg" jdbcType="TIMESTAMP" />
+        <result column="usu_act" property="usuAct" jdbcType="VARCHAR" />
+        <result column="fec_act" property="fechaAct" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <select id="selectByID" resultMap="botonesSistemaResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.BotonesSistemaEntity">
+
+        SELECT
+            boton_id, nombre_boton, key_boton, ind_del, 
+            usu_reg, fec_reg, usu_act, fec_act
+        FROM 
+            inventario.botones_sistema
+        WHERE
+            boton_id = #{botonID,jdbcType=INTEGER}
+    </select>
+
+    <select id="select" resultMap="botonesSistemaResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.BotonesSistemaEntity">
+
+        SELECT
+            boton_id, nombre_boton, key_boton, ind_del, 
+            usu_reg, fec_reg, usu_act, fec_act
+        FROM 
+            inventario.botones_sistema
+        <where>
+            <if test="botonID != null">
+                 AND boton_id = #{botonID,jdbcType=INTEGER}
+            </if>
+            <if test="nombreBoton != null">
+                 AND nombre_boton = #{nombreBoton,jdbcType=VARCHAR}
+            </if>
+            <if test="keyBoton != null">
+                 AND key_boton = #{keyBoton,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMap" resultMap="botonesSistemaResultMap" useCache="false" parameterType="java.util.Map">
+
+        SELECT
+            b.boton_id, b.nombre_boton, b.key_boton, b.ind_del, 
+            b.usu_reg, b.fec_reg, b.usu_act, b.fec_act
+        FROM 
+            inventario.botones_sistema b
+        <where>
+            <if test="botonID != null">
+                <choose>
+                    <when test="botonID_type == 'rango_incluye'">
+                         AND b.boton_id &gt;= #{botonID_ini,jdbcType=INTEGER} AND b.boton_id &lt;= #{botonID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="botonID_type == 'rango_excluye'">
+                         AND b.boton_id &gt; #{botonID_ini,jdbcType=INTEGER} AND b.boton_id &lt; #{botonID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND b.boton_id = #{botonID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="nombreBoton != null">
+                <choose>
+                    <when test="nombreBoton_type == 'igual'">
+                         AND b.nombre_boton = #{nombreBoton,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.nombre_boton like #{nombreBoton,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="keyBoton != null">
+                <choose>
+                    <when test="keyBoton_type == 'igual'">
+                         AND b.key_boton = #{keyBoton,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.key_boton like #{keyBoton,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND b.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND b.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND b.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND b.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND b.fec_reg &gt; #{fechaReg_ini,jdbcType=TIMESTAMP} AND b.fec_reg &lt; #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND b.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND b.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND b.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND b.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND b.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND b.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND b.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND b.fec_act &gt; #{fechaAct_ini,jdbcType=TIMESTAMP} AND b.fec_act &lt; #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND b.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND b.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND b.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMapGrilla" useCache="false" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT
+            b.boton_id as "botonID", 
+            b.nombre_boton as "nombreBoton", 
+            b.key_boton as "keyBoton", 
+            b.ind_del as "indDel", 
+            b.usu_reg as "usuReg", 
+            b.fec_reg as "fechaReg", 
+            b.usu_act as "usuAct", 
+            b.fec_act as "fechaAct"
+        FROM 
+            inventario.botones_sistema b
+        <where>
+            <if test="botonID != null">
+                <choose>
+                    <when test="botonID_type == 'rango_incluye'">
+                         AND b.boton_id &gt;= #{botonID,jdbcType=INTEGER} AND b.boton_id &lt;= #{botonID,jdbcType=INTEGER}
+                    </when>
+                    <when test="botonID_type == 'rango_excluye'">
+                         AND b.boton_id &gt; #{botonID,jdbcType=INTEGER} AND b.boton_id &lt; #{botonID,jdbcType=INTEGER}
+                    </when>
+                    <when test="botonID_type == 'is_null'">
+                         AND b.boton_id IS NULL 
+                    </when>
+                    <when test="botonID_type == 'is_not_null'">
+                         AND b.boton_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.boton_id = #{botonID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="nombreBoton != null">
+                <choose>
+                    <when test="nombreBoton_type == 'igual'">
+                         AND b.nombre_boton = #{nombreBoton,jdbcType=VARCHAR}
+                    </when>
+                    <when test="nombreBoton_type == 'is_null'">
+                         AND b.nombre_boton IS NULL 
+                    </when>
+                    <when test="nombreBoton_type == 'is_not_null'">
+                         AND b.nombre_boton IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.nombre_boton like #{nombreBoton,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="keyBoton != null">
+                <choose>
+                    <when test="keyBoton_type == 'igual'">
+                         AND b.key_boton = #{keyBoton,jdbcType=VARCHAR}
+                    </when>
+                    <when test="keyBoton_type == 'is_null'">
+                         AND b.key_boton IS NULL 
+                    </when>
+                    <when test="keyBoton_type == 'is_not_null'">
+                         AND b.key_boton IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.key_boton like #{keyBoton,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND b.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indDel_type == 'is_null'">
+                         AND b.ind_del IS NULL 
+                    </when>
+                    <when test="indDel_type == 'is_not_null'">
+                         AND b.ind_del IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND b.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuReg_type == 'is_null'">
+                         AND b.usu_reg IS NULL 
+                    </when>
+                    <when test="usuReg_type == 'is_not_null'">
+                         AND b.usu_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND b.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND b.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND b.fec_reg &gt; #{fechaReg,jdbcType=TIMESTAMP} AND b.fec_reg &lt; #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND b.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'is_null'">
+                         AND b.fec_reg IS NULL 
+                    </when>
+                    <when test="fechaReg_type == 'is_not_null'">
+                         AND b.fec_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND b.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND b.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuAct_type == 'is_null'">
+                         AND b.usu_act IS NULL 
+                    </when>
+                    <when test="usuAct_type == 'is_not_null'">
+                         AND b.usu_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND b.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND b.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND b.fec_act &gt; #{fechaAct,jdbcType=TIMESTAMP} AND b.fec_act &lt; #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND b.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'is_null'">
+                         AND b.fec_act IS NULL 
+                    </when>
+                    <when test="fechaAct_type == 'is_not_null'">
+                         AND b.fec_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND b.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND b.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectNextID" useCache="false" resultType="java.lang.Integer">
+        select nextval('botones_sistema_botones_sistema_id_seq')
+    </select>
+
+    <select id="selectCurrentID" useCache="false" resultType="java.lang.Integer">
+        select currval('botones_sistema_botones_sistema_id_seq')
+    </select>
+
+    <insert id="insert" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.BotonesSistemaEntity"
+        useGeneratedKeys="true" keyProperty="botonID">
+
+        INSERT INTO inventario.botones_sistema 
+        (
+            nombre_boton,
+            key_boton,
+            ind_del,
+            usu_reg,
+            fec_reg,
+            usu_act,
+            fec_act
+        )
+        VALUES
+        (
+            #{nombreBoton,jdbcType=VARCHAR},
+            #{keyBoton,jdbcType=VARCHAR},
+            #{indDel,jdbcType=VARCHAR},
+            #{usuReg,jdbcType=VARCHAR},
+            #{fechaReg,jdbcType=TIMESTAMP},
+            #{usuAct,jdbcType=VARCHAR},
+            #{fechaAct,jdbcType=TIMESTAMP}
+        )
+
+    </insert>
+
+    <update id="update" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.BotonesSistemaEntity">
+
+        UPDATE inventario.botones_sistema
+        <set>
+            <if test="nombreBoton != null">
+                nombre_boton = #{nombreBoton,jdbcType=VARCHAR},
+            </if>
+            <if test="keyBoton != null">
+                key_boton = #{keyBoton,jdbcType=VARCHAR},
+            </if>
+            <if test="indDel != null">
+                ind_del = #{indDel,jdbcType=VARCHAR},
+            </if>
+            <if test="usuReg != null">
+                usu_reg = #{usuReg,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaReg != null">
+                fec_reg = #{fechaReg,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usuAct != null">
+                usu_act = #{usuAct,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaAct != null">
+                fec_act = #{fechaAct,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE 
+            boton_id = #{botonID,jdbcType=INTEGER}
+    </update>
+
+</mapper>

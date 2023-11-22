@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simios.simioapp.dao.InventarioDAO">
+
+    <cache />
+
+    <resultMap id="inventarioResultMap" type="com.simios.simioapp.dominio.entidades.InventarioEntity">
+        <id column="inventario_id" property="inventarioID" jdbcType="INTEGER" />
+        <result column="nombre" property="nombre" jdbcType="VARCHAR" />
+        <result column="fecha_apertura" property="fechaApertura" jdbcType="DATE" />
+        <result column="fecha_cierre" property="fechaCierre" jdbcType="DATE" />
+        <result column="estado" property="estado" jdbcType="VARCHAR" />
+        <result column="ind_del" property="indDel" jdbcType="VARCHAR" />
+        <result column="fec_reg" property="fechaReg" jdbcType="TIMESTAMP" />
+        <result column="fec_act" property="fechaAct" jdbcType="TIMESTAMP" />
+        <result column="usu_reg" property="usuReg" jdbcType="VARCHAR" />
+        <result column="usu_act" property="usuAct" jdbcType="VARCHAR" />
+        <result column="entidad_id" property="entidadID" jdbcType="INTEGER" />
+    </resultMap>
+
+    <select id="selectByID" resultMap="inventarioResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.InventarioEntity">
+
+        SELECT
+            inventario_id, nombre, fecha_apertura, fecha_cierre, 
+            estado, ind_del, fec_reg, fec_act, 
+            usu_reg, usu_act, entidad_id
+        FROM 
+            inventario.inventario
+        WHERE
+            inventario_id = #{inventarioID,jdbcType=INTEGER}
+    </select>
+
+    <select id="select" resultMap="inventarioResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.InventarioEntity">
+
+        SELECT
+            inventario_id, nombre, fecha_apertura, fecha_cierre, 
+            estado, ind_del, fec_reg, fec_act, 
+            usu_reg, usu_act, entidad_id
+        FROM 
+            inventario.inventario
+        <where>
+            <if test="inventarioID != null">
+                 AND inventario_id = #{inventarioID,jdbcType=INTEGER}
+            </if>
+            <if test="nombre != null">
+                 AND nombre = #{nombre,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaApertura != null">
+                 AND fecha_apertura = #{fechaApertura,jdbcType=DATE}
+            </if>
+            <if test="fechaCierre != null">
+                 AND fecha_cierre = #{fechaCierre,jdbcType=DATE}
+            </if>
+            <if test="estado != null">
+                 AND estado = #{estado,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+            <if test="entidadID != null">
+                 AND entidad_id = #{entidadID,jdbcType=INTEGER}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMap" resultMap="inventarioResultMap" useCache="false" parameterType="java.util.Map">
+
+        SELECT
+            i.inventario_id, i.nombre, i.fecha_apertura, i.fecha_cierre, 
+            i.estado, i.ind_del, i.fec_reg, i.fec_act, 
+            i.usu_reg, i.usu_act, i.entidad_id
+        FROM 
+            inventario.inventario i
+        <where>
+            <if test="inventarioID != null">
+                <choose>
+                    <when test="inventarioID_type == 'rango_incluye'">
+                         AND i.inventario_id &gt;= #{inventarioID_ini,jdbcType=INTEGER} AND i.inventario_id &lt;= #{inventarioID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="inventarioID_type == 'rango_excluye'">
+                         AND i.inventario_id &gt; #{inventarioID_ini,jdbcType=INTEGER} AND i.inventario_id &lt; #{inventarioID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND i.inventario_id = #{inventarioID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="nombre != null">
+                <choose>
+                    <when test="nombre_type == 'igual'">
+                         AND i.nombre = #{nombre,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND i.nombre like #{nombre,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaApertura != null">
+                <choose>
+                    <when test="fechaApertura_type == 'rango_incluye'">
+                         AND i.fecha_apertura &gt;= #{fechaApertura_ini,jdbcType=DATE} AND i.fecha_apertura &lt;= #{fechaApertura_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaApertura_type == 'rango_excluye'">
+                         AND i.fecha_apertura &gt; #{fechaApertura_ini,jdbcType=DATE} AND i.fecha_apertura &lt; #{fechaApertura_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaApertura_type == 'igual'">
+                         AND i.fecha_apertura = #{fechaApertura,jdbcType=DATE}
+                    </when>
+                    <otherwise>
+                         AND i.fecha_apertura &gt;= #{fechaApertura_ini,jdbcType=DATE} AND i.fecha_apertura &lt;= #{fechaApertura_fin,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaCierre != null">
+                <choose>
+                    <when test="fechaCierre_type == 'rango_incluye'">
+                         AND i.fecha_cierre &gt;= #{fechaCierre_ini,jdbcType=DATE} AND i.fecha_cierre &lt;= #{fechaCierre_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaCierre_type == 'rango_excluye'">
+                         AND i.fecha_cierre &gt; #{fechaCierre_ini,jdbcType=DATE} AND i.fecha_cierre &lt; #{fechaCierre_fin,jdbcType=DATE}
+                    </when>
+                    <when test="fechaCierre_type == 'igual'">
+                         AND i.fecha_cierre = #{fechaCierre,jdbcType=DATE}
+                    </when>
+                    <otherwise>
+                         AND i.fecha_cierre &gt;= #{fechaCierre_ini,jdbcType=DATE} AND i.fecha_cierre &lt;= #{fechaCierre_fin,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="estado != null">
+                <choose>
+                    <when test="estado_type == 'igual'">
+                         AND i.estado = #{estado,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND i.estado like #{estado,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND i.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND i.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND i.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND i.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND i.fec_reg &gt; #{fechaReg_ini,jdbcType=TIMESTAMP} AND i.fec_reg &lt; #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND i.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND i.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND i.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND i.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND i.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND i.fec_act &gt; #{fechaAct_ini,jdbcType=TIMESTAMP} AND i.fec_act &lt; #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND i.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND i.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND i.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND i.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND i.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND i.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND i.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entidadID != null">
+                <choose>
+                    <when test="entidadID_type == 'rango_incluye'">
+                         AND i.entidad_id &gt;= #{entidadID_ini,jdbcType=INTEGER} AND i.entidad_id &lt;= #{entidadID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="entidadID_type == 'rango_excluye'">
+                         AND i.entidad_id &gt; #{entidadID_ini,jdbcType=INTEGER} AND i.entidad_id &lt; #{entidadID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND i.entidad_id = #{entidadID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMapGrilla" useCache="false" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT
+            i.inventario_id as "inventarioID",
+            i.nombre as "nombre",
+            i.fecha_apertura as "fechaApertura",
+            i.fecha_cierre as "fechaCierre",
+            i.estado as "estado",
+            (select c.descripcion from catalogo c where c.catalogo = 'ESTADO_INVENTARIO' and c.ind_del = '0' and c.tipo = 'DET' and c.datacatalogo = i.estado) as "estadoDescrip",
+            i.ind_del as "indDel",
+            i.fec_reg as "fechaReg",
+            i.fec_act as "fechaAct",
+            i.usu_reg as "usuReg",
+            i.usu_act as "usuAct",
+            i.entidad_id as "entidadID",
+            (select e.entidad from inventario.entidad e where i.entidad_id = e.entidad_id) as "entidadDescrip"
+        FROM 
+            inventario.inventario i
+        <where>
+            <if test="inventarioID != null">
+                <choose>
+                    <when test="inventarioID_type == 'rango_incluye'">
+                         AND i.inventario_id &gt;= #{inventarioID,jdbcType=INTEGER} AND i.inventario_id &lt;= #{inventarioID,jdbcType=INTEGER}
+                    </when>
+                    <when test="inventarioID_type == 'rango_excluye'">
+                         AND i.inventario_id &gt; #{inventarioID,jdbcType=INTEGER} AND i.inventario_id &lt; #{inventarioID,jdbcType=INTEGER}
+                    </when>
+                    <when test="inventarioID_type == 'is_null'">
+                         AND i.inventario_id IS NULL 
+                    </when>
+                    <when test="inventarioID_type == 'is_not_null'">
+                         AND i.inventario_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND i.inventario_id = #{inventarioID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="nombre != null">
+                <choose>
+                    <when test="nombre_type == 'igual'">
+                         AND i.nombre = #{nombre,jdbcType=VARCHAR}
+                    </when>
+                    <when test="nombre_type == 'is_null'">
+                         AND i.nombre IS NULL 
+                    </when>
+                    <when test="nombre_type == 'is_not_null'">
+                         AND i.nombre IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND i.nombre like #{nombre,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaApertura != null">
+                <choose>
+                    <when test="fechaApertura_type == 'rango_incluye'">
+                         AND i.fecha_apertura &gt;= #{fechaApertura,jdbcType=DATE} AND i.fecha_apertura &lt;= #{fechaApertura,jdbcType=DATE}
+                    </when>
+                    <when test="fechaApertura_type == 'rango_excluye'">
+                         AND i.fecha_apertura &gt; #{fechaApertura,jdbcType=DATE} AND i.fecha_apertura &lt; #{fechaApertura,jdbcType=DATE}
+                    </when>
+                    <when test="fechaApertura_type == 'igual'">
+                         AND i.fecha_apertura = #{fechaApertura,jdbcType=DATE}
+                    </when>
+                    <when test="fechaApertura_type == 'is_null'">
+                         AND i.fecha_apertura IS NULL 
+                    </when>
+                    <when test="fechaApertura_type == 'is_not_null'">
+                         AND i.fecha_apertura IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND i.fecha_apertura &gt;= #{fechaApertura,jdbcType=DATE} AND i.fecha_apertura &lt;= #{fechaApertura,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaCierre != null">
+                <choose>
+                    <when test="fechaCierre_type == 'rango_incluye'">
+                         AND i.fecha_cierre &gt;= #{fechaCierre,jdbcType=DATE} AND i.fecha_cierre &lt;= #{fechaCierre,jdbcType=DATE}
+                    </when>
+                    <when test="fechaCierre_type == 'rango_excluye'">
+                         AND i.fecha_cierre &gt; #{fechaCierre,jdbcType=DATE} AND i.fecha_cierre &lt; #{fechaCierre,jdbcType=DATE}
+                    </when>
+                    <when test="fechaCierre_type == 'igual'">
+                         AND i.fecha_cierre = #{fechaCierre,jdbcType=DATE}
+                    </when>
+                    <when test="fechaCierre_type == 'is_null'">
+                         AND i.fecha_cierre IS NULL 
+                    </when>
+                    <when test="fechaCierre_type == 'is_not_null'">
+                         AND i.fecha_cierre IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND i.fecha_cierre &gt;= #{fechaCierre,jdbcType=DATE} AND i.fecha_cierre &lt;= #{fechaCierre,jdbcType=DATE}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="estado != null">
+                <choose>
+                    <when test="estado_type == 'igual'">
+                         AND i.estado = #{estado,jdbcType=VARCHAR}
+                    </when>
+                    <when test="estado_type == 'is_null'">
+                         AND i.estado IS NULL 
+                    </when>
+                    <when test="estado_type == 'is_not_null'">
+                         AND i.estado IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND i.estado like #{estado,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND i.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indDel_type == 'is_null'">
+                         AND i.ind_del IS NULL 
+                    </when>
+                    <when test="indDel_type == 'is_not_null'">
+                         AND i.ind_del IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND i.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND i.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND i.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND i.fec_reg &gt; #{fechaReg,jdbcType=TIMESTAMP} AND i.fec_reg &lt; #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND i.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'is_null'">
+                         AND i.fec_reg IS NULL 
+                    </when>
+                    <when test="fechaReg_type == 'is_not_null'">
+                         AND i.fec_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND i.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND i.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND i.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND i.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND i.fec_act &gt; #{fechaAct,jdbcType=TIMESTAMP} AND i.fec_act &lt; #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND i.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'is_null'">
+                         AND i.fec_act IS NULL 
+                    </when>
+                    <when test="fechaAct_type == 'is_not_null'">
+                         AND i.fec_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND i.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND i.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND i.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuReg_type == 'is_null'">
+                         AND i.usu_reg IS NULL 
+                    </when>
+                    <when test="usuReg_type == 'is_not_null'">
+                         AND i.usu_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND i.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND i.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuAct_type == 'is_null'">
+                         AND i.usu_act IS NULL 
+                    </when>
+                    <when test="usuAct_type == 'is_not_null'">
+                         AND i.usu_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND i.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="entidadID != null">
+                <choose>
+                    <when test="entidadID_type == 'rango_incluye'">
+                         AND i.entidad_id &gt;= #{entidadID,jdbcType=INTEGER} AND i.entidad_id &lt;= #{entidadID,jdbcType=INTEGER}
+                    </when>
+                    <when test="entidadID_type == 'rango_excluye'">
+                         AND i.entidad_id &gt; #{entidadID,jdbcType=INTEGER} AND i.entidad_id &lt; #{entidadID,jdbcType=INTEGER}
+                    </when>
+                    <when test="entidadID_type == 'is_null'">
+                         AND i.entidad_id IS NULL 
+                    </when>
+                    <when test="entidadID_type == 'is_not_null'">
+                         AND i.entidad_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND i.entidad_id = #{entidadID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectNextID" useCache="false" resultType="java.lang.Integer">
+        select nextval('inventario_inventario_id_seq')
+    </select>
+
+    <select id="selectCurrentID" useCache="false" resultType="java.lang.Integer">
+        select currval('inventario_inventario_id_seq')
+    </select>
+
+    <insert id="insert" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.InventarioEntity"
+        useGeneratedKeys="true" keyProperty="inventarioID">
+
+        INSERT INTO inventario.inventario 
+        (
+            nombre,
+            fecha_apertura,
+            fecha_cierre,
+            estado,
+            ind_del,
+            fec_reg,
+            fec_act,
+            usu_reg,
+            usu_act,
+            entidad_id
+        )
+        VALUES
+        (
+            #{nombre,jdbcType=VARCHAR},
+            #{fechaApertura,jdbcType=DATE},
+            #{fechaCierre,jdbcType=DATE},
+            #{estado,jdbcType=VARCHAR},
+            #{indDel,jdbcType=VARCHAR},
+            #{fechaReg,jdbcType=TIMESTAMP},
+            #{fechaAct,jdbcType=TIMESTAMP},
+            #{usuReg,jdbcType=VARCHAR},
+            #{usuAct,jdbcType=VARCHAR},
+            #{entidadID,jdbcType=INTEGER}
+        )
+
+    </insert>
+
+    <update id="update" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.InventarioEntity">
+
+        UPDATE inventario.inventario
+        <set>
+            <if test="nombre != null">
+                nombre = #{nombre,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaApertura != null">
+                fecha_apertura = #{fechaApertura,jdbcType=DATE},
+            </if>
+            <if test="fechaCierre != null">
+                fecha_cierre = #{fechaCierre,jdbcType=DATE},
+            </if>
+            <if test="estado != null">
+                estado = #{estado,jdbcType=VARCHAR},
+            </if>
+            <if test="indDel != null">
+                ind_del = #{indDel,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaReg != null">
+                fec_reg = #{fechaReg,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fechaAct != null">
+                fec_act = #{fechaAct,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usuReg != null">
+                usu_reg = #{usuReg,jdbcType=VARCHAR},
+            </if>
+            <if test="usuAct != null">
+                usu_act = #{usuAct,jdbcType=VARCHAR},
+            </if>
+            <if test="entidadID != null">
+                entidad_id = #{entidadID,jdbcType=INTEGER},
+            </if>
+        </set>
+        WHERE 
+            inventario_id = #{inventarioID,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateFechasAperturaCierre" flushCache="true"
+            parameterType="com.simios.simioapp.dominio.entidades.InventarioEntity">
+
+        UPDATE inventario.inventario
+        <set>
+            <if test="nombre != null">
+                nombre = #{nombre,jdbcType=VARCHAR},
+            </if>
+
+                fecha_apertura = #{fechaApertura,jdbcType=DATE},
+                fecha_cierre = #{fechaCierre,jdbcType=DATE},
+
+            <if test="estado != null">
+                estado = #{estado,jdbcType=VARCHAR},
+            </if>
+            <if test="indDel != null">
+                ind_del = #{indDel,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaReg != null">
+                fec_reg = #{fechaReg,jdbcType=DATE},
+            </if>
+            <if test="fechaAct != null">
+                fec_act = #{fechaAct,jdbcType=DATE},
+            </if>
+            <if test="usuReg != null">
+                usu_reg = #{usuReg,jdbcType=VARCHAR},
+            </if>
+            <if test="usuAct != null">
+                usu_act = #{usuAct,jdbcType=VARCHAR},
+            </if>
+            <if test="entidadID != null">
+                entidad_id = #{entidadID,jdbcType=INTEGER},
+            </if>
+        </set>
+        WHERE
+        inventario_id = #{inventarioID,jdbcType=INTEGER}
+    </update>
+
+
+</mapper>

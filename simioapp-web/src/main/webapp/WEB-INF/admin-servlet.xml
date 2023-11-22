@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+    <import resource="classpath:applicationContext.xml"/>
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.simios.simioapp"/>
+
+    <!-- beans para configurar los controladores -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
+
+    <bean id="paramResolver"
+          class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"
+          p:paramName="action"/>
+
+    <!-- controladores parte online -->
+    <bean name="/admin.htm"
+          class="com.simios.simioapp.controladores.online.AdminController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-catalogo.htm"
+          class="com.simios.simioapp.controladores.online.RegistroCatalogoController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-parametro.htm"
+          class="com.simios.simioapp.controladores.online.RegistroParametroController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-dependencia.htm"
+          class="com.simios.simioapp.controladores.online.RegistroDependenciaController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-catalogobien.htm"
+          class="com.simios.simioapp.controladores.online.RegistroCatalogoBienController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-area.htm"
+          class="com.simios.simioapp.controladores.online.RegistroAreaController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-locales.htm"
+          class="com.simios.simioapp.controladores.online.RegistroLocalesController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-entidad.htm"
+          class="com.simios.simioapp.controladores.online.RegistroEntidadController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+    <bean name="/registro-ubigeo.htm"
+          class="com.simios.simioapp.controladores.online.RegistroUbigeoController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-empleado.htm"
+          class="com.simios.simioapp.controladores.online.RegistroEmpleadoController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-ubicacion-empleado.htm"
+          class="com.simios.simioapp.controladores.online.RegistroEmpleadoUbicacionController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-oficina.htm"
+          class="com.simios.simioapp.controladores.online.RegistroOficinaController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-clase.htm"
+          class="com.simios.simioapp.controladores.online.RegistroClaseController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-grupo.htm"
+          class="com.simios.simioapp.controladores.online.RegistroGrupoController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-grupoclase.htm"
+          class="com.simios.simioapp.controladores.online.RegistroGrupoClaseController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-cuenta.htm"
+          class="com.simios.simioapp.controladores.online.RegistroCuentaController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/registro-inventario.htm"
+          class="com.simios.simioapp.controladores.online.RegistroInventarioController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/apertura-inventario.htm"
+          class="com.simios.simioapp.controladores.online.AperturaController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/asignacion-inventario.htm"
+          class="com.simios.simioapp.controladores.online.AsignacionController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/cierre-inventario.htm"
+          class="com.simios.simioapp.controladores.online.CierreController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/sobrante-faltante-inventario.htm"
+          class="com.simios.simioapp.controladores.online.SobranteFaltanteController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/estado-subida-inventario.htm"
+          class="com.simios.simioapp.controladores.online.EstadoSubidaController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/descarga.htm"
+          class="com.simios.simioapp.controladores.online.DescargaController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/exportar-excel.htm"
+          class="com.simios.simioapp.controladores.online.ExportarExcelController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/importacion-zip.htm"
+          class="com.simios.simioapp.controladores.online.ImportacionZipController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/importacion-excel.htm"
+          class="com.simios.simioapp.controladores.online.ImportacionExcelController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/sincronizar.htm"
+          class="com.simios.simioapp.controladores.online.SincronizarController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <bean name="/generacion-token.htm"
+          class="com.simios.simioapp.controladores.online.GeneracionTokenController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+    
+    <bean name="/baja-disposicion.htm"
+          class="com.simios.simioapp.controladores.online.BajaDisposicionController">
+        <property name="methodNameResolver" ref="paramResolver"/>
+    </bean>
+
+    <!-- controladores parte offline -->
+
+</beans>

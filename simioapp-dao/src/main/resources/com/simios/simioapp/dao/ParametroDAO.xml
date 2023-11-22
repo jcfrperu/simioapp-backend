@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simios.simioapp.dao.ParametroDAO">
+
+    <cache />
+
+    <resultMap id="parametroResultMap" type="com.simios.simioapp.dominio.entidades.ParametroEntity">
+        <id column="parametro_id" property="parametroID" jdbcType="INTEGER" />
+        <result column="nombre" property="nombre" jdbcType="VARCHAR" />
+        <result column="valor" property="valor" jdbcType="VARCHAR" />
+        <result column="tipo_valor" property="tipoValor" jdbcType="VARCHAR" />
+        <result column="descripcion" property="descripcion" jdbcType="VARCHAR" />
+        <result column="ind_del" property="indDel" jdbcType="VARCHAR" />
+        <result column="fec_reg" property="fechaReg" jdbcType="TIMESTAMP" />
+        <result column="fec_act" property="fechaAct" jdbcType="TIMESTAMP" />
+        <result column="usu_reg" property="usuReg" jdbcType="VARCHAR" />
+        <result column="usu_act" property="usuAct" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectByID" resultMap="parametroResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.ParametroEntity">
+
+        SELECT
+            parametro_id, nombre, valor, tipo_valor, 
+            descripcion, ind_del, fec_reg, fec_act, 
+            usu_reg, usu_act
+        FROM 
+            inventario.parametro
+        WHERE
+            parametro_id = #{parametroID,jdbcType=INTEGER}
+    </select>
+
+    <select id="select" resultMap="parametroResultMap" useCache="false" 
+         parameterType="com.simios.simioapp.dominio.entidades.ParametroEntity">
+
+        SELECT
+            parametro_id, nombre, valor, tipo_valor, 
+            descripcion, ind_del, fec_reg, fec_act, 
+            usu_reg, usu_act
+        FROM 
+            inventario.parametro
+        <where>
+            <if test="parametroID != null">
+                 AND parametro_id = #{parametroID,jdbcType=INTEGER}
+            </if>
+            <if test="nombre != null">
+                 AND nombre = #{nombre,jdbcType=VARCHAR}
+            </if>
+            <if test="valor != null">
+                 AND valor = #{valor,jdbcType=VARCHAR}
+            </if>
+            <if test="tipoValor != null">
+                 AND tipo_valor = #{tipoValor,jdbcType=VARCHAR}
+            </if>
+            <if test="descripcion != null">
+                 AND descripcion = #{descripcion,jdbcType=VARCHAR}
+            </if>
+            <if test="indDel != null">
+                 AND ind_del = #{indDel,jdbcType=VARCHAR}
+            </if>
+            <if test="fechaReg != null">
+                 AND fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+            </if>
+            <if test="fechaAct != null">
+                 AND fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+            </if>
+            <if test="usuReg != null">
+                 AND usu_reg = #{usuReg,jdbcType=VARCHAR}
+            </if>
+            <if test="usuAct != null">
+                 AND usu_act = #{usuAct,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMap" resultMap="parametroResultMap" useCache="false" parameterType="java.util.Map">
+
+        SELECT
+            p.parametro_id, p.nombre, p.valor, p.tipo_valor, 
+            p.descripcion, p.ind_del, p.fec_reg, p.fec_act, 
+            p.usu_reg, p.usu_act
+        FROM 
+            inventario.parametro p
+        <where>
+            <if test="parametroID != null">
+                <choose>
+                    <when test="parametroID_type == 'rango_incluye'">
+                         AND p.parametro_id &gt;= #{parametroID_ini,jdbcType=INTEGER} AND p.parametro_id &lt;= #{parametroID_fin,jdbcType=INTEGER}
+                    </when>
+                    <when test="parametroID_type == 'rango_excluye'">
+                         AND p.parametro_id &gt; #{parametroID_ini,jdbcType=INTEGER} AND p.parametro_id &lt; #{parametroID_fin,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                         AND p.parametro_id = #{parametroID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="nombre != null">
+                <choose>
+                    <when test="nombre_type == 'igual'">
+                         AND p.nombre = #{nombre,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND p.nombre like #{nombre,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="valor != null">
+                <choose>
+                    <when test="valor_type == 'igual'">
+                         AND p.valor = #{valor,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND p.valor like #{valor,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="tipoValor != null">
+                <choose>
+                    <when test="tipoValor_type == 'igual'">
+                         AND p.tipo_valor = #{tipoValor,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND p.tipo_valor like #{tipoValor,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="descripcion != null">
+                <choose>
+                    <when test="descripcion_type == 'igual'">
+                         AND p.descripcion = #{descripcion,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND p.descripcion like #{descripcion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND p.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND p.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND p.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND p.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND p.fec_reg &gt; #{fechaReg_ini,jdbcType=TIMESTAMP} AND p.fec_reg &lt; #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND p.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND p.fec_reg &gt;= #{fechaReg_ini,jdbcType=TIMESTAMP} AND p.fec_reg &lt;= #{fechaReg_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND p.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND p.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND p.fec_act &gt; #{fechaAct_ini,jdbcType=TIMESTAMP} AND p.fec_act &lt; #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND p.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                         AND p.fec_act &gt;= #{fechaAct_ini,jdbcType=TIMESTAMP} AND p.fec_act &lt;= #{fechaAct_fin,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND p.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND p.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND p.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <otherwise>
+                         AND p.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByMapGrilla" useCache="false" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT
+            p.parametro_id as "parametroID", 
+            p.nombre as "nombre", 
+            p.valor as "valor", 
+            p.tipo_valor as "tipoValor", 
+            p.descripcion as "descripcion", 
+            p.ind_del as "indDel", 
+            p.fec_reg as "fechaReg", 
+            p.fec_act as "fechaAct", 
+            p.usu_reg as "usuReg", 
+            p.usu_act as "usuAct"
+        FROM 
+            inventario.parametro p
+        <where>
+            <if test="parametroID != null">
+                <choose>
+                    <when test="parametroID_type == 'rango_incluye'">
+                         AND p.parametro_id &gt;= #{parametroID,jdbcType=INTEGER} AND p.parametro_id &lt;= #{parametroID,jdbcType=INTEGER}
+                    </when>
+                    <when test="parametroID_type == 'rango_excluye'">
+                         AND p.parametro_id &gt; #{parametroID,jdbcType=INTEGER} AND p.parametro_id &lt; #{parametroID,jdbcType=INTEGER}
+                    </when>
+                    <when test="parametroID_type == 'is_null'">
+                         AND p.parametro_id IS NULL 
+                    </when>
+                    <when test="parametroID_type == 'is_not_null'">
+                         AND p.parametro_id IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND p.parametro_id = #{parametroID,jdbcType=INTEGER}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="nombre != null">
+                <choose>
+                    <when test="nombre_type == 'igual'">
+                         AND p.nombre = #{nombre,jdbcType=VARCHAR}
+                    </when>
+                    <when test="nombre_type == 'is_null'">
+                         AND p.nombre IS NULL 
+                    </when>
+                    <when test="nombre_type == 'is_not_null'">
+                         AND p.nombre IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND p.nombre like #{nombre,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="valor != null">
+                <choose>
+                    <when test="valor_type == 'igual'">
+                         AND p.valor = #{valor,jdbcType=VARCHAR}
+                    </when>
+                    <when test="valor_type == 'is_null'">
+                         AND p.valor IS NULL 
+                    </when>
+                    <when test="valor_type == 'is_not_null'">
+                         AND p.valor IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND p.valor like #{valor,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="tipoValor != null">
+                <choose>
+                    <when test="tipoValor_type == 'igual'">
+                         AND p.tipo_valor = #{tipoValor,jdbcType=VARCHAR}
+                    </when>
+                    <when test="tipoValor_type == 'is_null'">
+                         AND p.tipo_valor IS NULL 
+                    </when>
+                    <when test="tipoValor_type == 'is_not_null'">
+                         AND p.tipo_valor IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND p.tipo_valor like #{tipoValor,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="descripcion != null">
+                <choose>
+                    <when test="descripcion_type == 'igual'">
+                         AND p.descripcion = #{descripcion,jdbcType=VARCHAR}
+                    </when>
+                    <when test="descripcion_type == 'is_null'">
+                         AND p.descripcion IS NULL 
+                    </when>
+                    <when test="descripcion_type == 'is_not_null'">
+                         AND p.descripcion IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND p.descripcion like #{descripcion,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="indDel != null">
+                <choose>
+                    <when test="indDel_type == 'igual'">
+                         AND p.ind_del = #{indDel,jdbcType=VARCHAR}
+                    </when>
+                    <when test="indDel_type == 'is_null'">
+                         AND p.ind_del IS NULL 
+                    </when>
+                    <when test="indDel_type == 'is_not_null'">
+                         AND p.ind_del IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND p.ind_del like #{indDel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaReg != null">
+                <choose>
+                    <when test="fechaReg_type == 'rango_incluye'">
+                         AND p.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND p.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'rango_excluye'">
+                         AND p.fec_reg &gt; #{fechaReg,jdbcType=TIMESTAMP} AND p.fec_reg &lt; #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'igual'">
+                         AND p.fec_reg = #{fechaReg,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaReg_type == 'is_null'">
+                         AND p.fec_reg IS NULL 
+                    </when>
+                    <when test="fechaReg_type == 'is_not_null'">
+                         AND p.fec_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND p.fec_reg &gt;= #{fechaReg,jdbcType=TIMESTAMP} AND p.fec_reg &lt;= #{fechaReg,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="fechaAct != null">
+                <choose>
+                    <when test="fechaAct_type == 'rango_incluye'">
+                         AND p.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND p.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'rango_excluye'">
+                         AND p.fec_act &gt; #{fechaAct,jdbcType=TIMESTAMP} AND p.fec_act &lt; #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'igual'">
+                         AND p.fec_act = #{fechaAct,jdbcType=TIMESTAMP}
+                    </when>
+                    <when test="fechaAct_type == 'is_null'">
+                         AND p.fec_act IS NULL 
+                    </when>
+                    <when test="fechaAct_type == 'is_not_null'">
+                         AND p.fec_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND p.fec_act &gt;= #{fechaAct,jdbcType=TIMESTAMP} AND p.fec_act &lt;= #{fechaAct,jdbcType=TIMESTAMP}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuReg != null">
+                <choose>
+                    <when test="usuReg_type == 'igual'">
+                         AND p.usu_reg = #{usuReg,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuReg_type == 'is_null'">
+                         AND p.usu_reg IS NULL 
+                    </when>
+                    <when test="usuReg_type == 'is_not_null'">
+                         AND p.usu_reg IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND p.usu_reg like #{usuReg,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="usuAct != null">
+                <choose>
+                    <when test="usuAct_type == 'igual'">
+                         AND p.usu_act = #{usuAct,jdbcType=VARCHAR}
+                    </when>
+                    <when test="usuAct_type == 'is_null'">
+                         AND p.usu_act IS NULL 
+                    </when>
+                    <when test="usuAct_type == 'is_not_null'">
+                         AND p.usu_act IS NOT NULL 
+                    </when>
+                    <otherwise>
+                         AND p.usu_act like #{usuAct,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectNextID" useCache="false" resultType="java.lang.Integer">
+        select nextval('parametro_parametro_id_seq')
+    </select>
+
+    <select id="selectCurrentID" useCache="false" resultType="java.lang.Integer">
+        select currval('parametro_parametro_id_seq')
+    </select>
+
+    <insert id="insert" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.ParametroEntity"
+        useGeneratedKeys="true" keyProperty="parametroID">
+
+        INSERT INTO inventario.parametro 
+        (
+            nombre,
+            valor,
+            tipo_valor,
+            descripcion,
+            ind_del,
+            fec_reg,
+            fec_act,
+            usu_reg,
+            usu_act
+        )
+        VALUES
+        (
+            #{nombre,jdbcType=VARCHAR},
+            #{valor,jdbcType=VARCHAR},
+            #{tipoValor,jdbcType=VARCHAR},
+            #{descripcion,jdbcType=VARCHAR},
+            #{indDel,jdbcType=VARCHAR},
+            #{fechaReg,jdbcType=TIMESTAMP},
+            #{fechaAct,jdbcType=TIMESTAMP},
+            #{usuReg,jdbcType=VARCHAR},
+            #{usuAct,jdbcType=VARCHAR}
+        )
+
+    </insert>
+
+    <update id="update" flushCache="true"
+        parameterType="com.simios.simioapp.dominio.entidades.ParametroEntity">
+
+        UPDATE inventario.parametro
+        <set>
+            <if test="nombre != null">
+                nombre = #{nombre,jdbcType=VARCHAR},
+            </if>
+            <if test="valor != null">
+                valor = #{valor,jdbcType=VARCHAR},
+            </if>
+            <if test="tipoValor != null">
+                tipo_valor = #{tipoValor,jdbcType=VARCHAR},
+            </if>
+            <if test="descripcion != null">
+                descripcion = #{descripcion,jdbcType=VARCHAR},
+            </if>
+            <if test="indDel != null">
+                ind_del = #{indDel,jdbcType=VARCHAR},
+            </if>
+            <if test="fechaReg != null">
+                fec_reg = #{fechaReg,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fechaAct != null">
+                fec_act = #{fechaAct,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usuReg != null">
+                usu_reg = #{usuReg,jdbcType=VARCHAR},
+            </if>
+            <if test="usuAct != null">
+                usu_act = #{usuAct,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE 
+            parametro_id = #{parametroID,jdbcType=INTEGER}
+    </update>
+
+</mapper>
